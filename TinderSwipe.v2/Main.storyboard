@@ -149,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqG-OZ-eSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88.799999999999997" y="130.88455772113943"/>
+            <point key="canvasLocation" x="617" y="179"/>
         </scene>
         <!--SwipeVC-->
         <scene sceneID="R3W-Nm-xj0">
@@ -404,7 +404,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="797.60000000000002" y="130.88455772113943"/>
+            <point key="canvasLocation" x="1497" y="179"/>
         </scene>
         <!--ResultVC-->
         <scene sceneID="fjZ-Zc-O5d">
@@ -470,7 +470,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwq-Fl-dkW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1511" y="131"/>
+            <point key="canvasLocation" x="2310" y="154"/>
         </scene>
         <!--See GroupVC-->
         <scene sceneID="MTf-Cw-dff">
@@ -507,9 +507,11 @@
                                                 <state key="normal" title="Create Event"/>
                                                 <connections>
                                                     <action selector="createEvent:" destination="eHv-Qu-Oqe" eventType="touchUpInside" id="Z8j-4a-mAv"/>
-                                                    <segue destination="Xnw-Aa-OTx" kind="show" identifier="CreateEventIdentifier" id="bhb-TD-Rf3"/>
                                                 </connections>
                                             </button>
+                                            <connections>
+                                                <segue destination="e0O-QO-PQr" kind="show" identifier="CreateEventIdentifier" id="VNt-3D-oAY"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -523,7 +525,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sEE-u7-PoW" id="Y9b-WM-zgd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -580,7 +582,7 @@
                                                 </connections>
                                             </button>
                                             <connections>
-                                                <segue destination="e0O-QO-PQr" kind="show" identifier="DoneInvitingIdentifier" id="8KR-Zc-ptv"/>
+                                                <segue destination="3Cm-gd-cdL" kind="show" identifier="DoneInvitingIdentifier" id="lKa-GA-Nxb"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -595,7 +597,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IZX-fr-LyB" id="zI9-zB-k0D">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="22.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="23"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
