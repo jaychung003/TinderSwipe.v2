@@ -81,14 +81,16 @@ class DataManager: NSObject {
     
     // gets the top level of the JSON file that is the same for all of the restaurants (before specific). Leaves us with a Specific5 value
     func getResultJson(indexRestaurant: Int)
-    {
+    { print("1")
         if let JSONResponse = fullJson?["response"] as? NSDictionary
-        {
+        { print("2")
+          print(JSONResponse)
             if let JSONGroup = JSONResponse["group"] as? NSDictionary
-            {
+            {print("3")
                 if let JSONResult = JSONGroup["results"] as? NSArray
-                {
+                {print("4")
                     specificRestaurant = JSONResult[indexRestaurant] as? NSDictionary
+                    print("5")
                     //print(specificRestaurant as Any)
                     
                 }
@@ -125,13 +127,13 @@ class DataManager: NSObject {
         URLtoPass =  "https://api.foursquare.com/v2/search/recommendations?near=\(eventCity),\(eventState)&v=20160607&intent=\(venueType)&limit=15&client_id=\(client_id)&client_secret=\(client_secret)"
         URLtoPassNoSpace = URLtoPass.replacingOccurrences(of: " ", with: "_", options: .literal, range: nil)
         urlHERE = URLtoPassNoSpace
-        print("This is makemyURL", urlHERE)
+        print("This is url from INPUT", urlHERE)
     }
     
     func makeMyLocationURL()
     {
         urlHERE = "https://api.foursquare.com/v2/search/recommendations?ll=\(myCurrentLocation.latitude),\(myCurrentLocation.longitude)&v=20160607&intent=\(venueType)&limit=15&client_id=\(client_id)&client_secret=\(client_secret)"
-        print("This is makemyURL", urlHERE)
+        print("This is url from current location", urlHERE)
    
     }
     
@@ -159,7 +161,6 @@ class DataManager: NSObject {
         }
         
         }
-        print(JSONLocationType)
         return JSONLocationType!
     }
     

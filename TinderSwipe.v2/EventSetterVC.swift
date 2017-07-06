@@ -236,7 +236,7 @@ func areFieldsFilled()
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1){
             DataManager.sharedData.makeMyLocationURL()
             let url = DataManager.sharedData.urlHERE
-            print(url)
+            print("is this different from makemyURL?", url)
             DataManager.sharedData.request = NSMutableURLRequest(url: URL(string: url)!)
             DataManager.sharedData.getJSONData()
             
@@ -245,6 +245,7 @@ func areFieldsFilled()
             while DataManager.sharedData.fullJson == nil {
                 print("JSON IS LLL")
             }
+            print(DataManager.sharedData.fullJson)
             print("We left the while loop")
             print(self.currentLocation)
             DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
