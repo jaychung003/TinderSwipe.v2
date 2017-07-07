@@ -13,6 +13,8 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
     var groupIDs = [String]()
+    var groupInfo = [String]()
+    var indexGroupID: Int = 0
     
     @IBOutlet weak var navBarUserName: UINavigationItem!
     
@@ -26,9 +28,6 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewDidLoad() {
         if checkIfUserLoggedIn() == true{
-        //look for own username in groups
-        self.lookUpGroups()
-        self.loadGroupIDs()
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -38,18 +37,8 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkIfUserLoggedIn()
+        self.loadGroupIDs()
     }
-    
-    func lookUpGroups() {
-        
-        
-//        // first, look for own username
-//        var ref: DatabaseReference!
-//        ref = Database.database().reference()
-//        let queryUsername = ref.child(")
-//        
-    }
-    
     
     func loadGroupIDs() { // Put IDs into group IDs array.
         var ref: DatabaseReference!
@@ -61,17 +50,50 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 }
             }
             print("Here are the IDs of groups you are in. \(self.groupIDs)")
-            
-            // Load items into list.
-            print("loading page...")
-            //self.loadItems() // Load items after callback has happened.
-            //self.loadGroupNames() // Less important to load names, but they exist. Call afterward
-            //print(groupIDs)
-            self.tableView.reloadData()
         }) {(error) in
             print(error.localizedDescription)
         }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
+        self.loadGroupName()
+        }
     }
+    
+    
+    func loadGroupName() {
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        for individualID in groupIDs {
+        ref.child("myGroups").child(individualID).observeSingleEvent(of: .value, with: { (DataSnapshot) in
+            if let dictionary = DataSnapshot.value as? [String: AnyObject] {
+                let eventName = (dictionary["event name"] as? String)!
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                self.groupInfo.append(eventName)
+                self.tableView.reloadData()
+                }
+            }
+        }, withCancel: nil)
+        }
+    }
+    
+    func loadGroupMembers() {
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        for individualID in groupIDs {
+            var members = [String]()
+            ref.child("myGroups").child(individualID).child("members").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                for child in DataSnapshot.children {
+                    if let childRef = child as? DataSnapshot {
+                        members.append(childRef.key)
+                    }
+                }
+                //groupInfo[1] = members
+                
+                
+                
+            }, withCancel: nil)
+        }
+    }
+
     
     func checkIfUserLoggedIn() -> (Bool) {
         if Auth.auth().currentUser?.uid == nil {
@@ -109,17 +131,17 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // UITable functions
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(self.groupIDs)
+        print("group info:", self.groupInfo)
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
-        cell.textLabel?.text = self.groupIDs[indexPath.row]
+        cell.textLabel?.text = self.groupInfo[indexPath.row]
+        cell.detailTextLabel?.text = self.groupIDs[indexPath.row]
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupIDs.count
+        return groupInfo.count
     }
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
+    
     
 }
