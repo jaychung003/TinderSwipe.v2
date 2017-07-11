@@ -52,16 +52,20 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     uid = userSnap.key
                     let userDict = userSnap.value as! [String:AnyObject]
                     print("uid:", uid)
+                    
+                    
+                    //for members of the group, make a new branch groupsAssociatedWith
+                    var groupDict = [String: Bool]()
+                    
+                    print("groupID:", self.groupID)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
+                        ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
+                    }
+                    
                 }
             }
             )
-            //for members of the group, make a new branch groupsAssociatedWith
-            var groupDict = [String: Bool]()
 
-            print("groupID:", groupID)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
-            ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
-            }
 
             
             

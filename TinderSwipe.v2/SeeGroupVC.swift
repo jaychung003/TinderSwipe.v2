@@ -12,8 +12,7 @@ import Firebase
 class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
-//    var groupIDs = [String]()
-//    var groupInfo = [String]()
+
     var groupInfoObject = GroupInfo() // initialize the groupInfo object
     var indexGroupID: Int = 0
     
@@ -28,8 +27,6 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     override func viewDidLoad() {
-//        if checkIfUserLoggedIn() == true{
-//        }
         
         checkIfUserLoggedIn()
         
