@@ -40,6 +40,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //iterate through each member in group
         let ref = Database.database().reference()
         var uid: String!
+        print("LISTOFMEMBERS: ", group1.listOfMembers)
         for member in group1.listOfMembers {
 
             //find the matching uid for each username
@@ -56,11 +57,14 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     //for members of the group, make a new branch groupsAssociatedWith
                     var groupDict = [String: Bool]()
-                    
+                    print(uid)
                     print("groupID:", self.groupID)
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
-                        ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
-                    }
+                    ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
+
+//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
+//                        print("count how many times this runs")
+//                        ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
+//                    }
                     
                 }
             }
@@ -69,7 +73,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
             
             
-    }
+        }
     }
     
     func handleDoneInviting() {
