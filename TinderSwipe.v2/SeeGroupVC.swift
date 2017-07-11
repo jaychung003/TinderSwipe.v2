@@ -43,10 +43,9 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if GroupInfo.sharedGroupInfo.groupIDs == nil {
+        while GroupInfo.sharedGroupInfo.groupIDs == nil {
             print("Group IDs is NIL")
-        }
-        else {
+
             GroupInfo.sharedGroupInfo.loadGroupIDs()
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
                 print("PRINT GROUPIDS: ", GroupInfo.sharedGroupInfo.groupIDs)
@@ -64,29 +63,6 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 
             }
         }
-
-        
-        
-//        checkIfUserLoggedIn()
-//        //self.loadGroupIDs()
-//        if GroupInfo.sharedGroupInfo.groupIDs == nil {
-//            print("Group IDs is NIL")
-//        }
-//        else {
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
-//                GroupInfo.sharedGroupInfo.loadGroupNames()
-//                GroupInfo.sharedGroupInfo.loadGroupMembers()
-//                GroupInfo.sharedGroupInfo.loadDecks()
-//                self.tableView.reloadData()
-//            }
-//            
-//            // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
-//                print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
-//                self.tableView.reloadData()
-//                
-//            }
-//        }
         
     }
         
