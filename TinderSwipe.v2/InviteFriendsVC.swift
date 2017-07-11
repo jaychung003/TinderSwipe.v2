@@ -59,7 +59,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             var groupDict = [String: Bool]()
 
             print("groupID:", groupID)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
             ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
             }
 

@@ -12,8 +12,8 @@ import Firebase
 class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
-    var groupIDs = [String]()
-    var groupInfo = [String]()
+//    var groupIDs = [String]()
+//    var groupInfo = [String]()
     var groupInfoObject = GroupInfo() // initialize the groupInfo object
     var indexGroupID: Int = 0
     
@@ -28,8 +28,10 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     override func viewDidLoad() {
-        if checkIfUserLoggedIn() == true{
-        }
+//        if checkIfUserLoggedIn() == true{
+//        }
+        
+        checkIfUserLoggedIn()
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -40,22 +42,52 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkIfUserLoggedIn()
-        //self.loadGroupIDs()
-        GroupInfo.sharedGroupInfo.loadGroupIDs()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
-        GroupInfo.sharedGroupInfo.loadGroupNames()
-        GroupInfo.sharedGroupInfo.loadGroupMembers()
-        GroupInfo.sharedGroupInfo.loadDecks()
-        self.tableView.reloadData()
-        }
         
-        // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
-            print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
-            self.tableView.reloadData()
-
+        if GroupInfo.sharedGroupInfo.groupIDs == nil {
+            print("Group IDs is NIL")
         }
+        else {
+            GroupInfo.sharedGroupInfo.loadGroupIDs()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
+                print("PRINT GROUPIDS: ", GroupInfo.sharedGroupInfo.groupIDs)
+
+                GroupInfo.sharedGroupInfo.loadGroupNames()
+                GroupInfo.sharedGroupInfo.loadGroupMembers()
+                GroupInfo.sharedGroupInfo.loadDecks()
+                self.tableView.reloadData()
+            }
+            
+            // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
+                print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
+                self.tableView.reloadData()
+                
+            }
+        }
+
+        
+        
+//        checkIfUserLoggedIn()
+//        //self.loadGroupIDs()
+//        if GroupInfo.sharedGroupInfo.groupIDs == nil {
+//            print("Group IDs is NIL")
+//        }
+//        else {
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
+//                GroupInfo.sharedGroupInfo.loadGroupNames()
+//                GroupInfo.sharedGroupInfo.loadGroupMembers()
+//                GroupInfo.sharedGroupInfo.loadDecks()
+//                self.tableView.reloadData()
+//            }
+//            
+//            // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
+//                print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
+//                self.tableView.reloadData()
+//                
+//            }
+//        }
+        
     }
         
     func checkIfUserLoggedIn() -> (Bool) {
