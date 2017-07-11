@@ -99,6 +99,8 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         var memberDict = [String: Bool]()
         
+        var cardDict = [String: Bool]()
+        
         for member in group1.listOfMembers {
             memberDict[member] = true
         }

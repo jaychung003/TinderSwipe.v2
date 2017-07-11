@@ -34,20 +34,6 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     
     var action = UIAlertAction()
     var alertView = UIAlertController()
-
-//IBAction sets location based on urlHERE, gets the JSONData file, and createsDeck from it
-    
-//    @IBAction func setLocation(_ sender: UIButton) {
-//        let url = DataManager.sharedData.urlHERE
-//        DataManager.sharedData.request = NSMutableURLRequest(url: URL(string: url)!)
-//        DataManager.sharedData.getJSONData()
-//        while DataManager.sharedData.fullJson == nil {
-//        }
-//        DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
-//        DataManager.sharedData.createDeck()
-//    }
-
-    
     
 //ViewDidLoad func requests user location privileges, hides scroll pickers, creates a "tap" zone for scrollers
 

@@ -14,6 +14,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
     var groupIDs = [String]()
     var groupInfo = [String]()
+    var groupInfoObject = GroupInfo() // initialize the groupInfo object
     var indexGroupID: Int = 0
     
     @IBOutlet weak var navBarUserName: UINavigationItem!
@@ -32,67 +33,77 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkIfUserLoggedIn()
-        self.loadGroupIDs()
-    }
-    
-    func loadGroupIDs() { // Put IDs into group IDs array.
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith").observeSingleEvent(of: .value, with: {(snapshot) in
-            for child in snapshot.children {
-                if let childRef = child as? DataSnapshot {
-                    self.groupIDs.append(childRef.key)
-                }
-            }
-            print("Here are the IDs of groups you are in. \(self.groupIDs)")
-        }) {(error) in
-            print(error.localizedDescription)
+        //self.loadGroupIDs()
+        GroupInfo.sharedGroupInfo.loadGroupIDs()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
+        GroupInfo.sharedGroupInfo.loadGroupMembers()
+        GroupInfo.sharedGroupInfo.loadDecks()
         }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
-        self.loadGroupName()
+        
+        // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
+            print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
         }
     }
     
+//    func loadGroupIDs() { // Put IDs into group IDs array.
+//        var ref: DatabaseReference!
+//        ref = Database.database().reference()
+//        ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith").observeSingleEvent(of: .value, with: {(snapshot) in
+//            for child in snapshot.children {
+//                if let childRef = child as? DataSnapshot {
+//                    self.groupIDs.append(childRef.key)
+//                }
+//            }
+//            print("Here are the IDs of groups you are in. \(self.groupIDs)")
+//        }) {(error) in
+//            print(error.localizedDescription)
+//        }
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
+//        self.loadGroupNames()
+//        }
+//    }
     
-    func loadGroupName() {
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        for individualID in groupIDs {
-        ref.child("myGroups").child(individualID).observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            if let dictionary = DataSnapshot.value as? [String: AnyObject] {
-                let eventName = (dictionary["event name"] as? String)!
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                self.groupInfo.append(eventName)
-                self.tableView.reloadData()
-                }
-            }
-        }, withCancel: nil)
-        }
-    }
     
-    func loadGroupMembers() {
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        for individualID in groupIDs {
-            var members = [String]()
-            ref.child("myGroups").child(individualID).child("members").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-                for child in DataSnapshot.children {
-                    if let childRef = child as? DataSnapshot {
-                        members.append(childRef.key)
-                    }
-                }
-                //groupInfo[1] = members
-                
-                
-                
-            }, withCancel: nil)
-        }
-    }
+//    func loadGroupNames() {
+//        var ref: DatabaseReference!
+//        ref = Database.database().reference()
+//        for individualID in groupIDs {
+//        ref.child("myGroups").child(individualID).observeSingleEvent(of: .value, with: { (DataSnapshot) in
+//            if let dictionary = DataSnapshot.value as? [String: AnyObject] {
+//                let eventName = (dictionary["event name"] as? String)!
+//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+//                self.groupInfo.append(eventName)
+//                self.tableView.reloadData()
+//                }
+//            }
+//        }, withCancel: nil)
+//        }
+//    }
+//    
+//    func loadGroupMembers() {
+//        var ref: DatabaseReference!
+//        ref = Database.database().reference()
+//        for individualID in groupIDs {
+//            var members = [String]()
+//            ref.child("myGroups").child(individualID).child("members").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+//                for child in DataSnapshot.children {
+//                    if let childRef = child as? DataSnapshot {
+//                        members.append(childRef.key)
+//                    }
+//                }
+//                
+//                
+//                
+//            }, withCancel: nil)
+//        }
+//    }
 
     
     func checkIfUserLoggedIn() -> (Bool) {
