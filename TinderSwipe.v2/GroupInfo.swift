@@ -45,7 +45,7 @@ class GroupInfo: NSObject {
                     let eventName = (dictionary["event name"] as? String)!
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                         self.groupNames.append(eventName)
-//                        self.tableView.reloadData()
+                        //self.tableView.reloadData()
                     }
                 }
             }, withCancel: nil)
@@ -103,8 +103,6 @@ class GroupInfo: NSObject {
             // END OF LOOP FOR 1 GROUP ID
             
         }
-        
-        
         
     }
     
