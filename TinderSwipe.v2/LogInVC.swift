@@ -76,6 +76,7 @@ class LogInVC: UIViewController {
             //successfully logged in our user
 //            self.dismiss(animated: true, completion: nil)
             print("log in complete")
+            print(Auth.auth().currentUser?.uid)
             self.logIn()
         })
         

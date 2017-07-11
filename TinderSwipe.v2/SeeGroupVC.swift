@@ -12,7 +12,8 @@ import Firebase
 class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
-
+//    var groupIDs = [String]()
+//    var groupInfo = [String]()
     var groupInfoObject = GroupInfo() // initialize the groupInfo object
     var indexGroupID: Int = 0
     
@@ -27,24 +28,31 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     override func viewDidLoad() {
-        
         checkIfUserLoggedIn()
+        self.tableView.reloadData()
         
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+         checkIfUserLoggedIn()
         self.tableView.reloadData()
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        // Don't do anything if the user isn't logged in yet,
+        // instead, transition to the login screen
+        if !checkIfUserLoggedIn() {
+            return
+        }
         while GroupInfo.sharedGroupInfo.groupIDs == nil {
             print("Group IDs is NIL")
 
             GroupInfo.sharedGroupInfo.loadGroupIDs()
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
+        }
+            GroupInfo.sharedGroupInfo.loadGroupIDs()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0) {
                 print("PRINT GROUPIDS: ", GroupInfo.sharedGroupInfo.groupIDs)
 
                 GroupInfo.sharedGroupInfo.loadGroupNames()
@@ -59,13 +67,15 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.tableView.reloadData()
                 
             }
-        }
+        //}
+        
         
     }
-        
+    
     func checkIfUserLoggedIn() -> (Bool) {
         if Auth.auth().currentUser?.uid == nil {
-            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+            print("User not logged in.")
+            handleLogout()
             return false
         } else {
             // THIS IS HOW WE FETCH DATA FROM THE DATABASE!!!
@@ -82,7 +92,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func handleLogout() {
-        
+        print("handling logout")
         do {
             try Auth.auth()
                 .signOut()
