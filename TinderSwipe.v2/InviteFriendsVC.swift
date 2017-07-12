@@ -36,6 +36,20 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var alertView = UIAlertController()
     var allUsernames = [String]()
     
+    // a dummy array, supposed to be swipeArray
+    var swipeArray = [String]()
+    
+    func populateInitialArray() {
+        
+        for i in 0...DataManager.sharedData.sizeCount-1 {
+            self.swipeArray.append("x")
+        }
+        print("SWIPEARRAY COUNT: ", self.swipeArray.count)
+        print("SWIPEARRAY: ", self.swipeArray)
+
+    }
+    
+    
     func handleGroupFormation() {
         //iterate through each member in group
         let ref = Database.database().reference()
@@ -55,17 +69,17 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let userDict = userSnap.value as! [String:AnyObject]
                     print("uid:", uid)
                     
-                    var groupDict = [String: Bool]()
-                    print(uid)
-                    print("groupID:", self.groupID)
-                    ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
+//                    var groupDict = [String: Bool]()
+//                    print(uid)
+//                    print("groupID:", self.groupID)
+//                    ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
                     
-//                    //for members of the group, make a new branch groupsAssociatedWith
-//                    let eachUserRef = usersRef.child("\(uid!)")
-//                    var groupInfoForUserWithSwipes: [String: Any]
-//                    groupInfoForUserWithSwipes = ["swipeArray": ]]
-//                    var referenceForID =  eachUserRef.child("\(self.groupID!)")
-//                    referenceForID.setValue(groupInfoForUserWithSwipes)
+                    //for members of the group, make a new branch groupsAssociatedWith
+                    let eachUserRef = usersRef.child("\(uid!)/groupsAssociatedWith")
+                    var groupInfoForUserWithSwipes: [String: Any]
+                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray]
+                    var referenceForID =  eachUserRef.child("\(self.groupID!)")
+                    referenceForID.setValue(groupInfoForUserWithSwipes)
 
 
 
@@ -212,6 +226,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     override func viewDidLoad() {
         fetchUsernames()
+        populateInitialArray()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             print("all users: ", self.allUsernames)
         }

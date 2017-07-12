@@ -89,7 +89,7 @@ class GroupInfo: NSObject {
                 var cardInfo: NSArray = []
                 var deckInfo = [[String]]()
                 
-                for cardIndexInDeck in 0...14 {
+                for cardIndexInDeck in 0...DataManager.sharedData.sizeCount {
                     cardInfo = deckInNSArrayForm[cardIndexInDeck] as! NSArray // cardInfo is the list of information for a card (contains 9 elements in total)
                     print("INFO FOR ONE CARD: ", cardInfo)
                     deckInfo.append(cardInfo as! Array)

@@ -125,6 +125,7 @@ class SwipeVC: UIViewController {
                     DataManager.sharedData.yesDeck.append(DataManager.sharedData.deck[index])
                 }
             }
+            
             print(DataManager.sharedData.swipes.count-1)
             nextPage.alpha = 1
             performSegue(withIdentifier: "youreDone", sender: self)
