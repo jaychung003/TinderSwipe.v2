@@ -42,7 +42,7 @@ class SwipeVC: UIViewController {
     }
     
     var deck = DataManager.sharedData.deck
-    var divisor: CGFloat! //variable for angle
+    var divisor: CGFloat! //variable for angle tilt
     var cardIndex: Int = 0
     
     override func viewDidLoad() {
@@ -78,6 +78,7 @@ class SwipeVC: UIViewController {
     
     //populates the card with info
     func showInfo() {
+        deck = DataManager.sharedData.deck
         print("did deck transfer:", deck)
         UIView.animate(withDuration: 0.1, animations: {
         self.nameLabel.text = self.deck[self.cardIndex][0]

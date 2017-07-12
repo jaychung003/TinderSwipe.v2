@@ -12,11 +12,6 @@ import Firebase
 class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
-//    var groupIDs = [String]()
-//    var groupInfo = [String]()
-    var groupInfoObject = GroupInfo() // initialize the groupInfo object
-    var indexGroupID: Int = 0
-    
     @IBOutlet weak var navBarUserName: UINavigationItem!
     
     @IBAction func createEvent(_ sender: Any) {
@@ -46,6 +41,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if !checkIfUserLoggedIn() {
             return
         }
+        clearAllGroupInfo()
         while GroupInfo.sharedGroupInfo.groupIDs == nil {
             print("Group IDs is NIL")
 
@@ -67,9 +63,13 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.tableView.reloadData()
                 
             }
-        //}
         
-        
+    }
+    func clearAllGroupInfo() {
+        GroupInfo.sharedGroupInfo.groupIDs = [String]()
+        GroupInfo.sharedGroupInfo.groupNames = [String]()
+        GroupInfo.sharedGroupInfo.groupMembers = [[String]]()
+        GroupInfo.sharedGroupInfo.allDecks = [[[String]]]()
     }
     
     func checkIfUserLoggedIn() -> (Bool) {
@@ -127,5 +127,11 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         return GroupInfo.sharedGroupInfo.groupNames.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        DataManager.sharedData.deck = GroupInfo.sharedGroupInfo.allDecks[indexPath.row]
+        print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
+        
+        performSegue(withIdentifier: "SeeGroupToSwipeIdentifier", sender: self)
+    }
     
 }
