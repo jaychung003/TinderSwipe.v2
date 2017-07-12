@@ -59,6 +59,11 @@ class DataManager: NSObject {
     var JSONMenuURL = ""
     var JSONTier: Int!
     
+    var JSONPhoneNumberString: String!
+    var arraySize = 0
+    var sizeCount = 0
+    var cardTierValue = 0
+    
     // variables for data structures, card and deck
     var card = [String]() // an array of strings
     var deck = [[String]]() // an array of cards
@@ -83,22 +88,20 @@ class DataManager: NSObject {
     }
     
     // gets the top level of the JSON file that is the same for all of the restaurants (before specific). Leaves us with a Specific5 value
-    func getResultJson(indexRestaurant: Int)
-    { print("1")
+    func getResultJson(indexRestaurant: Int) -> NSDictionary
+    {
         if let JSONResponse = fullJson?["response"] as? NSDictionary
-        { print("2")
-            print(JSONResponse)
+        {
             if let JSONGroup = JSONResponse["group"] as? NSDictionary
-            {print("3")
+            {
                 if let JSONResult = JSONGroup["results"] as? NSArray
-                {print("4")
+                {
                     specificRestaurant = JSONResult[indexRestaurant] as? NSDictionary
-                    print("This is Specific Rest:", specificRestaurant)
-                    print("5")
-                    //print(specificRestaurant as Any)
+                    arraySize = JSONResult.count
                 }
             }
         }
+        return specificRestaurant!
     }
     
     func addRemoveValue(dollarSignValue: Int)
@@ -120,26 +123,54 @@ class DataManager: NSObject {
     
     //creates Deck
     func createDeck() -> [[String]]
-    {
-        for indexRestaurant in 0...14
+    {   findSize()
+        var count = 0
+        while count < sizeCount
         {
             getResultJson(indexRestaurant: indexRestaurant)
-            setName()
-            setLocationType()
-            setLocationAddress()
-            setLocationCity()
-            setRating()
-            setPrice()
-            setImageURL()
-            setMenuID()
-            setHasMenu()
-            deck.append(card)
-            
-            // reset card and imageURL
-            resetCard()
-            resetImageURL()
+            getPrice()
+            if priceArray.contains(cardTierValue)
+            {
+                getJSONVenueID()
+                setName()
+                setLocationType()
+                setLocationAddress()
+                setLocationCity()
+                setRating()
+                setPrice()
+                setImageURL()
+                setMenuID()
+                setHasMenu()
+                setPhoneNumber()
+                deck.append(card)
+                count = count + 1
+                // reset card and imageURL
+                resetCard()
+                resetImageURL()
+            }
+            indexRestaurant = indexRestaurant + 1
         }
+        print("This is the deck from data manager:", deck)
         return deck
+    }
+    
+    func findSize()
+    {   while indexRestaurant < (arraySize - 1)
+    {   getResultJson(indexRestaurant: indexRestaurant)
+        getPrice()
+        if priceArray.contains(cardTierValue)
+        {sizeCount = sizeCount + 1 }
+        indexRestaurant = indexRestaurant + 1
+        }
+        print("SIZE COUNT: ", sizeCount)
+        indexRestaurant = 0
+    }
+    
+    func getJSONVenueID() -> String
+    {
+        getMenuID()
+        print("Try this as the id:", JSONMenuID)
+        return ""
     }
     
     //takes user input location and generates foursquare url
@@ -289,30 +320,34 @@ class DataManager: NSObject {
             if let JSONPriceGeneral = JSONVenue["price"] as? NSDictionary
             {
                 JSONTier = JSONPriceGeneral["tier"] as? Int
+                cardTierValue = JSONTier
+                print("JSONTIER is: ", JSONTier)
             }
         }
-        if JSONPrice == nil
+        if JSONPrice == nil || JSONTier == nil
         {
             JSONPrice = "N/A"
+            //Let's say that any venue without a tier is a 1
+            JSONTier = 1
         }
-        if JSONTier == nil
-        {
-            JSONTier = 0000000000
-        }
-        for numbers in 1...JSONTier
+        for numbers in 1...cardTierValue
         {
             PriceAndTier = PriceAndTier + "$"
         }
+        print("Price and Tier to be Returned", PriceAndTier)
         return (PriceAndTier)
     }
     
     func setPrice()
     {
-        card.append(getPrice())
         PriceAndTier = ""
+        JSONTier = 1
+        card.append(getPrice())
         //print(card)
         //print(card[5])
     }
+    
+
     
     func getImageURL() -> String
     {
@@ -401,6 +436,33 @@ class DataManager: NSObject {
         }
         
     }
+    
+    func getPhoneNumber() -> String
+    { if let JSONVenue = specificRestaurant?["venue"] as? NSDictionary
+    {
+        if let JSONContactInfo = JSONVenue["contact"] as? NSDictionary
+        {
+            let phoneNumber = JSONContactInfo["phone"] as? String
+            
+            if phoneNumber == nil {
+                JSONPhoneNumberString = "NoNumber"
+            }
+            else{
+                JSONPhoneNumberString = String(phoneNumber!)!
+            }
+            
+        }
+        
+        }
+        return(JSONPhoneNumberString)
+    }
+    
+    func setPhoneNumber()
+    {
+        card.append(getPhoneNumber())
+    }
+    
+
     
 }
 

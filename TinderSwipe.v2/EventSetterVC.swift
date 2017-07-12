@@ -567,6 +567,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     
     
     //One click of this button takes user input, sets urlHERE, makes deck, and transitions to next ViewController
+    
     @IBAction func getManualURL(_ sender: UIButton) {
         datePicker.isHidden = true
         pickerView.isHidden = true

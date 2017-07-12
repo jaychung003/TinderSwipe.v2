@@ -8,15 +8,43 @@
 
 import UIKit
 
-class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
     var wholeDeck = [[String]]()
     var swipeResult = DataManager.sharedData.swipes
     var yesDeck = DataManager.sharedData.yesDeck
+    var myIndex = 0
+    var venueName = ""
+    var foursquarePageUrl = ""
+    var venueID = ""
+    
+    @IBOutlet weak var resultsTableView: UITableView!
     
     override func viewDidLoad() {
         print(swipeResult)
         print(yesDeck)
+    
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delegate = self
+        self.resultsTableView.addGestureRecognizer(longPressGesture)
+    
+    }
+    
+    func handleLongPress(longPressGesture:UILongPressGestureRecognizer) {
+        let p = longPressGesture.location(in: self.resultsTableView)
+        let indexPath = self.resultsTableView.indexPathForRow(at: p)
+        if indexPath == nil {
+            print("Long press on table view, not row.")
+        }
+        else if (longPressGesture.state == UIGestureRecognizerState.began) {
+            print("Long press on row, at \(indexPath!.row)")
+            var restaurant2 = yesDeck[(indexPath?.row)!]
+            let busPhone = restaurant2[9]
+            if let urlTest = URL(string: "tel://\(busPhone)"), UIApplication.shared.canOpenURL(urlTest) {
+                UIApplication.shared.open(urlTest)
+            }
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,4 +75,16 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var restaurant2 = yesDeck[indexPath.row]
+        myIndex = indexPath.row
+        venueName = restaurant2[0].replacingOccurrences(of: " ", with: "-", options: .literal, range: nil)
+        venueName = venueName.lowercased()
+        foursquarePageUrl = "https://foursquare.com/v/" + venueName + "/" + restaurant2[7]
+        print(foursquarePageUrl)
+        UIApplication.shared.openURL(URL(string: foursquarePageUrl)!)
+    }
+    
+    
 }
