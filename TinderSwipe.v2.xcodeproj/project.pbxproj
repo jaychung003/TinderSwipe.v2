@@ -301,25 +301,25 @@
 			files = (
 				CBE653551F0D54CA00201E47 /* UITextFieldX.swift in Sources */,
 				CBE653561F0D54CA00201E47 /* UIViewAnchorPoint.swift in Sources */,
-				CBE653521F0D54CA00201E47 /* UIImageViewX.swift in Sources */,
-				CBE653641F0D558600201E47 /* DataManager.swift in Sources */,
-				CBE653731F0D560C00201E47 /* ThirdVC.swift in Sources */,
-				CBE653541F0D54CA00201E47 /* UISliderX.swift in Sources */,
-				CBE653621F0D558600201E47 /* AppUser.swift in Sources */,
-				CBE653511F0D54CA00201E47 /* UIButtonX.swift in Sources */,
-				CBE653711F0D560C00201E47 /* InviteFriendsVC.swift in Sources */,
-				CBE653631F0D558600201E47 /* Group.swift in Sources */,
-				CBE653681F0D55AF00201E47 /* LogInVC.swift in Sources */,
-				CBDD84E71F13E39C00CAC9EE /* GroupInfo.swift in Sources */,
-				CBE653091F0D4F3200201E47 /* AppDelegate.swift in Sources */,
-				CBE653741F0D560C00201E47 /* resultVC.swift in Sources */,
-				CBE653721F0D560C00201E47 /* SwipeVC.swift in Sources */,
-				CBE653531F0D54CA00201E47 /* UILabelX.swift in Sources */,
 				CBE6535A1F0D54CA00201E47 /* UIVisualEffectViewX.swift in Sources */,
 				CBE653571F0D54CA00201E47 /* UIViewControllerX.swift in Sources */,
 				CBE653591F0D54CA00201E47 /* UIViewXRadialGradient.swift in Sources */,
-				CBE653691F0D55AF00201E47 /* SeeGroupVC.swift in Sources */,
 				CBE653581F0D54CA00201E47 /* UIViewX.swift in Sources */,
+				CBE653521F0D54CA00201E47 /* UIImageViewX.swift in Sources */,
+				CBE653511F0D54CA00201E47 /* UIButtonX.swift in Sources */,
+				CBE653531F0D54CA00201E47 /* UILabelX.swift in Sources */,
+				CBE653541F0D54CA00201E47 /* UISliderX.swift in Sources */,
+				CBE653641F0D558600201E47 /* DataManager.swift in Sources */,
+				CBE653731F0D560C00201E47 /* ThirdVC.swift in Sources */,
+				CBE653621F0D558600201E47 /* AppUser.swift in Sources */,
+				CBDD84E71F13E39C00CAC9EE /* GroupInfo.swift in Sources */,
+				CBE653711F0D560C00201E47 /* InviteFriendsVC.swift in Sources */,
+				CBE653631F0D558600201E47 /* Group.swift in Sources */,
+				CBE653681F0D55AF00201E47 /* LogInVC.swift in Sources */,
+				CBE653091F0D4F3200201E47 /* AppDelegate.swift in Sources */,
+				CBE653741F0D560C00201E47 /* resultVC.swift in Sources */,
+				CBE653721F0D560C00201E47 /* SwipeVC.swift in Sources */,
+				CBE653691F0D55AF00201E47 /* SeeGroupVC.swift in Sources */,
 				CBE653701F0D560C00201E47 /* EventSetterVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,11 +428,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 883AGS2Z86;
 				INFOPLIST_FILE = TinderSwipe.v2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cssummer.TinderSwipe-v2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cssummer.TinderSwipe-v3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -444,11 +446,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 883AGS2Z86;
 				INFOPLIST_FILE = TinderSwipe.v2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cssummer.TinderSwipe-v2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cssummer.TinderSwipe-v3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
