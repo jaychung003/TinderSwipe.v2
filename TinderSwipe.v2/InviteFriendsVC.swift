@@ -45,6 +45,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
             //find the matching uid for each username
             let usersRef = ref.child("users")
+            
             let queryRef = usersRef.queryOrdered(byChild: "username")
                 .queryEqual(toValue: member)
             queryRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -56,15 +57,14 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     
                     //for members of the group, make a new branch groupsAssociatedWith
-                    var groupDict = [String: Bool]()
-                    print(uid)
-                    print("groupID:", self.groupID)
-                    ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
+                    let eachUserRef = usersRef.child("\(uid!)")
+                    var groupInfoForUserWithSwipes: [String: Any]
+                    groupInfoForUserWithSwipes = ["swipeArray": [0...14]]
+                    var referenceForID =  eachUserRef.child("\(self.groupID!)")
+                    referenceForID.setValue(groupInfoForUserWithSwipes)
 
-//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
-//                        print("count how many times this runs")
-//                        ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
-//                    }
+
+
                     
                 }
             }
@@ -75,6 +75,29 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }
     }
+    
+//    var databaseRef: DatabaseReference!
+//    databaseRef = Database.database().reference() // sets up reference to the Firebase database
+//    
+//    // Create a dictionary memberDict with usernames as the keys and default boolean 'true' as the values. This is for easier access of data in future (unordered list instead of an ordered list)
+//    
+//    var memberDict = [String: Bool]()
+//    
+//    var cardDict = [String: Bool]()
+//    
+//    for member in group1.listOfMembers {
+//    memberDict[member] = true
+//    }
+//    
+//    print("MEMBER DICT: ", memberDict)
+//    var groupInfo: [String: Any]
+//    groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck]
+//    var reference = databaseRef.child("myGroups").childByAutoId()
+//    reference.setValue(groupInfo)
+//    groupID = reference.key
+//    print("printing groupID: ", groupID)
+    
+    
     
     func handleDoneInviting() {
         //upload data to database to share with the group

@@ -48,9 +48,9 @@ class SwipeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //
-        if DataManager.sharedData.swipes != nil {
-           performSegue(withIdentifier: "youreDone", sender: self)
-        }
+//        if DataManager.sharedData.swipes != nil {
+//           performSegue(withIdentifier: "youreDone", sender: self)
+//        }
     }
 
     
