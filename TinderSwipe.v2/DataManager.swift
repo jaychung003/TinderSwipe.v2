@@ -29,13 +29,16 @@ class DataManager: NSObject {
     var urlHERE = ""
     var myCurrentLocation = CLLocationCoordinate2D()
     var eventType = ["Food","Breakfast","Brunch","Lunch","Coffee","Dinner","Dessert","Drinks"]
-
+    
     var PriceAndTier = String()
     var llURL = ""
     
     //variables for creating JSON file
     let session = URLSession.shared
     var request: NSMutableURLRequest?
+    
+    //price array variable
+    var priceArray:[Int] = []
     
     // variables for full JSON file
     var fullJson: AnyObject?
@@ -84,19 +87,36 @@ class DataManager: NSObject {
     { print("1")
         if let JSONResponse = fullJson?["response"] as? NSDictionary
         { print("2")
-          print(JSONResponse)
+            print(JSONResponse)
             if let JSONGroup = JSONResponse["group"] as? NSDictionary
             {print("3")
                 if let JSONResult = JSONGroup["results"] as? NSArray
                 {print("4")
                     specificRestaurant = JSONResult[indexRestaurant] as? NSDictionary
+                    print("This is Specific Rest:", specificRestaurant)
                     print("5")
                     //print(specificRestaurant as Any)
-                    
                 }
             }
         }
     }
+    
+    func addRemoveValue(dollarSignValue: Int)
+    {
+        if (priceArray.contains(dollarSignValue))
+        {priceArray = priceArray.filter
+            {
+                $0 != dollarSignValue
+                
+            }
+            print(priceArray)
+        }
+        else{
+            priceArray.append(dollarSignValue)
+            print(priceArray)
+        }
+    }
+    
     
     //creates Deck
     func createDeck() -> [[String]]
@@ -127,6 +147,7 @@ class DataManager: NSObject {
         URLtoPass =  "https://api.foursquare.com/v2/search/recommendations?near=\(eventCity),\(eventState)&v=20160607&intent=\(venueType)&limit=15&client_id=\(client_id)&client_secret=\(client_secret)"
         URLtoPassNoSpace = URLtoPass.replacingOccurrences(of: " ", with: "_", options: .literal, range: nil)
         urlHERE = URLtoPassNoSpace
+        print("This is url from input", urlHERE)
         print("This is url from INPUT", urlHERE)
     }
     
@@ -134,7 +155,7 @@ class DataManager: NSObject {
     {
         urlHERE = "https://api.foursquare.com/v2/search/recommendations?ll=\(myCurrentLocation.latitude),\(myCurrentLocation.longitude)&v=20160607&intent=\(venueType)&limit=15&client_id=\(client_id)&client_secret=\(client_secret)"
         print("This is url from current location", urlHERE)
-   
+        
     }
     
     func resetCard()
@@ -167,7 +188,7 @@ class DataManager: NSObject {
     func setLocationType()
     {
         card.append(getLocationType())
-
+        
     }
     
     func getName() -> String
@@ -378,7 +399,7 @@ class DataManager: NSObject {
         else {
             card.append("Menu is not available") // if restaurant does not have menu, append the string "Menu is not available"
         }
-
+        
     }
     
 }
