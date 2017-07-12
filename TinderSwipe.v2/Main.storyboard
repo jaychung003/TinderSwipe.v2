@@ -465,7 +465,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1028" y="153"/>
+            <point key="canvasLocation" x="1090" y="152"/>
         </scene>
         <!--ResultVC-->
         <scene sceneID="fjZ-Zc-O5d">
@@ -822,8 +822,8 @@
         <image name="upbutton" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XPb-lH-J2Q"/>
-        <segue reference="4Ph-qx-BIR"/>
         <segue reference="BkC-QG-nOT"/>
+        <segue reference="lKa-GA-Nxb"/>
+        <segue reference="4Ph-qx-BIR"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -55,13 +55,17 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let userDict = userSnap.value as! [String:AnyObject]
                     print("uid:", uid)
                     
+                    var groupDict = [String: Bool]()
+                    print(uid)
+                    print("groupID:", self.groupID)
+                    ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
                     
-                    //for members of the group, make a new branch groupsAssociatedWith
-                    let eachUserRef = usersRef.child("\(uid!)")
-                    var groupInfoForUserWithSwipes: [String: Any]
-                    groupInfoForUserWithSwipes = ["swipeArray": [0...14]]
-                    var referenceForID =  eachUserRef.child("\(self.groupID!)")
-                    referenceForID.setValue(groupInfoForUserWithSwipes)
+//                    //for members of the group, make a new branch groupsAssociatedWith
+//                    let eachUserRef = usersRef.child("\(uid!)")
+//                    var groupInfoForUserWithSwipes: [String: Any]
+//                    groupInfoForUserWithSwipes = ["swipeArray": ]]
+//                    var referenceForID =  eachUserRef.child("\(self.groupID!)")
+//                    referenceForID.setValue(groupInfoForUserWithSwipes)
 
 
 

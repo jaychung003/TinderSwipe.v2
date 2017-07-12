@@ -608,7 +608,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
                 //This is the transition to the next VC
                 
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SwipeVCID")
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVCID")
                 self.present(nextViewController, animated:true, completion:nil)
             }}
             
@@ -629,7 +629,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             //This is the transition to the next VC
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SwipeVCID")
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVCID")
             self.present(nextViewController, animated:true, completion:nil)
         }
     }
