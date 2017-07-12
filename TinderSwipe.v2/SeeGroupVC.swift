@@ -134,6 +134,8 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //when tableview cell clicked, go to Swipe VC or Result VC
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataManager.sharedData.deck = GroupInfo.sharedGroupInfo.allDecks[indexPath.row]
+        DataManager.sharedData.individualGroupID = GroupInfo.sharedGroupInfo.groupIDs[indexPath.row]
+        print("individual group ID:::", DataManager.sharedData.individualGroupID)
         print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
         
         performSegue(withIdentifier: "SeeGroupToSwipeIdentifier", sender: self)

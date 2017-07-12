@@ -69,6 +69,7 @@ class DataManager: NSObject {
     var deck = [[String]]() // an array of cards
     var swipes = [String]() //an array of YES or NO swipes
     var yesDeck = [[String]]() //an array of cards with YES swipes
+    var individualGroupID = String()
     
     //Calls to server to get Foursquare data and returns the full file as myJson5
     func getJSONData()
