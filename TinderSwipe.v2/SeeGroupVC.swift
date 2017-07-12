@@ -14,26 +14,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var navBarUserName: UINavigationItem!
     
-    @IBAction func createEvent(_ sender: Any) {
-        print("event button clicked")
-        handleCreateEvent()
-    }
-    @IBAction func logOut(_ sender: UIButton) {
-        handleLogout()
-    }
-    
-    override func viewDidLoad() {
-        checkIfUserLoggedIn()
-        self.tableView.reloadData()
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-         checkIfUserLoggedIn()
-        self.tableView.reloadData()
 
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Don't do anything if the user isn't logged in yet,
@@ -65,6 +46,44 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             }
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkIfUserLoggedIn()
+        self.tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        checkIfUserLoggedIn()
+        self.tableView.reloadData()
+        
+    }
+    
+    
+    //when create event button clicked
+    @IBAction func createEvent(_ sender: Any) {
+        print("event button clicked")
+        handleCreateEvent()
+    }
+    func handleCreateEvent() {
+        performSegue(withIdentifier: "CreateEventIdentifier", sender: self)
+    }
+    
+    //when log out button clicked
+    @IBAction func logOut(_ sender: UIButton) {
+        handleLogout()
+    }
+    func handleLogout() {
+        print("handling logout")
+        do {
+            try Auth.auth()
+                .signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        performSegue(withIdentifier: "LogOutIdentifier", sender: self)
+    }
+    
     func clearAllGroupInfo() {
         GroupInfo.sharedGroupInfo.groupIDs = [String]()
         GroupInfo.sharedGroupInfo.groupNames = [String]()
@@ -90,24 +109,9 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         return true
         }
     }
+   
     
-    func handleLogout() {
-        print("handling logout")
-        do {
-            try Auth.auth()
-                .signOut()
-        } catch let logoutError {
-            print(logoutError)
-        }
-        performSegue(withIdentifier: "LogOutIdentifier", sender: self)
-    }
-    
-    func handleCreateEvent() {
-        performSegue(withIdentifier: "CreateEventIdentifier", sender: self)
-    }
-    
-    
-    // UITable functions
+// UITable functions
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("group name:", GroupInfo.sharedGroupInfo.groupNames)
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
@@ -127,6 +131,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         return GroupInfo.sharedGroupInfo.groupNames.count
     }
     
+    //when tableview cell clicked, go to Swipe VC or Result VC
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataManager.sharedData.deck = GroupInfo.sharedGroupInfo.allDecks[indexPath.row]
         print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)

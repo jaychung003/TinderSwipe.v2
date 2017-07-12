@@ -606,7 +606,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="3Cm-gd-cdL" kind="show" identifier="SeeGroupToSwipeIdentifier" id="VEj-BQ-gYq"/>
+                                            <segue destination="3Cm-gd-cdL" kind="show" identifier="SeeGroupToSwipeIdentifier" id="XPb-lH-J2Q"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -819,7 +819,7 @@
         <image name="upbutton" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VEj-BQ-gYq"/>
+        <segue reference="XPb-lH-J2Q"/>
         <segue reference="4Ph-qx-BIR"/>
         <segue reference="BkC-QG-nOT"/>
     </inferredMetricsTieBreakers>

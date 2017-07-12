@@ -45,6 +45,16 @@ class SwipeVC: UIViewController {
     var divisor: CGFloat! //variable for angle tilt
     var cardIndex: Int = 0
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //
+        if DataManager.sharedData.swipes != nil {
+           performSegue(withIdentifier: "youreDone", sender: self)
+        }
+    }
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nextPage.isHidden = true
