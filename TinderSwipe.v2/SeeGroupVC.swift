@@ -12,11 +12,6 @@ import Firebase
 class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet var tableView: UITableView!
-//    var groupIDs = [String]()
-//    var groupInfo = [String]()
-    var groupInfoObject = GroupInfo() // initialize the groupInfo object
-    var indexGroupID: Int = 0
-    
     @IBOutlet weak var navBarUserName: UINavigationItem!
     
     @IBAction func createEvent(_ sender: Any) {
@@ -133,7 +128,10 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Your action here
+        DataManager.sharedData.deck = GroupInfo.sharedGroupInfo.allDecks[indexPath.row]
+        print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
+        
+        performSegue(withIdentifier: "SeeGroupToSwipeIdentifier", sender: self)
     }
     
 }

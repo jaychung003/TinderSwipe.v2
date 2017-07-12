@@ -78,6 +78,7 @@ class SwipeVC: UIViewController {
     
     //populates the card with info
     func showInfo() {
+        deck = DataManager.sharedData.deck
         print("did deck transfer:", deck)
         UIView.animate(withDuration: 0.1, animations: {
         self.nameLabel.text = self.deck[self.cardIndex][0]
