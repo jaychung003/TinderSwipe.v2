@@ -46,6 +46,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if !checkIfUserLoggedIn() {
             return
         }
+        clearAllGroupInfo()
         while GroupInfo.sharedGroupInfo.groupIDs == nil {
             print("Group IDs is NIL")
 
@@ -67,9 +68,13 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.tableView.reloadData()
                 
             }
-        //}
         
-        
+    }
+    func clearAllGroupInfo() {
+        GroupInfo.sharedGroupInfo.groupIDs = [String]()
+        GroupInfo.sharedGroupInfo.groupNames = [String]()
+        GroupInfo.sharedGroupInfo.groupMembers = [[String]]()
+        GroupInfo.sharedGroupInfo.allDecks = [[[String]]]()
     }
     
     func checkIfUserLoggedIn() -> (Bool) {
@@ -127,5 +132,8 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         return GroupInfo.sharedGroupInfo.groupNames.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Your action here
+    }
     
 }

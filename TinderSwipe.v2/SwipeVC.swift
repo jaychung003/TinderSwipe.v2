@@ -42,7 +42,7 @@ class SwipeVC: UIViewController {
     }
     
     var deck = DataManager.sharedData.deck
-    var divisor: CGFloat! //variable for angle
+    var divisor: CGFloat! //variable for angle tilt
     var cardIndex: Int = 0
     
     override func viewDidLoad() {
