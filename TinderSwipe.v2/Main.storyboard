@@ -120,6 +120,9 @@
                                 <state key="normal" title="Create Event">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="getManualURL:" destination="e0O-QO-PQr" eventType="touchUpInside" id="VXc-S9-PFO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIE-Zc-fDn" userLabel="Search One">
                                 <rect key="frame" x="22" y="280" width="30" height="30"/>
