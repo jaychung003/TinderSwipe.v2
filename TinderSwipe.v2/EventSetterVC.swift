@@ -16,8 +16,8 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     
     @IBOutlet weak var diningLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var cityField: UITextField!
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var eventNameField: UITextField!
     @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var nextStep: UIButton!

@@ -82,6 +82,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.27406751070000002" green="0.69450072880000002" blue="0.6664475393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.76470588240000004" green="0.23529411759999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="e0O-QO-PQr" id="c1y-fB-6uB"/>
+                                    <outlet property="delegate" destination="e0O-QO-PQr" id="T76-Ub-9Cl"/>
+                                </connections>
                             </pickerView>
                             <datePicker hidden="YES" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ntg-yy-gld">
                                 <rect key="frame" x="0.0" y="412" width="375" height="142"/>
@@ -190,13 +194,13 @@
                         <outlet property="cityField" destination="kfh-cL-nDc" id="WgC-fA-HbV"/>
                         <outlet property="dateLabel" destination="MdE-wf-aRK" id="FU0-qm-Wex"/>
                         <outlet property="datePicker" destination="Ntg-yy-gld" id="PkA-72-fdD"/>
-                        <outlet property="diningLabel" destination="faA-ze-NHb" id="gTg-vY-XhV"/>
+                        <outlet property="diningLabel" destination="faA-ze-NHb" id="3vK-eg-vMT"/>
                         <outlet property="eventNameField" destination="jfp-om-Y9X" id="HTU-23-GX3"/>
                         <outlet property="myLocationIconButton" destination="6Ro-L4-IRt" id="Yuf-TR-P9l"/>
                         <outlet property="nextStep" destination="6qQ-bu-9Dy" id="uxF-Dq-aEW"/>
                         <outlet property="okButton" destination="LfO-h2-2wo" id="Wy5-av-4VP"/>
                         <outlet property="orLabel" destination="ww8-Ca-3eo" id="g3n-T8-vCa"/>
-                        <outlet property="pickerView" destination="Llz-Jp-RgA" id="ed3-JB-tQ5"/>
+                        <outlet property="pickerView" destination="Llz-Jp-RgA" id="HBT-hg-Rf0"/>
                         <outlet property="stateField" destination="q1g-bL-zcW" id="vjP-hr-kT3"/>
                         <outlet property="stepLabel" destination="5Hm-jb-nHI" id="KGA-Z9-Xc9"/>
                     </connections>
