@@ -47,10 +47,7 @@ class SwipeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //
-//        if DataManager.sharedData.swipes != nil {
-//           performSegue(withIdentifier: "youreDone", sender: self)
-//        }
+
     }
 
     
@@ -126,6 +123,11 @@ class SwipeVC: UIViewController {
                 }
             }
             
+            // function that updates swipe Array once swiping is done
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
+            self.updateSwipeArray()
+            
+            }
             print(DataManager.sharedData.swipes.count-1)
             nextPage.alpha = 1
             performSegue(withIdentifier: "youreDone", sender: self)
@@ -133,7 +135,25 @@ class SwipeVC: UIViewController {
             return
         }
     }
-
+    
+    func updateSwipeArray() {
+        var IDtoFix = DataManager.sharedData.individualGroupID
+        
+        let ref = Database.database().reference()
+        let usersRef = ref.child("users")
+        guard let currentUID = Auth.auth().currentUser?.uid else {
+            print("user is not currently logged in.")
+            return
+        }
+        print("ID to Fix:: ", IDtoFix)
+        print("ID should come up on this long one", DataManager.sharedData.individualGroupID)
+        let eachUserRef = usersRef.child("\(currentUID)/groupsAssociatedWith/\(IDtoFix)")
+        var updatedSwipeArray = [String: Any]()
+        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes]
+        eachUserRef.setValue(updatedSwipeArray)
+        
+    }
+    
     
     @IBAction func toggleMenu(_ sender: UIButton) {
         toggleMenu()

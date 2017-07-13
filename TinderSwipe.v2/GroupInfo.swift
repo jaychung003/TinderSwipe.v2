@@ -17,6 +17,7 @@ class GroupInfo: NSObject {
     var groupNames = [String]()
     var groupMembers = [[String]]()
     var allDecks = [[[String]]]()
+    //var individualGroupID = String()
     
     func loadGroupIDs() { // Put IDs into group IDs array.
         var ref: DatabaseReference!

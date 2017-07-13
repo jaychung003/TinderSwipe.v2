@@ -80,17 +80,11 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray]
                     var referenceForID =  eachUserRef.child("\(self.groupID!)")
                     referenceForID.setValue(groupInfoForUserWithSwipes)
-
-
-
+                    DataManager.sharedData.individualGroupID = self.groupID
                     
                 }
             }
             )
-
-
-            
-            
         }
     }
     
@@ -160,6 +154,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         var reference = databaseRef.child("myGroups").childByAutoId()
         reference.setValue(groupInfo)
         groupID = reference.key
+        //GroupInfo.sharedGroupInfo.currentUserGroupID = groupID
         print("printing groupID: ", groupID)
     }
     
