@@ -27,8 +27,6 @@
 		CBE653581F0D54CA00201E47 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6534E1F0D54CA00201E47 /* UIViewX.swift */; };
 		CBE653591F0D54CA00201E47 /* UIViewXRadialGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6534F1F0D54CA00201E47 /* UIViewXRadialGradient.swift */; };
 		CBE6535A1F0D54CA00201E47 /* UIVisualEffectViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE653501F0D54CA00201E47 /* UIVisualEffectViewX.swift */; };
-		CBE653621F0D558600201E47 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6535F1F0D558600201E47 /* AppUser.swift */; };
-		CBE653631F0D558600201E47 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE653601F0D558600201E47 /* Group.swift */; };
 		CBE653641F0D558600201E47 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE653611F0D558600201E47 /* DataManager.swift */; };
 		CBE653681F0D55AF00201E47 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE653661F0D55AF00201E47 /* LogInVC.swift */; };
 		CBE653691F0D55AF00201E47 /* SeeGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE653671F0D55AF00201E47 /* SeeGroupVC.swift */; };
@@ -76,8 +74,6 @@
 		CBE6534E1F0D54CA00201E47 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		CBE6534F1F0D54CA00201E47 /* UIViewXRadialGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewXRadialGradient.swift; sourceTree = "<group>"; };
 		CBE653501F0D54CA00201E47 /* UIVisualEffectViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVisualEffectViewX.swift; sourceTree = "<group>"; };
-		CBE6535F1F0D558600201E47 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
-		CBE653601F0D558600201E47 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CBE653611F0D558600201E47 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CBE653661F0D55AF00201E47 /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		CBE653671F0D55AF00201E47 /* SeeGroupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeeGroupVC.swift; sourceTree = "<group>"; };
@@ -176,8 +172,6 @@
 		CBE6535E1F0D554B00201E47 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				CBE6535F1F0D558600201E47 /* AppUser.swift */,
-				CBE653601F0D558600201E47 /* Group.swift */,
 				CBE653611F0D558600201E47 /* DataManager.swift */,
 				CBDD84E61F13E39C00CAC9EE /* GroupInfo.swift */,
 			);
@@ -345,10 +339,8 @@
 				CBE653541F0D54CA00201E47 /* UISliderX.swift in Sources */,
 				CBE653641F0D558600201E47 /* DataManager.swift in Sources */,
 				CBE653731F0D560C00201E47 /* ThirdVC.swift in Sources */,
-				CBE653621F0D558600201E47 /* AppUser.swift in Sources */,
 				CBDD84E71F13E39C00CAC9EE /* GroupInfo.swift in Sources */,
 				CBE653711F0D560C00201E47 /* InviteFriendsVC.swift in Sources */,
-				CBE653631F0D558600201E47 /* Group.swift in Sources */,
 				CBE653681F0D55AF00201E47 /* LogInVC.swift in Sources */,
 				CBE653091F0D4F3200201E47 /* AppDelegate.swift in Sources */,
 				CBE653741F0D560C00201E47 /* resultVC.swift in Sources */,
