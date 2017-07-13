@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CBE652EE1F0D4EE200201E47"
-               BuildableName = "TinderSwipe.v2.app"
+               BuildableName = "YumNum.app"
                BlueprintName = "TinderSwipe.v2"
                ReferencedContainer = "container:TinderSwipe.v2.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBE652EE1F0D4EE200201E47"
-            BuildableName = "TinderSwipe.v2.app"
+            BuildableName = "YumNum.app"
             BlueprintName = "TinderSwipe.v2"
             ReferencedContainer = "container:TinderSwipe.v2.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBE652EE1F0D4EE200201E47"
-            BuildableName = "TinderSwipe.v2.app"
+            BuildableName = "YumNum.app"
             BlueprintName = "TinderSwipe.v2"
             ReferencedContainer = "container:TinderSwipe.v2.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CBE652EE1F0D4EE200201E47"
-            BuildableName = "TinderSwipe.v2.app"
+            BuildableName = "YumNum.app"
             BlueprintName = "TinderSwipe.v2"
             ReferencedContainer = "container:TinderSwipe.v2.xcodeproj">
          </BuildableReference>
