@@ -11,6 +11,6 @@ import UIKit
 class AppUser: NSObject {
     var name: String!
     var email: String!
-    var groupsAssociatedWith = [String]()
+    var groupsAssociatedWith: [Group] = []
 
 }
