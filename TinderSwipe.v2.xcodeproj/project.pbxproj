@@ -10,6 +10,8 @@
 		A94C473C1F16D0FC0013AFB8 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */; };
 		A94C473D1F16D0FC0013AFB8 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */; };
 		A94C473E1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */; };
+		CBB88C711F17E90800CD0132 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB88C701F17E90800CD0132 /* Group.swift */; };
+		CBB88C731F17E94300CD0132 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB88C721F17E94300CD0132 /* AppUser.swift */; };
 		CBDD84E71F13E39C00CAC9EE /* GroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDD84E61F13E39C00CAC9EE /* GroupInfo.swift */; };
 		CBE653091F0D4F3200201E47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE653041F0D4F3200201E47 /* AppDelegate.swift */; };
 		CBE6530A1F0D4F3200201E47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBE653051F0D4F3200201E47 /* Main.storyboard */; };
@@ -56,6 +58,8 @@
 		A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/TinderSwipe.v2-ezlylvmzcvskeufpfgoygbdjivgq/Build/Products/Debug-iphonesimulator/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "../../../Library/Developer/Xcode/DerivedData/TinderSwipe.v2-ezlylvmzcvskeufpfgoygbdjivgq/Build/Products/Debug-iphonesimulator/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
 		A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_TinderSwipe_v2.framework; path = "Pods/../build/Debug-iphoneos/Pods_TinderSwipe_v2.framework"; sourceTree = "<group>"; };
+		CBB88C701F17E90800CD0132 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		CBB88C721F17E94300CD0132 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		CBDD84E61F13E39C00CAC9EE /* GroupInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInfo.swift; sourceTree = "<group>"; };
 		CBE652EF1F0D4EE200201E47 /* YumNum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumNum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBE653041F0D4F3200201E47 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				CBE653611F0D558600201E47 /* DataManager.swift */,
+				CBB88C721F17E94300CD0132 /* AppUser.swift */,
+				CBB88C701F17E90800CD0132 /* Group.swift */,
 				CBDD84E61F13E39C00CAC9EE /* GroupInfo.swift */,
 			);
 			name = "Data Models";
@@ -327,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB88C711F17E90800CD0132 /* Group.swift in Sources */,
 				CBE653551F0D54CA00201E47 /* UITextFieldX.swift in Sources */,
 				CBE653561F0D54CA00201E47 /* UIViewAnchorPoint.swift in Sources */,
 				CBE6535A1F0D54CA00201E47 /* UIVisualEffectViewX.swift in Sources */,
@@ -340,6 +347,7 @@
 				CBE653641F0D558600201E47 /* DataManager.swift in Sources */,
 				CBE653731F0D560C00201E47 /* ThirdVC.swift in Sources */,
 				CBDD84E71F13E39C00CAC9EE /* GroupInfo.swift in Sources */,
+				CBB88C731F17E94300CD0132 /* AppUser.swift in Sources */,
 				CBE653711F0D560C00201E47 /* InviteFriendsVC.swift in Sources */,
 				CBE653681F0D55AF00201E47 /* LogInVC.swift in Sources */,
 				CBE653091F0D4F3200201E47 /* AppDelegate.swift in Sources */,
