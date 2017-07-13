@@ -578,6 +578,7 @@
                                 <rect key="frame" x="0.0" y="98" width="375" height="549"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="groupCell" textLabel="8hZ-yE-dig" detailTextLabel="xSg-Q1-hcS" rowHeight="74" style="IBUITableViewCellStyleSubtitle" id="sEE-u7-PoW">
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
