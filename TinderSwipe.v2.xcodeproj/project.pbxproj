@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A94C473C1F16D0FC0013AFB8 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */; };
+		A94C473D1F16D0FC0013AFB8 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */; };
+		A94C473E1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */; };
 		CBDD84E71F13E39C00CAC9EE /* GroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDD84E61F13E39C00CAC9EE /* GroupInfo.swift */; };
 		CBE653091F0D4F3200201E47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE653041F0D4F3200201E47 /* AppDelegate.swift */; };
 		CBE6530A1F0D4F3200201E47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBE653051F0D4F3200201E47 /* Main.storyboard */; };
@@ -36,9 +39,25 @@
 		CBE653741F0D560C00201E47 /* resultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6536F1F0D560C00201E47 /* resultVC.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A94C472B1F16CFBD0013AFB8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		24FEA0F8F63CE17BB6DAEA71 /* Pods-TinderSwipe.v2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinderSwipe.v2.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinderSwipe.v2/Pods-TinderSwipe.v2.release.xcconfig"; sourceTree = "<group>"; };
 		353407ECAE19078B0E2E6763 /* Pods-TinderSwipe.v2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinderSwipe.v2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinderSwipe.v2/Pods-TinderSwipe.v2.debug.xcconfig"; sourceTree = "<group>"; };
+		A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/TinderSwipe.v2-ezlylvmzcvskeufpfgoygbdjivgq/Build/Products/Debug-iphonesimulator/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
+		A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "../../../Library/Developer/Xcode/DerivedData/TinderSwipe.v2-ezlylvmzcvskeufpfgoygbdjivgq/Build/Products/Debug-iphonesimulator/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
+		A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_TinderSwipe_v2.framework; path = "Pods/../build/Debug-iphoneos/Pods_TinderSwipe_v2.framework"; sourceTree = "<group>"; };
 		CBDD84E61F13E39C00CAC9EE /* GroupInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInfo.swift; sourceTree = "<group>"; };
 		CBE652EF1F0D4EE200201E47 /* TinderSwipe.v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderSwipe.v2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBE653041F0D4F3200201E47 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +93,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A94C473C1F16D0FC0013AFB8 /* GoogleToolboxForMac.framework in Frameworks */,
+				A94C473D1F16D0FC0013AFB8 /* GTMSessionFetcher.framework in Frameworks */,
+				A94C473E1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,12 +111,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A94C47381F16D0FC0013AFB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */,
+				A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */,
+				A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CBE652E61F0D4EE100201E47 = {
 			isa = PBXGroup;
 			children = (
 				CBE652F11F0D4EE200201E47 /* TinderSwipe.v2 */,
 				CBE652F01F0D4EE200201E47 /* Products */,
 				724318008C6F60CA1126B2C0 /* Pods */,
+				A94C47381F16D0FC0013AFB8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,6 +218,7 @@
 				CBE652ED1F0D4EE200201E47 /* Resources */,
 				C57ECEBD5A501F284B3D66C1 /* [CP] Embed Pods Frameworks */,
 				3D9B8655DA54591233A0BB52 /* [CP] Copy Pods Resources */,
+				A94C472B1F16CFBD0013AFB8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,7 +241,7 @@
 				TargetAttributes = {
 					CBE652EE1F0D4EE200201E47 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = J9ZQ7GC82X;
+						DevelopmentTeam = F7K338KU6F;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -249,7 +283,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		3D9B8655DA54591233A0BB52 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -429,10 +463,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = J9ZQ7GC82X;
+				DEVELOPMENT_TEAM = F7K338KU6F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = TinderSwipe.v2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSw;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSw2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -447,10 +485,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = J9ZQ7GC82X;
+				DEVELOPMENT_TEAM = F7K338KU6F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = TinderSwipe.v2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSw;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSw2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
