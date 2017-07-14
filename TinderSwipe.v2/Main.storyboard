@@ -168,17 +168,6 @@
                                     <action selector="amendSearchThree:" destination="e0O-QO-PQr" eventType="touchUpInside" id="YhR-X8-uQh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqD-4z-Uy7">
-                                <rect key="frame" x="16" y="20" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.27592062950134277" green="0.69328939914703369" blue="0.66889560222625732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="backButton:" destination="e0O-QO-PQr" eventType="touchUpInside" id="eMx-yX-1Pr"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ro-L4-IRt" userLabel="My Location Icon Button">
                                 <rect key="frame" x="164" y="270" width="43" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -199,7 +188,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="no" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qQ-bu-9Dy" userLabel="Next Step">
-                                <rect key="frame" x="291" y="20" width="68" height="30"/>
+                                <rect key="frame" x="291" y="20" width="68" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.27592062950000001" green="0.69328939909999998" blue="0.66889560219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Next Step">
@@ -207,6 +196,29 @@
                                 </state>
                                 <connections>
                                     <action selector="incrementStepValue:" destination="e0O-QO-PQr" eventType="touchUpInside" id="LAe-mV-kGw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJo-0T-Lzh">
+                                <rect key="frame" x="16" y="24" width="106" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.27311348915100098" green="0.69571095705032349" blue="0.66867619752883911" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Back to Groups">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToGroupAction:" destination="e0O-QO-PQr" eventType="touchUpInside" id="WkR-YH-eBv"/>
+                                    <segue destination="eHv-Qu-Oqe" kind="show" identifier="backToGroupVC" id="rLs-Rl-21D"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqD-4z-Uy7">
+                                <rect key="frame" x="16" y="24" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.27592062950134277" green="0.69328939914703369" blue="0.66889560222625732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="e0O-QO-PQr" eventType="touchUpInside" id="eMx-yX-1Pr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -220,6 +232,7 @@
                         <outlet property="SearchTwo" destination="Tyr-OK-eAn" id="8Bz-2G-F4p"/>
                         <outlet property="andLabel" destination="qFd-LR-RV9" id="iZe-Xf-Tr0"/>
                         <outlet property="backButton" destination="XqD-4z-Uy7" id="1XP-N4-bRg"/>
+                        <outlet property="backToGroup" destination="JJo-0T-Lzh" id="vuU-Nn-KZT"/>
                         <outlet property="cityField" destination="kfh-cL-nDc" id="WgC-fA-HbV"/>
                         <outlet property="dateLabel" destination="MdE-wf-aRK" id="FU0-qm-Wex"/>
                         <outlet property="datePicker" destination="Ntg-yy-gld" id="PkA-72-fdD"/>
@@ -261,117 +274,6 @@
                                     <segue destination="Ve3-JB-ksU" kind="show" identifier="youreDone" id="BkC-QG-nOT"/>
                                 </connections>
                             </button>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8N-zZ-xnJ">
-                                <rect key="frame" x="0.0" y="545" width="375" height="122"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="3Mp-O4-mel">
-                                        <rect key="frame" x="35" y="60" width="305" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LmH-AH-mtC" customClass="UIButtonX" customModule="TinderSwipe">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                <color key="backgroundColor" red="0.82802380180000001" green="0.82802380180000001" blue="0.82802380180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="iEp-cc-GGb"/>
-                                                    <constraint firstAttribute="width" constant="50" id="sQh-N5-EUV"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                <state key="normal" title="4">
-                                                    <color key="titleShadowColor" red="0.82802380180000001" green="0.82802380180000001" blue="0.82802380180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="25"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lz-G3-Vbr" customClass="UIButtonX" customModule="TinderSwipe">
-                                                <rect key="frame" x="85" y="0.0" width="50" height="50"/>
-                                                <color key="backgroundColor" red="0.82802380180000001" green="0.82802380180000001" blue="0.82802380180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="22d-e9-WhK"/>
-                                                    <constraint firstAttribute="height" constant="50" id="tbW-xa-xp0"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                <state key="normal" title="3">
-                                                    <color key="titleShadowColor" red="0.82802380180000001" green="0.82802380180000001" blue="0.82802380180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="25"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46p-iU-ytg" customClass="UIButtonX" customModule="TinderSwipe">
-                                                <rect key="frame" x="170" y="0.0" width="50" height="50"/>
-                                                <color key="backgroundColor" red="0.82802380180000001" green="0.82802380180000001" blue="0.82802380180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="ZB2-ct-Ol5"/>
-                                                    <constraint firstAttribute="width" constant="50" id="ZKb-Gw-dm0"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                <state key="normal" title="2">
-                                                    <color key="titleShadowColor" red="0.82802380180000001" green="0.82802380180000001" blue="0.82802380180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="25"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yvq-HL-7p9" customClass="UIButtonX" customModule="TinderSwipe">
-                                                <rect key="frame" x="255" y="0.0" width="50" height="50"/>
-                                                <color key="backgroundColor" red="0.82802380181347157" green="0.82802380181347157" blue="0.82802380181347157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="gbT-iT-zAm"/>
-                                                    <constraint firstAttribute="width" constant="50" id="hRG-xw-bh9"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                <state key="normal" title="1">
-                                                    <color key="titleShadowColor" red="0.82802380181347157" green="0.82802380181347157" blue="0.82802380181347157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="25"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="46p-iU-ytg" firstAttribute="top" secondItem="3Mp-O4-mel" secondAttribute="top" id="38C-Sq-8Wu"/>
-                                            <constraint firstItem="0lz-G3-Vbr" firstAttribute="top" secondItem="3Mp-O4-mel" secondAttribute="top" id="J1n-k9-qUI"/>
-                                            <constraint firstItem="Yvq-HL-7p9" firstAttribute="top" secondItem="3Mp-O4-mel" secondAttribute="top" id="ObI-kH-4iW"/>
-                                            <constraint firstItem="LmH-AH-mtC" firstAttribute="top" secondItem="3Mp-O4-mel" secondAttribute="top" id="Sv2-RY-g84"/>
-                                            <constraint firstItem="Yvq-HL-7p9" firstAttribute="leading" secondItem="46p-iU-ytg" secondAttribute="trailing" constant="35" id="gqA-pG-nKV"/>
-                                            <constraint firstItem="LmH-AH-mtC" firstAttribute="leading" secondItem="3Mp-O4-mel" secondAttribute="leading" id="iV4-W1-Kqq"/>
-                                            <constraint firstItem="46p-iU-ytg" firstAttribute="leading" secondItem="0lz-G3-Vbr" secondAttribute="trailing" constant="35" id="jRp-FT-KTx"/>
-                                            <constraint firstItem="0lz-G3-Vbr" firstAttribute="leading" secondItem="LmH-AH-mtC" secondAttribute="trailing" constant="35" id="z2D-R1-LwH"/>
-                                        </constraints>
-                                    </stackView>
-                                    <view clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PSz-Dj-ghT" customClass="UIViewX" customModule="YumNum" customModuleProvider="target">
-                                        <rect key="frame" x="162" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="22"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wr-tQ-GNf" userLabel="Menu Button" customClass="UIButtonX" customModule="TinderSwipe">
-                                        <rect key="frame" x="162" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="upbutton"/>
-                                        <connections>
-                                            <action selector="toggleMenu:" destination="3Cm-gd-cdL" eventType="touchUpInside" id="9vb-38-fGr"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="122" id="VCP-jX-1fc"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZL-LA-daF" customClass="UIViewX" customModule="TinderSwipe">
                                 <rect key="frame" x="16" y="96" width="343" height="474"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -391,7 +293,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$$$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUp-cu-OeK">
-                                        <rect key="frame" x="34" y="140" width="37" height="20"/>
+                                        <rect key="frame" x="34" y="140" width="74" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -458,22 +360,10 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.27406751070000002" green="0.69450072880000002" blue="0.6664475393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="A8N-zZ-xnJ" secondAttribute="trailing" id="YIX-rh-Vnm"/>
-                            <constraint firstItem="A8N-zZ-xnJ" firstAttribute="leading" secondItem="2q2-i2-XeO" secondAttribute="leading" id="kAD-vs-fBl"/>
-                            <constraint firstAttribute="bottom" secondItem="A8N-zZ-xnJ" secondAttribute="bottom" id="rhR-5y-M8A"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="Qvh-Pv-vyi" id="L9c-2V-ZJL"/>
-                        <outlet property="button1" destination="Yvq-HL-7p9" id="c4T-Uo-FIQ"/>
-                        <outlet property="button2" destination="46p-iU-ytg" id="vrC-Hl-vRq"/>
-                        <outlet property="button3" destination="0lz-G3-Vbr" id="ROM-RV-Lkw"/>
-                        <outlet property="button4" destination="LmH-AH-mtC" id="M5j-6A-Kxt"/>
                         <outlet property="card" destination="GZL-LA-daF" id="9it-0Y-Van"/>
-                        <outlet property="darkFillView" destination="PSz-Dj-ghT" id="XgV-Xa-3CQ"/>
-                        <outlet property="menuButton" destination="4Wr-tQ-GNf" id="KaX-cr-3e9"/>
-                        <outlet property="menuView" destination="A8N-zZ-xnJ" id="slV-TD-LkF"/>
                         <outlet property="nameLabel" destination="gZx-vf-VpG" id="LmL-8h-uWY"/>
                         <outlet property="nextPage" destination="Cal-bX-aKJ" id="lE9-Dh-Zix"/>
                         <outlet property="picture" destination="U29-l4-cp1" id="FSm-aX-D8Y"/>
@@ -491,7 +381,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1086" y="160"/>
+            <point key="canvasLocation" x="1085.5999999999999" y="159.67016491754123"/>
         </scene>
         <!--ResultVC-->
         <scene sceneID="fjZ-Zc-O5d">
@@ -616,6 +506,7 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5x-HE-IeX">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.2731134892" green="0.69571095709999997" blue="0.66867619749999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Title" id="sm8-n4-Fi9">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="EOD-hP-hlm">
@@ -660,7 +551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVm-Xe-qTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="-618.44077961019491"/>
+            <point key="canvasLocation" x="897" y="-627"/>
         </scene>
         <!--Invite FriendsVC-->
         <scene sceneID="XoE-hQ-3Xl">
@@ -684,29 +575,46 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0q-iY-HSh">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.12369277328252792" green="0.64077079296112061" blue="0.61796367168426514" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Search Friends!" id="nPR-iV-1MZ">
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="sbl-R7-CI3">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="omI-wK-ce0">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="mWE-xh-kh7">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ovJ-2c-hSA">
                                                 <rect key="frame" x="293" y="7" width="66" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Done">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="doneButtonClicked:" destination="Xnw-Aa-OTx" eventType="touchUpInside" id="T9w-Dj-R3h"/>
+                                                    <action selector="doneButtonClicked:" destination="Xnw-Aa-OTx" eventType="touchUpInside" id="ghT-OV-98a"/>
+                                                    <segue destination="3Cm-gd-cdL" kind="show" identifier="DoneInvitingIdentifier" id="b7o-mM-NUn"/>
                                                 </connections>
                                             </button>
-                                            <connections>
-                                                <segue destination="3Cm-gd-cdL" kind="show" identifier="DoneInvitingIdentifier" id="lKa-GA-Nxb"/>
-                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Dg-fI-NLl" customClass="UIButtonX" customModule="YumNum" customModuleProvider="target">
+                                <rect key="frame" x="317" y="97" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.23529411759999999" green="0.3921568627" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Add">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addButtonClicked:" destination="Xnw-Aa-OTx" eventType="touchUpInside" id="1r3-2v-Wag"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="23" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gfX-Zv-Nv8">
-                                <rect key="frame" x="0.0" y="170" width="375" height="497"/>
+                                <rect key="frame" x="0.0" y="135" width="375" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -725,22 +633,6 @@
                                     <outlet property="delegate" destination="Xnw-Aa-OTx" id="2Ac-EC-GPu"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Dg-fI-NLl" customClass="UIButtonX" customModule="YumNum" customModuleProvider="target">
-                                <rect key="frame" x="317" y="97" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.23529411759999999" green="0.3921568627" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Add">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="7"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="addButtonClicked:" destination="Xnw-Aa-OTx" eventType="touchUpInside" id="1r3-2v-Wag"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -753,7 +645,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MCb-of-Af8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="153"/>
+            <point key="canvasLocation" x="57" y="133"/>
         </scene>
         <!--Log InVC-->
         <scene sceneID="0iV-gC-zR4">
@@ -783,7 +675,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMP-Zt-Rvm">
                                 <rect key="frame" x="154" y="327" width="68" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Register"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="registerButton:" destination="GSv-3T-Xp0" eventType="touchUpInside" id="0bF-hO-I9d"/>
                                     <segue destination="eHv-Qu-Oqe" kind="show" identifier="RegisterIdentifier" id="4Ph-qx-BIR"/>
@@ -792,7 +686,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rx7-Q4-Bfy">
                                 <rect key="frame" x="150" y="327" width="75" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log In"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="logInButton:" destination="GSv-3T-Xp0" eventType="touchUpInside" id="XXs-Ca-3C9"/>
                                     <segue destination="eHv-Qu-Oqe" kind="show" identifier="LogInIdentifier" id="lEn-xV-nu4"/>
@@ -856,11 +752,10 @@
         <image name="burger" width="194" height="121"/>
         <image name="crosshair-256" width="256" height="256"/>
         <image name="up" width="600" height="600"/>
-        <image name="upbutton" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="rLs-Rl-21D"/>
+        <segue reference="XPb-lH-J2Q"/>
         <segue reference="BkC-QG-nOT"/>
-        <segue reference="lKa-GA-Nxb"/>
-        <segue reference="4Ph-qx-BIR"/>
     </inferredMetricsTieBreakers>
 </document>

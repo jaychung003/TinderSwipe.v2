@@ -23,7 +23,8 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         handleAddButton()
     }
 
-    @IBAction func doneButtonClicked(_ sender: Any) {
+    @IBAction func doneButtonClicked(_ sender: UIButton) {
+    
         // update the groupsAssociatedWith for each member of the group that has just been created
 
         handleDoneInviting()

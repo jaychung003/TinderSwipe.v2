@@ -103,7 +103,8 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 print(DataSnapshot)
                 print(uid)
                 if let dictionary = DataSnapshot.value as? [String: AnyObject] {
-                    self.navBarUserName.title = (dictionary["name"] as? String)! + "'s groups"
+                    self.navBarUserName.title = "My Groups"
+                    //self.navBarUserName.title = (dictionary["name"] as? String)! + "'s groups"
                 }
             }, withCancel: nil)
         return true

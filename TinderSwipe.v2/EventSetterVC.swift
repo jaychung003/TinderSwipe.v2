@@ -32,6 +32,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     @IBOutlet weak var SearchFour: UIButton!
     @IBOutlet weak var SearchThree: UIButton!
     @IBOutlet weak var myLocationIconButton: UIButton!
+    @IBOutlet weak var backToGroup: UIButton!
     
     
     
@@ -76,6 +77,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             stepLabel.text! = "Give Your Event a Name"
             backButton.isHidden = true
             backButton.isUserInteractionEnabled = false
+            backToGroup.isHidden = false
             stepValue = stepValue - 1
         }
         
@@ -99,6 +101,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             stepLabel.text! = "Search by City and State or Current Location"
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             stepValue = stepValue - 1
         }
         
@@ -124,6 +127,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             stepLabel.text! = "Select a Time and Date for Your Event"
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             stepValue = stepValue - 1
             
         }
@@ -149,6 +153,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             stepLabel.text! = "Select a Type of Dining for Your Event"
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             stepValue = stepValue - 1
             
         }
@@ -174,6 +179,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             stepLabel.text! = "Select Up To Four Price Ranges"
+            backToGroup.isHidden = true
             stepValue = stepValue - 1
         }
         
@@ -211,6 +217,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             backButton.isUserInteractionEnabled = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             
         }
         if stepValue == 1
@@ -234,6 +241,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             stepLabel.text! = "Select a Time and Date for Your Event"
         }
         
@@ -258,6 +266,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             stepLabel.text! = "Select a Type of Dining for Your Event"
         }
         
@@ -282,6 +291,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             stepLabel.text! = "Select Up To Four Price Ranges"
         }
         
@@ -305,6 +315,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            backToGroup.isHidden = true
             stepLabel.text! = "Get Ready to Swipe"
         }
         
@@ -334,6 +345,8 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
 
     
     //ViewDidLoad func requests user location privileges, hides scroll pickers, creates a "tap" zone for scrollers
+    @IBAction func backToGroupAction(_ sender: UIButton) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -607,9 +620,9 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
                 print("We created a deck", DataManager.sharedData.deck)
                 //This is the transition to the next VC
                 
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVCID")
-                self.present(nextViewController, animated:true, completion:nil)
+                 var storyBoard1 : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                 var nextViewController1 = storyBoard1.instantiateViewController(withIdentifier: "InviteFriendsVCID")
+                self.present(nextViewController1, animated:true, completion:nil)
             }}
             
         else {
