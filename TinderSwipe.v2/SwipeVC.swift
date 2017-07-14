@@ -56,7 +56,7 @@ class SwipeVC: UIViewController {
         super.viewDidLoad()
         nextPage.isHidden = true
         divisor = (view.frame.width / 2) / 0.61 //degree tilted
-        hideButtons()
+       // hideButtons()
         //for a few second delay of showing card's info
         nextPage.alpha = 0
         card.alpha = 0

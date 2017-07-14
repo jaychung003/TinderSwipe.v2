@@ -401,6 +401,9 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
         dateLabel.isUserInteractionEnabled = true
         datePicker.backgroundColor = hexStringToUIColor(hex: "#46B1AA")
         dateLabel.layer.cornerRadius = 5
+        backToGroup.layer.cornerRadius = 7
+        backButton.layer.cornerRadius = 7
+        nextStep.layer.cornerRadius = 7
         dateLabel.clipsToBounds = true
         diningLabel.layer.cornerRadius = 5
         diningLabel.clipsToBounds = true

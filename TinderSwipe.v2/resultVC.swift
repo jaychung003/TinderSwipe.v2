@@ -19,6 +19,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     var venueID = ""
     
     @IBOutlet weak var resultsTableView: UITableView!
+    @IBOutlet weak var SwipeResultToGroups: UIButton!
     
     override func viewDidLoad() {
         print(swipeResult)
