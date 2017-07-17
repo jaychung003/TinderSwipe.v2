@@ -19,15 +19,11 @@ class SwipeVC: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var picture: UIImageView!
     
-    //menu things that aren't being used right now
-    @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var menuButton: UIButton!
-    @IBOutlet weak var darkFillView: UIViewX!
-    @IBOutlet weak var button1: UIButtonX!
-    @IBOutlet weak var button2: UIButtonX!
-    @IBOutlet weak var button3: UIButtonX!
-    @IBOutlet weak var button4: UIButtonX!
+    //swiping related things
     @IBOutlet weak var thumbImageView: UIImageView!
+    //@IBOutlet weak var checkMark: UIButtonX!
+    //@IBOutlet weak var xMark: UIButtonX!
+    
     
     //button that brings to the next page
     @IBOutlet weak var nextPage: UIButton!
@@ -50,7 +46,32 @@ class SwipeVC: UIViewController {
 
     }
 
+    //right and left button action
+    @IBAction func checkMarkClicked(_ sender: Any) {
+        swipeRight()
+    }
+    @IBAction func xMarkClicked(_ sender: Any) {
+        swipeLeft()
+    }
     
+    func swipeRight() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.center = CGPoint(x: self.card.center.x + 200, y: self.card.center.y)
+        })
+        loadNew()
+        DataManager.sharedData.swipes.append("YES")
+        print(DataManager.sharedData.swipes)
+    }
+    
+    func swipeLeft() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.center = CGPoint(x: self.card.center.x - 200, y: self.card.center.y)
+        })
+        loadNew()
+        DataManager.sharedData.swipes.append("NO")
+        print(DataManager.sharedData.swipes)
+        return
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,11 +175,6 @@ class SwipeVC: UIViewController {
         
     }
     
-    
-    @IBAction func toggleMenu(_ sender: UIButton) {
-        toggleMenu()
-    }
-    
     //swiping action
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         let card = sender.view!
@@ -187,22 +203,24 @@ class SwipeVC: UIViewController {
         if sender.state == UIGestureRecognizerState.ended {
             if card.center.x < 75 {
                 //move off to the left side of screen
-                UIView.animate(withDuration: 0.3, animations: {
-                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
-                })
-                loadNew()
-                DataManager.sharedData.swipes.append("NO")
-                print(DataManager.sharedData.swipes)
-                return
+                swipeLeft()
+//                UIView.animate(withDuration: 0.3, animations: {
+//                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
+//                })
+//                loadNew()
+//                DataManager.sharedData.swipes.append("NO")
+//                print(DataManager.sharedData.swipes)
+//                return
             }
             else if card.center.x > (view.frame.width - 75) {
                 // move off to the right side of screen
-                UIView.animate(withDuration: 0.3, animations: {
-                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
-                })
-                loadNew()
-                DataManager.sharedData.swipes.append("YES")
-                print(DataManager.sharedData.swipes)
+                swipeRight()
+//                UIView.animate(withDuration: 0.3, animations: {
+//                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
+//                })
+//                loadNew()
+//                DataManager.sharedData.swipes.append("YES")
+//                print(DataManager.sharedData.swipes)
                 return
             }
             //bring back to center if let go in the middle range
