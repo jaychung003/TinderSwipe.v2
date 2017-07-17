@@ -32,8 +32,10 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     @IBOutlet weak var SearchFour: UIButton!
     @IBOutlet weak var SearchThree: UIButton!
     @IBOutlet weak var myLocationIconButton: UIButton!
-    @IBOutlet weak var backToGroup: UIButton!
+    //@IBOutlet weak var backToGroup: UIButton!
+    //@IBOutlet weak var PressBelowLabel: UILabel!
     @IBOutlet weak var PressBelowLabel: UILabel!
+    @IBOutlet weak var backToGroup: UIButton!
     
     
     
