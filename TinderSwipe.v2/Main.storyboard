@@ -767,8 +767,8 @@
         <image name="up" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i6J-rW-jMI"/>
-        <segue reference="BkC-QG-nOT"/>
+        <segue reference="rLs-Rl-21D"/>
         <segue reference="XPb-lH-J2Q"/>
+        <segue reference="BkC-QG-nOT"/>
     </inferredMetricsTieBreakers>
 </document>
