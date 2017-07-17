@@ -152,7 +152,7 @@ class SwipeVC: UIViewController {
         }
         else {
             //make a new list of restaurants that got YES swipes
-            for index in 0...(DataManager.sharedData.swipes.count-1) {
+            for index in 0...(DataManager.sharedData.swipes.count - 1) {
                 if DataManager.sharedData.swipes[index] == "YES" {
                     DataManager.sharedData.yesDeck.append(DataManager.sharedData.deck[index])
                 }
@@ -163,7 +163,7 @@ class SwipeVC: UIViewController {
             self.updateSwipeArray()
             
             }
-            print(DataManager.sharedData.swipes.count-1)
+            print(DataManager.sharedData.swipes.count)
             nextPage.alpha = 1
             performSegue(withIdentifier: "youreDone", sender: self)
             performSegue(withIdentifier: "nextButton", sender: self)
@@ -217,24 +217,22 @@ class SwipeVC: UIViewController {
         if sender.state == UIGestureRecognizerState.ended {
             if card.center.x < 75 {
                 //move off to the left side of screen
-                swipeLeft()
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
-//                })
-//                loadNew()
-//                DataManager.sharedData.swipes.append("NO")
-//                print(DataManager.sharedData.swipes)
-//                return
+                UIView.animate(withDuration: 0.3, animations: {
+                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
+                })
+                loadNew()
+                DataManager.sharedData.swipes.append("NO")
+                print(DataManager.sharedData.swipes)
+                return
             }
             else if card.center.x > (view.frame.width - 75) {
                 // move off to the right side of screen
-                swipeRight()
-//                UIView.animate(withDuration: 0.3, animations: {
-//                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
-//                })
-//                loadNew()
-//                DataManager.sharedData.swipes.append("YES")
-//                print(DataManager.sharedData.swipes)
+                UIView.animate(withDuration: 0.3, animations: {
+                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
+                })
+                loadNew()
+                DataManager.sharedData.swipes.append("YES")
+                print(DataManager.sharedData.swipes)
                 return
             }
             //bring back to center if let go in the middle range
