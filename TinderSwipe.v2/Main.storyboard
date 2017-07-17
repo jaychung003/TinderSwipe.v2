@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eHv-Qu-Oqe">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GSv-3T-Xp0">
+>>>>>>> ef01591e1cf69be763441bfa25287523b9d0710f
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -103,23 +107,6 @@
                                     <action selector="pickerValueChanged:" destination="e0O-QO-PQr" eventType="valueChanged" id="mLT-hW-U3a"/>
                                 </connections>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LfO-h2-2wo">
-                                <rect key="frame" x="72" y="313" width="228" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <accessibility key="accessibilityConfiguration" hint="Select When Done" identifier="getManualURL">
-                                    <accessibilityTraits key="traits" button="YES" adjustable="YES"/>
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <color key="tintColor" red="0.74901960779999999" green="0.85882352939999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Create Event!">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="getManualURL:" destination="e0O-QO-PQr" eventType="touchUpInside" id="VXc-S9-PFO"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIE-Zc-fDn" userLabel="Search One">
                                 <rect key="frame" x="18" y="243" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -168,6 +155,17 @@
                                     <action selector="amendSearchThree:" destination="e0O-QO-PQr" eventType="touchUpInside" id="YhR-X8-uQh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqD-4z-Uy7">
+                                <rect key="frame" x="16" y="28" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.27592062950134277" green="0.69328939914703369" blue="0.66889560222625732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="e0O-QO-PQr" eventType="touchUpInside" id="eMx-yX-1Pr"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ro-L4-IRt" userLabel="My Location Icon Button">
                                 <rect key="frame" x="164" y="299" width="43" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -187,17 +185,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="no" returnKeyType="done"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqD-4z-Uy7">
-                                <rect key="frame" x="16" y="28" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.27592062950134277" green="0.69328939914703369" blue="0.66889560222625732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="backButton:" destination="e0O-QO-PQr" eventType="touchUpInside" id="eMx-yX-1Pr"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qQ-bu-9Dy" userLabel="Next Step">
                                 <rect key="frame" x="291" y="24" width="68" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -219,6 +206,22 @@
                                 <connections>
                                     <action selector="backToGroupAction:" destination="e0O-QO-PQr" eventType="touchUpInside" id="WkR-YH-eBv"/>
                                     <segue destination="eHv-Qu-Oqe" kind="show" identifier="backToGroupVC" id="rLs-Rl-21D"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LfO-h2-2wo">
+                                <rect key="frame" x="118" y="244" width="135" height="129"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" hint="Select When Done" identifier="getManualURL">
+                                    <accessibilityTraits key="traits" button="YES" adjustable="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <color key="tintColor" red="0.74901960779999999" green="0.85882352939999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Create Event!" image="Logomakr_4L5Y9C-1">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="getManualURL:" destination="e0O-QO-PQr" eventType="touchUpInside" id="VXc-S9-PFO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -430,10 +433,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q4t-Ge-RPD">
-                                <rect key="frame" x="0.0" y="42" width="375" height="556"/>
+                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="556" id="c9C-gS-Nv5"/>
+                                    <constraint firstAttribute="height" constant="606" id="c9C-gS-Nv5"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellRestaurant" textLabel="AZb-6r-sca" detailTextLabel="oya-4p-4EZ" imageView="iEN-Gn-Es3" rowHeight="115" style="IBUITableViewCellStyleSubtitle" id="p2y-VI-KBe">
@@ -471,7 +474,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pR0-Dw-wHS">
-                                <rect key="frame" x="16" y="4" width="109" height="30"/>
+                                <rect key="frame" x="16" y="23" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.2731134892" green="0.69571095709999997" blue="0.66867619749999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.2731134892" green="0.69571095709999997" blue="0.66867619749999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -485,7 +488,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Q4t-Ge-RPD" firstAttribute="top" secondItem="aY3-Hk-pRM" secondAttribute="bottom" constant="22" id="Dx3-22-v9Z"/>
+                            <constraint firstItem="Q4t-Ge-RPD" firstAttribute="top" secondItem="aY3-Hk-pRM" secondAttribute="bottom" constant="41" id="Dx3-22-v9Z"/>
                             <constraint firstAttribute="trailing" secondItem="Q4t-Ge-RPD" secondAttribute="trailing" id="bUA-RL-ayv"/>
                             <constraint firstItem="Q4t-Ge-RPD" firstAttribute="leading" secondItem="3uh-0v-P7C" secondAttribute="leading" id="ffD-EG-3jp"/>
                         </constraints>
@@ -497,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwq-Fl-dkW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1918" y="152"/>
+            <point key="canvasLocation" x="1917.5999999999999" y="158.77061469265368"/>
         </scene>
         <!--See GroupVC-->
         <scene sceneID="MTf-Cw-dff">
@@ -796,13 +799,14 @@
     </scenes>
     <resources>
         <image name="519580-076_LocationArrow-512" width="512" height="512"/>
+        <image name="Logomakr_4L5Y9C-1" width="814" height="814"/>
         <image name="Screen Shot 2017-06-29 at 9.53.36 AM" width="67" height="58"/>
         <image name="burger" width="194" height="121"/>
         <image name="up" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i6J-rW-jMI"/>
-        <segue reference="BkC-QG-nOT"/>
+        <segue reference="rLs-Rl-21D"/>
         <segue reference="XPb-lH-J2Q"/>
+        <segue reference="BkC-QG-nOT"/>
     </inferredMetricsTieBreakers>
 </document>
