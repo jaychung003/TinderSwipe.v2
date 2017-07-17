@@ -151,7 +151,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         print("MEMBER DICT: ", memberDict)
         var groupInfo: [String: Any]
-        groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck]
+        groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
         var reference = databaseRef.child("myGroups").childByAutoId()
         reference.setValue(groupInfo)
         groupID = reference.key

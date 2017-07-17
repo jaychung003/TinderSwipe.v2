@@ -1,4 +1,3 @@
-//
 //  GroupInfo.swift
 //  TinderSwipe.v2
 //
