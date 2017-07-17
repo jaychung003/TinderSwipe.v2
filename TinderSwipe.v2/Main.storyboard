@@ -103,6 +103,23 @@
                                     <action selector="pickerValueChanged:" destination="e0O-QO-PQr" eventType="valueChanged" id="mLT-hW-U3a"/>
                                 </connections>
                             </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LfO-h2-2wo">
+                                <rect key="frame" x="71" y="224" width="229" height="219"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" hint="Select When Done" identifier="getManualURL">
+                                    <accessibilityTraits key="traits" button="YES" adjustable="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" red="0.74901960779999999" green="0.85882352939999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" backgroundImage="Logomakr_4L5Y9C-2">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="getManualURL:" destination="e0O-QO-PQr" eventType="touchUpInside" id="VXc-S9-PFO"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIE-Zc-fDn" userLabel="Search One">
                                 <rect key="frame" x="18" y="243" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -204,27 +221,20 @@
                                     <segue destination="eHv-Qu-Oqe" kind="show" identifier="backToGroupVC" id="rLs-Rl-21D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LfO-h2-2wo">
-                                <rect key="frame" x="118" y="244" width="135" height="129"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <accessibility key="accessibilityConfiguration" hint="Select When Done" identifier="getManualURL">
-                                    <accessibilityTraits key="traits" button="YES" adjustable="YES"/>
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                                <color key="tintColor" red="0.74901960779999999" green="0.85882352939999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Create Event!" image="Logomakr_4L5Y9C-1">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="getManualURL:" destination="e0O-QO-PQr" eventType="touchUpInside" id="VXc-S9-PFO"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Press Below to Add Members" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cha-R0-WJn">
+                                <rect key="frame" x="28" y="180" width="318" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.2731134892" green="0.69571095709999997" blue="0.66867619749999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.12549019607843137" green="0.63921568627450975" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.47843137254901957" green="0.36470588235294116" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="PressBelowLabel" destination="cha-R0-WJn" id="d1s-1i-mA6"/>
                         <outlet property="SearchFour" destination="Y7O-of-xJo" id="ANS-75-x99"/>
                         <outlet property="SearchOne" destination="yIE-Zc-fDn" id="Je4-1Q-mYZ"/>
                         <outlet property="SearchThree" destination="Meq-BS-hcG" id="Qra-O6-R4S"/>
@@ -761,7 +771,7 @@
     </scenes>
     <resources>
         <image name="519580-076_LocationArrow-512" width="512" height="512"/>
-        <image name="Logomakr_4L5Y9C-1" width="814" height="814"/>
+        <image name="Logomakr_4L5Y9C-2" width="814" height="814"/>
         <image name="Screen Shot 2017-06-29 at 9.53.36 AM" width="67" height="58"/>
         <image name="burger" width="194" height="121"/>
         <image name="up" width="600" height="600"/>

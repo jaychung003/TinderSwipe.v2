@@ -33,6 +33,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     @IBOutlet weak var SearchThree: UIButton!
     @IBOutlet weak var myLocationIconButton: UIButton!
     @IBOutlet weak var backToGroup: UIButton!
+    @IBOutlet weak var PressBelowLabel: UILabel!
     
     
     
@@ -73,11 +74,13 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = true
             stepLabel.text! = "Give Your Event a Name"
             backButton.isHidden = true
             backButton.isUserInteractionEnabled = false
             backToGroup.isHidden = false
+            nextStep.isHidden = false
             stepValue = stepValue - 1
         }
         
@@ -97,11 +100,13 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = false
             stepLabel.text! = "Search by City and State or Current Location"
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backToGroup.isHidden = true
+            nextStep.isHidden = false
             stepValue = stepValue - 1
         }
         
@@ -123,11 +128,13 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = true
             stepLabel.text! = "Select a Time and Date for Your Event"
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backToGroup.isHidden = true
+            nextStep.isHidden = false
             stepValue = stepValue - 1
             
         }
@@ -149,11 +156,13 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = true
             stepLabel.text! = "Select a Type of Dining for Your Event"
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backToGroup.isHidden = true
+            nextStep.isHidden = false
             stepValue = stepValue - 1
             
         }
@@ -175,11 +184,13 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = false
             SearchFour.isHidden = false
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             stepLabel.text! = "Select Up To Four Price Ranges"
             backToGroup.isHidden = true
+            nextStep.isHidden = true
             stepValue = stepValue - 1
         }
         
@@ -211,12 +222,14 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = false
             stepLabel.text! = "Search by City and State or Current Location"
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
+            nextStep.isHidden = false
             backToGroup.isHidden = true
             
         }
@@ -238,10 +251,12 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backToGroup.isHidden = true
+            nextStep.isHidden = false
             stepLabel.text! = "Select a Time and Date for Your Event"
         }
         
@@ -263,10 +278,12 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backToGroup.isHidden = true
+            nextStep.isHidden = false
             stepLabel.text! = "Select a Type of Dining for Your Event"
         }
         
@@ -288,10 +305,12 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = false
             SearchFour.isHidden = false
             okButton.isHidden = true
+            PressBelowLabel.isHidden = true
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backToGroup.isHidden = true
+            nextStep.isHidden = false
             stepLabel.text! = "Select Up To Four Price Ranges"
         }
         
@@ -311,12 +330,14 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             SearchThree.isHidden = true
             SearchFour.isHidden = true
             okButton.isHidden = false
+            PressBelowLabel.isHidden = false
             nextStep.isHidden = true
             andLabel.isHidden = true
             backButton.isHidden = false
             backButton.isUserInteractionEnabled = true
             backToGroup.isHidden = true
-            stepLabel.text! = "Get Ready to Swipe"
+            nextStep.isHidden = true
+            stepLabel.text! = "Almost There!"
         }
         
         stepValue = stepValue + 1
@@ -366,6 +387,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
         SearchThree.isHidden = true
         SearchFour.isHidden = true
         okButton.isHidden = true
+        PressBelowLabel.isHidden = true
         andLabel.isHidden = true
         stepLabel.text! = "Give Your Event a Name"
         backButton.isHidden = true
@@ -401,6 +423,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
         dateLabel.isUserInteractionEnabled = true
         datePicker.backgroundColor = hexStringToUIColor(hex: "#46B1AA")
         dateLabel.layer.cornerRadius = 5
+        PressBelowLabel.layer.cornerRadius = 7
         backToGroup.layer.cornerRadius = 7
         backButton.layer.cornerRadius = 7
         nextStep.layer.cornerRadius = 7
