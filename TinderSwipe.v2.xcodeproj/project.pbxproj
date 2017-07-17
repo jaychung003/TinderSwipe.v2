@@ -35,7 +35,6 @@
 		CBE653701F0D560C00201E47 /* EventSetterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6536B1F0D560C00201E47 /* EventSetterVC.swift */; };
 		CBE653711F0D560C00201E47 /* InviteFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6536C1F0D560C00201E47 /* InviteFriendsVC.swift */; };
 		CBE653721F0D560C00201E47 /* SwipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6536D1F0D560C00201E47 /* SwipeVC.swift */; };
-		CBE653731F0D560C00201E47 /* ThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6536E1F0D560C00201E47 /* ThirdVC.swift */; };
 		CBE653741F0D560C00201E47 /* resultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE6536F1F0D560C00201E47 /* resultVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,7 +83,6 @@
 		CBE6536B1F0D560C00201E47 /* EventSetterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSetterVC.swift; sourceTree = "<group>"; };
 		CBE6536C1F0D560C00201E47 /* InviteFriendsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsVC.swift; sourceTree = "<group>"; };
 		CBE6536D1F0D560C00201E47 /* SwipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeVC.swift; sourceTree = "<group>"; };
-		CBE6536E1F0D560C00201E47 /* ThirdVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdVC.swift; sourceTree = "<group>"; };
 		CBE6536F1F0D560C00201E47 /* resultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resultVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,7 +197,6 @@
 				CBE6536B1F0D560C00201E47 /* EventSetterVC.swift */,
 				CBE6536C1F0D560C00201E47 /* InviteFriendsVC.swift */,
 				CBE6536D1F0D560C00201E47 /* SwipeVC.swift */,
-				CBE6536E1F0D560C00201E47 /* ThirdVC.swift */,
 				CBE6536F1F0D560C00201E47 /* resultVC.swift */,
 			);
 			name = "Create & Swipe";
@@ -345,7 +342,6 @@
 				CBE653531F0D54CA00201E47 /* UILabelX.swift in Sources */,
 				CBE653541F0D54CA00201E47 /* UISliderX.swift in Sources */,
 				CBE653641F0D558600201E47 /* DataManager.swift in Sources */,
-				CBE653731F0D560C00201E47 /* ThirdVC.swift in Sources */,
 				CBDD84E71F13E39C00CAC9EE /* GroupInfo.swift in Sources */,
 				CBB88C731F17E94300CD0132 /* AppUser.swift in Sources */,
 				CBE653711F0D560C00201E47 /* InviteFriendsVC.swift in Sources */,
