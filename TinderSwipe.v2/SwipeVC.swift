@@ -257,7 +257,7 @@ class SwipeVC: UIViewController {
         print("ID should come up on this long one", DataManager.sharedData.individualGroupID)
         let eachUserRef = usersRef.child("\(currentUID)/groupsAssociatedWith/\(IDtoFix)")
         var updatedSwipeArray = [String: Any]()
-        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes]
+        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
         eachUserRef.setValue(updatedSwipeArray)
         
     }

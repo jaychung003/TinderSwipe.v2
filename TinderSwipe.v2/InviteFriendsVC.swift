@@ -78,7 +78,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //for members of the group, make a new branch groupsAssociatedWith
                     let eachUserRef = usersRef.child("\(uid!)/groupsAssociatedWith")
                     var groupInfoForUserWithSwipes: [String: Any]
-                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray]
+                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
                     var referenceForID =  eachUserRef.child("\(self.groupID!)")
                     referenceForID.setValue(groupInfoForUserWithSwipes)
                     DataManager.sharedData.individualGroupID = self.groupID
@@ -88,28 +88,6 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             )
         }
     }
-    
-//    var databaseRef: DatabaseReference!
-//    databaseRef = Database.database().reference() // sets up reference to the Firebase database
-//    
-//    // Create a dictionary memberDict with usernames as the keys and default boolean 'true' as the values. This is for easier access of data in future (unordered list instead of an ordered list)
-//    
-//    var memberDict = [String: Bool]()
-//    
-//    var cardDict = [String: Bool]()
-//    
-//    for member in group1.listOfMembers {
-//    memberDict[member] = true
-//    }
-//    
-//    print("MEMBER DICT: ", memberDict)
-//    var groupInfo: [String: Any]
-//    groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck]
-//    var reference = databaseRef.child("myGroups").childByAutoId()
-//    reference.setValue(groupInfo)
-//    groupID = reference.key
-//    print("printing groupID: ", groupID)
-    
     
     
     func handleDoneInviting() {
@@ -148,15 +126,20 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         for member in group1.listOfMembers {
             memberDict[member] = true
         }
+        
+        // initialize the masterSwipeArray
+        ResultsData.sharedResultsData.populateInitialMasterSwipeArray()
             
         print("MEMBER DICT: ", memberDict)
         var groupInfo: [String: Any]
-        groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
-        var reference = databaseRef.child("myGroups").childByAutoId()
-        reference.setValue(groupInfo)
-        groupID = reference.key
+        groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "masterSwipeArray": ResultsData.sharedResultsData.masterSwipeArray]
+        var myGroupsReference = databaseRef.child("myGroups").childByAutoId()
+        myGroupsReference.setValue(groupInfo)
+        groupID = myGroupsReference.key
+        DataManager.sharedData.individualGroupID = myGroupsReference.key
         //GroupInfo.sharedGroupInfo.currentUserGroupID = groupID
-        print("printing groupID: ", groupID)
+        print("printing individualGroupID: ", DataManager.sharedData.individualGroupID)
+        
     }
     
     func handleAddButton() {
