@@ -28,7 +28,9 @@ class SwipeVC: UIViewController {
     //@IBOutlet weak var checkMark: UIButtonX!
     //@IBOutlet weak var xMark: UIButtonX!
     
-    
+    var point = CGPoint()
+    var timer: Timer?
+
     var action1 = UIAlertAction()
     var alertView1 = UIAlertController()
     
@@ -61,11 +63,82 @@ class SwipeVC: UIViewController {
     }
 
     //right and left button action
-    @IBAction func checkMarkClicked(_ sender: Any) {
-        swipeRight()
+    
+    @IBAction func checkMarkClicked(_ sender: UIButton) {
+        timer = nil
+        while timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.loopRight), userInfo: nil, repeats: true)
+        }
     }
-    @IBAction func xMarkClicked(_ sender: Any) {
-        swipeLeft()
+
+    func loopRight() {
+        
+        point.x = point.x + 1
+        
+        let xFromCenter = self.card.center.x - self.view.center.x
+        
+        self.card.center = CGPoint(x: self.view.center.x + point.x, y: self.view.center.y + point.y)
+        
+        let scale = min(1, (100/abs(xFromCenter)))
+        self.card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor).scaledBy(x: scale, y: scale)
+        
+        
+        if xFromCenter > 0 {
+            thumbImageView.image = #imageLiteral(resourceName: "thumb")
+            thumbImageView.tintColor = UIColor.green
+            thumbImageView.transform = CGAffineTransform(rotationAngle: 0)
+
+            print(xFromCenter)
+        }
+        thumbImageView.alpha = abs(xFromCenter) / self.view.center.x
+        
+        if card.center.x > (view.frame.width - 5) {
+            point.x = 0
+            timer?.invalidate()
+            loadNew()
+            DataManager.sharedData.swipes.append("YES")
+            print(DataManager.sharedData.swipes)
+            return
+        }
+    }
+
+    @IBAction func xMarkClicked(_ sender: UIButton) {
+        timer = nil
+        while timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.loopLeft), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func loopLeft() {
+        
+        point.x = point.x - 1
+        
+        let xFromCenter = self.card.center.x - self.view.center.x
+        //let xFromCenter = point.x - self.view.center.x
+        
+        self.card.center = CGPoint(x: self.view.center.x + point.x, y: self.view.center.y + point.y)
+        
+        let scale = min(1, (100/abs(xFromCenter)))
+        self.card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor).scaledBy(x: scale, y: scale)
+        
+        
+        if xFromCenter < 0 {
+            thumbImageView.image = #imageLiteral(resourceName: "thumb")
+            thumbImageView.tintColor = UIColor.red
+            thumbImageView.transform = CGAffineTransform(rotationAngle: 3.14)
+            
+            print(xFromCenter)
+        }
+        thumbImageView.alpha = abs(xFromCenter) / self.view.center.x
+        
+        if card.center.x < 5 {
+            point.x = 0
+            timer?.invalidate()
+            loadNew()
+            DataManager.sharedData.swipes.append("NO")
+            print(DataManager.sharedData.swipes)
+            return
+        }
     }
     
     func swipeRight() {
@@ -217,22 +290,25 @@ class SwipeVC: UIViewController {
         if sender.state == UIGestureRecognizerState.ended {
             if card.center.x < 75 {
                 //move off to the left side of screen
-                UIView.animate(withDuration: 0.3, animations: {
-                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
-                })
-                loadNew()
-                DataManager.sharedData.swipes.append("NO")
-                print(DataManager.sharedData.swipes)
-                return
+                swipeLeft()
+                //                UIView.animate(withDuration: 0.3, animations: {
+                //                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
+                //                })
+                //                loadNew()
+                //                DataManager.sharedData.swipes.append("NO")
+                //                print(DataManager.sharedData.swipes)
+                //                return
+
             }
             else if card.center.x > (view.frame.width - 75) {
                 // move off to the right side of screen
-                UIView.animate(withDuration: 0.3, animations: {
-                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
-                })
-                loadNew()
-                DataManager.sharedData.swipes.append("YES")
-                print(DataManager.sharedData.swipes)
+                swipeRight()
+                //                UIView.animate(withDuration: 0.3, animations: {
+                //                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
+                //                })
+                //                loadNew()
+                //                DataManager.sharedData.swipes.append("YES")
+                //                print(DataManager.sharedData.swipes)
                 return
             }
             //bring back to center if let go in the middle range
