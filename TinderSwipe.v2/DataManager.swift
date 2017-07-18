@@ -67,7 +67,7 @@ class DataManager: NSObject {
     // variables for data structures, card and deck
     var card = [String]() // an array of strings
     var deck = [[String]]() // an array of cards
-    var swipes = [String]() //an array of YES or NO swipes
+    var swipes = [Int]() //an array of YES or NO swipes
     var yesDeck = [[String]]() //an array of cards with YES swipes
     var individualGroupID = String()
     

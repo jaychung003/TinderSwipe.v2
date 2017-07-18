@@ -23,6 +23,18 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     //@IBOutlet weak var SwipeResultToGroups: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            ResultsData.sharedResultsData.updateMasterSwipeArray()
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         print(swipeResult)
         print(yesDeck)

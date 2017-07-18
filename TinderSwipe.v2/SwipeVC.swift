@@ -96,7 +96,9 @@ class SwipeVC: UIViewController {
             point.x = 0
             timer?.invalidate()
             loadNew()
-            DataManager.sharedData.swipes.append("YES")
+//            DataManager.sharedData.swipes.append("YES")
+            DataManager.sharedData.swipes.append(1)
+
             print(DataManager.sharedData.swipes)
             return
         }
@@ -135,7 +137,9 @@ class SwipeVC: UIViewController {
             point.x = 0
             timer?.invalidate()
             loadNew()
-            DataManager.sharedData.swipes.append("NO")
+//            DataManager.sharedData.swipes.append("NO")
+            DataManager.sharedData.swipes.append(0)
+
             print(DataManager.sharedData.swipes)
             return
         }
@@ -146,7 +150,9 @@ class SwipeVC: UIViewController {
             self.card.center = CGPoint(x: self.card.center.x + 200, y: self.card.center.y)
         })
         loadNew()
-        DataManager.sharedData.swipes.append("YES")
+//        DataManager.sharedData.swipes.append("YES")
+        DataManager.sharedData.swipes.append(1)
+
         print(DataManager.sharedData.swipes)
     }
     
@@ -155,7 +161,9 @@ class SwipeVC: UIViewController {
             self.card.center = CGPoint(x: self.card.center.x - 200, y: self.card.center.y)
         })
         loadNew()
-        DataManager.sharedData.swipes.append("NO")
+//        DataManager.sharedData.swipes.append("NO")
+        DataManager.sharedData.swipes.append(0)
+
         print(DataManager.sharedData.swipes)
         return
     }
@@ -226,7 +234,7 @@ class SwipeVC: UIViewController {
         else {
             //make a new list of restaurants that got YES swipes
             for index in 0...(DataManager.sharedData.swipes.count - 1) {
-                if DataManager.sharedData.swipes[index] == "YES" {
+                if DataManager.sharedData.swipes[index] == 1 {
                     DataManager.sharedData.yesDeck.append(DataManager.sharedData.deck[index])
                 }
             }
