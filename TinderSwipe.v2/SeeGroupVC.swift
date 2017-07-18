@@ -39,6 +39,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             }
             
             // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
+            // RELOAD DATA AFTER 5 SECONDS TO GENERATE ALL DECKS IN ALL GROUPS, ONLY FOR DEBUGGING PURPOSES
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
                 print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
                 self.tableView.reloadData()

@@ -10,15 +10,14 @@ import Firebase
 
 class GroupInfo: NSObject {
     
+// FUNCTIONS REQUIRED TO LOAD AND DISPLAY GROUP INFORMATION FOR THE USER THAT IS CURRENTLY LOGGED IN, IN SeeGroupsVC
+    
     // Declare global variables
     static let sharedGroupInfo = GroupInfo()
     var groupIDs = [String]()
     var groupNames = [String]()
     var groupMembers = [[String]]()
     var allDecks = [[[String]]]()
-    var fetchedSwipeArray = [String]()
-    var sizeOfSwipeArray = 0
-    var fetchedDeckSize = 0 // this is the deck size of the group that is already created
     
     func loadGroupIDs() { // Put IDs into group IDs array.
         var ref: DatabaseReference!
@@ -125,75 +124,10 @@ class GroupInfo: NSObject {
             }
         }
     }
+
+
     
-    func loadSwipes() {
-        
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        
-        print("currentuser uid   ", Auth.auth().currentUser!.uid)
-        print("individual groupid ", DataManager.sharedData.individualGroupID)
-        // START OF LOOP FOR 1 GROUP ID
-        ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/swipeArray").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            //print("DATASNAP: ", DataSnapshot)
-            let swipeArrayInNSArrayForm = DataSnapshot.value as! NSArray
-            //print("NS ARRAY SWIPE ARRAY: ", swipeArrayInNSArrayForm)
-            print("deck count:::", DataManager.sharedData.deck.count)
-            //print("deck::", DataManager.sharedData.deck)
-            //print("all deck::", GroupInfo.sharedGroupInfo.allDecks)
-            for swipeIndexInArray in 0...(DataManager.sharedData.deck.count - 1) {
-                let currentSwipeResult = swipeArrayInNSArrayForm[swipeIndexInArray] as! NSString // cardInfo is the list of information for a card (contains 9 elements in total)
-                self.fetchedSwipeArray.append(currentSwipeResult as! String)
-            }
-            print("FETCHED ARRAY: ", self.fetchedSwipeArray)
-            print("SHAREDDATA DECK COUNT: ", DataManager.sharedData.deck.count)
-        }, withCancel: nil)
-        
-    }
-    
-    func getSizeOfSwipeArray() {
-        
-        // Declare variable to return
-        
-        // Reference database
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        
-        ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/swipeArray").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            print("DATASNAP: ", DataSnapshot)
-            let swipeArrayInNSArrayForm = DataSnapshot.value as! NSArray
-            print("NS ARRAY SWIPE ARRAY: ", swipeArrayInNSArrayForm)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
-                print("ns array count", swipeArrayInNSArrayForm.count)
-                self.sizeOfSwipeArray = swipeArrayInNSArrayForm.count
-                print("fetched ns array count", self.sizeOfSwipeArray)
-            }
-        }, withCancel: nil)
-    }
-    
-    
-    func getDeckSize() -> Int {
-        
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        print("GROUP ID FOR getDeckSize", DataManager.sharedData.individualGroupID)
-        ref.child("myGroups/\(DataManager.sharedData.individualGroupID)/deck size").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            print("DECK SIZE DATASNAP: ", DataSnapshot)
-            
-            if let dictionary = DataSnapshot.value as? [String: AnyObject] {
-                self.fetchedDeckSize = (dictionary["deck size"] as? Int)!
-            }
-            
-            //let swipeArrayInNsArrayForm = DataSnapshot.value
-            
-            
-        }, withCancel: nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
-            print("FETCHED DECK SIZE: ", self.fetchedDeckSize)
-        }
-        return self.fetchedDeckSize
-    }
+// FUNCTIONS REQUIRED TO COMPILE AND UPLOAD SWIPE RESULTS ONTO FIREBASE
     
     
     
