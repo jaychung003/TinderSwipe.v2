@@ -20,7 +20,8 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     
     @IBOutlet weak var resultsTableView: UITableView!
-    @IBOutlet weak var SwipeResultToGroups: UIButton!
+    
+    //@IBOutlet weak var SwipeResultToGroups: UIButton!
     
     override func viewDidLoad() {
         print(swipeResult)
@@ -30,7 +31,8 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         self.resultsTableView.addGestureRecognizer(longPressGesture)
-        SwipeResultToGroups.layer.cornerRadius = 7
+       
+        // SwipeResultToGroups.layer.cornerRadius = 7
         
     }
     
