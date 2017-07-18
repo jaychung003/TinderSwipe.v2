@@ -78,52 +78,52 @@ class GroupInfo: NSObject {
     
     func loadDecks() {
         
-        var deckSizesArray = [Int]() // initializes an array that stores the deck size for the decks in the corresponding groups
-        
         var ref: DatabaseReference!
         ref = Database.database().reference()
         
+        // START OF LOOP FOR 1 GROUP ID
         for individualID in groupIDs {
             
-            ref.child("myGroups/\(individualID)").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-                if let dictionary = DataSnapshot.value as? [String: AnyObject] {
-                    let currentDeckSize = (dictionary["deck size"] as? Int)!
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                        deckSizesArray.append(currentDeckSize)
+            var sizeOfCurrentDeck = 0
+            
+            let uid = Auth.auth().currentUser?.uid
+            
+            ref.child("users/\(uid!)/groupsAssociatedWith/\(individualID)").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                print("CURRENT UID: ", uid)
+                
+                let dictionary = DataSnapshot.value as? [String: Any]
+                print("DATASNAP DICTIONARY: ", dictionary)
+            
+                sizeOfCurrentDeck = dictionary?["deck size"] as! Int
+                
+            }, withCancel: nil)
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
+                print("SIZE OF THE CURRENT DECK: ", sizeOfCurrentDeck)
+                
+                ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(individualID)/deck").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                    
+                    let deckInNSArrayForm = DataSnapshot.value as! NSArray
+                    
+                    var cardInfo: NSArray = []
+                    var deckInfo = [[String]]()
+                    
+                    print("sizecount:::: ", sizeOfCurrentDeck)
+                    
+                    for cardIndexInDeck in 0...(sizeOfCurrentDeck - 1) {
+                        cardInfo = deckInNSArrayForm[cardIndexInDeck] as! NSArray
+                        print("INFO FOR ONE CARD: ", cardInfo)
+                        deckInfo.append(cardInfo as! Array)
                     }
-                }
-                
-            }, withCancel: nil)
+                    
+                    print("INFO FOR ONE DECK: ", deckInfo)
+                    
+                    self.allDecks.append(deckInfo)
+                    deckInfo = [[]] // resets deckInfo after storing, since deckInfo is different for different group IDs
+                    
+                }, withCancel: nil)
+            }
         }
-        
-        print("DECK SIZES ARRAY: ", deckSizesArray)
-        for individualID in groupIDs {
-            
-            // START OF LOOP FOR 1 GROUP ID
-            ref.child("myGroups").child(individualID).child("deck").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-                let deckInNSArrayForm = DataSnapshot.value as! NSArray
-                
-                // Declaration of local variables
-                var cardInfo: NSArray = []
-                var deckInfo = [[String]]()
-                
-                print("sizecount::::", self.sizeOfSwipeArray)
-                
-                for cardIndexInDeck in 0...self.sizeOfSwipeArray {
-                    cardInfo = deckInNSArrayForm[cardIndexInDeck] as! NSArray // cardInfo is the list of information for a card (contains 9 elements in total)
-                    print("INFO FOR ONE CARD: ", cardInfo)
-                    deckInfo.append(cardInfo as! Array)
-                }
-                
-                print("INFO FOR ONE DECK: ", deckInfo)
-                
-                self.allDecks.append(deckInfo)
-                deckInfo = [[]] // resets deckInfo after storing, since deckInfo is different for different group IDs
-            }, withCancel: nil)
-            // END OF LOOP FOR 1 GROUP ID
-            
-        }
-        
     }
     
     func loadSwipes() {
