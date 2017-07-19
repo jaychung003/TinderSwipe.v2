@@ -212,7 +212,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "usernameCell", for: indexPath)
-        cell.textLabel?.text = groupMembers[indexPath.row + 1]
+        cell.textLabel?.text = groupMembers[indexPath.row + 1] //+1
         return cell
     }
     

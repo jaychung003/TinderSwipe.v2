@@ -368,13 +368,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6j-SC-Oh2" customClass="UIButtonX" customModule="YumNum" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6j-SC-Oh2" customClass="UIButtonX" customModule="YumNum" customModuleProvider="target">
                                 <rect key="frame" x="240" y="642" width="71" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.34537416696548462" green="0.67693698406219482" blue="0.004051791038364172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="K8n-J8-QpB"/>
-                                    <constraint firstAttribute="width" constant="65" id="fth-dp-imZ"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
                                 <state key="normal" title="✓">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -394,13 +391,10 @@
                                     <action selector="checkMarkClicked:" destination="3Cm-gd-cdL" eventType="touchUpInside" id="cBS-Vl-eCV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9p-aO-YnZ" customClass="UIButtonX" customModule="YumNum" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9p-aO-YnZ" customClass="UIButtonX" customModule="YumNum" customModuleProvider="target">
                                 <rect key="frame" x="109" y="642" width="72" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.77358740568161011" green="0.01431005634367466" blue="0.0032200315035879612" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="YfN-CP-tzj"/>
-                                    <constraint firstAttribute="height" constant="65" id="exW-rC-LFR"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" red="0.9959825873374939" green="0.99621325731277466" blue="0.99187678098678589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -683,7 +677,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IZX-fr-LyB" id="zI9-zB-k0D">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="22.666666666666668"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="23"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -825,8 +819,8 @@
         <image name="up" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JEI-FC-a0i"/>
-        <segue reference="BkC-QG-nOT"/>
+        <segue reference="e5u-QU-FD5"/>
         <segue reference="lKa-GA-Nxb"/>
+        <segue reference="BkC-QG-nOT"/>
     </inferredMetricsTieBreakers>
 </document>

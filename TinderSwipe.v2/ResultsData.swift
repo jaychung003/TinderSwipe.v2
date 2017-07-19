@@ -111,7 +111,7 @@ class ResultsData: NSObject {
     }
     
     
-    // sortDeck sorts the original deck of cards in decreasing order of vote counts, based on the variable sortedMasterSwipeArrayIndices
+    // sortDeck sorts the original deck of cards ievann decreasing order of vote counts, based on the variable sortedMasterSwipeArrayIndices
     // NOTE: Make sure sortMasterSwipeArray is called before this function, so that sortedMasterSwipeArrayIndices is updated to the latest version after user has swiped
     // updates the variable sortedDeck
     func sortDeck() {
