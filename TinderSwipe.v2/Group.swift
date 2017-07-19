@@ -10,6 +10,9 @@ import UIKit
 
 class Group: NSObject {
     
+    // An instance of a group object
+    static let groupInstance = Group()
+    
     var groupName: String!
     var listOfMembers: [String] = []
     var deck = DataManager.sharedData.deck
