@@ -451,12 +451,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q4t-Ge-RPD">
-                                <rect key="frame" x="0.0" y="63" width="375" height="604"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q4t-Ge-RPD">
+                                <rect key="frame" x="0.0" y="121" width="375" height="546"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="556" id="c9C-gS-Nv5"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellRestaurant" textLabel="AZb-6r-sca" detailTextLabel="oya-4p-4EZ" imageView="iEN-Gn-Es3" rowHeight="115" style="IBUITableViewCellStyleSubtitle" id="p2y-VI-KBe">
                                         <rect key="frame" x="0.0" y="28" width="375" height="115"/>
@@ -492,13 +490,28 @@
                                     <outlet property="delegate" destination="Ve3-JB-ksU" id="fhw-1E-rVX"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F9a-lK-6Q9">
+                                <rect key="frame" x="127" y="63" width="121" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="switchTable:" destination="Ve3-JB-ksU" eventType="valueChanged" id="UOr-g7-DX1"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mki-t8-yu2">
+                                <rect key="frame" x="16" y="20" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="myGroupsClicked:" destination="Ve3-JB-ksU" eventType="touchUpInside" id="aT3-SK-RRI"/>
+                                    <segue destination="eHv-Qu-Oqe" kind="show" identifier="MyGroupsIdentifier" id="atD-iM-ABX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1236927733" green="0.64077079299999995" blue="0.61796367169999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Q4t-Ge-RPD" firstAttribute="top" secondItem="aY3-Hk-pRM" secondAttribute="bottom" constant="22" id="Dx3-22-v9Z"/>
-                            <constraint firstAttribute="trailing" secondItem="Q4t-Ge-RPD" secondAttribute="trailing" id="bUA-RL-ayv"/>
-                            <constraint firstItem="Q4t-Ge-RPD" firstAttribute="leading" secondItem="3uh-0v-P7C" secondAttribute="leading" id="ffD-EG-3jp"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="resultsTableView" destination="Q4t-Ge-RPD" id="FYp-ug-Wwy"/>
@@ -803,8 +816,8 @@
         <image name="up" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JEI-FC-a0i"/>
-        <segue reference="XPb-lH-J2Q"/>
+        <segue reference="atD-iM-ABX"/>
         <segue reference="BkC-QG-nOT"/>
+        <segue reference="XPb-lH-J2Q"/>
     </inferredMetricsTieBreakers>
 </document>
