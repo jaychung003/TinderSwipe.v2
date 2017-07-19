@@ -18,6 +18,16 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     var foursquarePageUrl = ""
     var venueID = ""
     
+    var p: Int!
+    
+    var testArray = [[[String]]]()
+    
+    var testTest = [["1 a","2 b","3 c","4 d","5 e"],["a 1","b 2","c 3","d 4"]]
+    
+    @IBAction func switchTable(_ sender: UISegmentedControl) {
+        p = sender.selectedSegmentIndex
+        resultsTableView.reloadData()
+    }
     
     @IBOutlet weak var resultsTableView: UITableView!
     
@@ -36,8 +46,12 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     
     override func viewDidLoad() {
+        testArray.append(testTest)
+        testArray.append(yesDeck)
+        print("test array", testArray)
         print(swipeResult)
         print(yesDeck)
+        p = 0
     
         let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPressGesture.minimumPressDuration = 0.5
@@ -69,7 +83,8 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return yesDeck.count
+        //return yesDeck.count
+        return testArray[p].count
     }
     
     
@@ -79,8 +94,8 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellRestaurant", for: indexPath)
         
         let restaurant = yesDeck[indexPath.row]
-        cell.textLabel?.text = restaurant[0] //name of restaurant in each cell
-        cell.detailTextLabel?.text = restaurant[1] + "\n" + restaurant[2] + ", " + restaurant[3] + "\n" + restaurant[4] + "🔥" + "  " + restaurant[5] //detailed info
+        //cell.textLabel?.text = restaurant[0] //name of restaurant in each cell
+        //cell.detailTextLabel?.text = restaurant[1] + "\n" + restaurant[2] + ", " + restaurant[3] + "\n" + restaurant[4] + "🔥" + "  " + restaurant[5] //detailed info
         
         
         //pull image from url and set it as the image in each cell
@@ -89,6 +104,13 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         let restImage = UIImage(data: data! as Data)
 
         cell.imageView!.image = restImage
+        
+        
+        //segmented control stuff
+        let str = testArray[p][indexPath.row][0]
+        
+        cell.textLabel?.text = str
+        cell.detailTextLabel?.text = " "
         
         return cell
     }

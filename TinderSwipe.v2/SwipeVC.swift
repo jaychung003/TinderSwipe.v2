@@ -129,7 +129,6 @@ class SwipeVC: UIViewController {
             thumbImageView.tintColor = UIColor.red
             thumbImageView.transform = CGAffineTransform(rotationAngle: 3.14)
             
-            print(xFromCenter)
         }
         thumbImageView.alpha = abs(xFromCenter) / self.view.center.x
         
