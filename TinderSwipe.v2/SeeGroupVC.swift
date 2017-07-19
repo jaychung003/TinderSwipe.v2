@@ -106,7 +106,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 print(uid)
                 if let dictionary = DataSnapshot.value as? [String: AnyObject] {
                     self.navBarUserName.title = "My Groups"
-                    DataManager.sharedData.currentUsername = (dictionary["username"] as? String)!
+                    DataManager.sharedData.currentUsername = (dictionary["username"] as? String)! // this is called to store the current usermame of the logged in user as the currentUsername variable in DataManager
                     //self.navBarUserName.title = (dictionary["name"] as? String)! + "'s groups"
                 }
             }, withCancel: nil)
