@@ -10,7 +10,7 @@ import UIKit
 
 class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
-    var wholeDeck = [[String]]()
+    var wholeDeck = DataManager.sharedData.deck
     var swipeResult = DataManager.sharedData.swipes
     var yesDeck = DataManager.sharedData.yesDeck
     var myIndex = 0
@@ -46,7 +46,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     
     override func viewDidLoad() {
-        testArray.append(testTest)
+        testArray.append(wholeDeck)
         testArray.append(yesDeck)
         print("test array", testArray)
         print(swipeResult)
@@ -83,34 +83,27 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return yesDeck.count
         return testArray[p].count
     }
-    
     
     @IBOutlet weak var restaurantImage: UIImageView!
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellRestaurant", for: indexPath)
         
-        let restaurant = yesDeck[indexPath.row]
-        //cell.textLabel?.text = restaurant[0] //name of restaurant in each cell
-        //cell.detailTextLabel?.text = restaurant[1] + "\n" + restaurant[2] + ", " + restaurant[3] + "\n" + restaurant[4] + "🔥" + "  " + restaurant[5] //detailed info
-        
+        //segmented control stuff
+        let restaurant = testArray[p][indexPath.row]
+        cell.textLabel?.text = restaurant[0]
+        cell.detailTextLabel?.text = restaurant[1] + "\n" + restaurant[2] + ", " + restaurant[3] + "\n" + restaurant[4] + "🔥" + "  " + restaurant[5] //detailed info
         
         //pull image from url and set it as the image in each cell
-        let url = NSURL(string:yesDeck[indexPath.row][6])
+        let url = NSURL(string:testArray[p][indexPath.row][6])
         let data = NSData(contentsOf:url! as URL)
         let restImage = UIImage(data: data! as Data)
-
         cell.imageView!.image = restImage
+        //cell.imageView!.image.layer.borderColor = UIColor.white
+        //cell.imageView!.image.layer.borderWidth = 2
         
-        
-        //segmented control stuff
-        let str = testArray[p][indexPath.row][0]
-        
-        cell.textLabel?.text = str
-        cell.detailTextLabel?.text = " "
         
         return cell
     }
