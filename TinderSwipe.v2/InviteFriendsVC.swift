@@ -22,6 +22,14 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBAction func addButtonClicked(_ sender: Any) {
         handleAddButton()
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("my username: ", DataManager.sharedData.currentUsername)
+        group1.listOfMembers.append(DataManager.sharedData.currentUsername)
+        print("default listofmembers: ", group1.listOfMembers)
+    }
 
     @IBAction func doneButtonClicked(_ sender: UIButton) {
     
@@ -171,6 +179,15 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         //append entered username to the list if the textfield is not empty
         else {
+            
+            //changes
+            
+//            group1.listOfMembers.append(userNameField.text!)
+//            print("updated listOfMembers: ", group1.list
+//            self.tableView.reloadData()
+            
+            
+            
             groupMembers.append(userNameField.text!)
             print(groupMembers)
             self.tableView.reloadData()
@@ -195,7 +212,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "usernameCell", for: indexPath)
-        cell.textLabel?.text = groupMembers[indexPath.row]
+        cell.textLabel?.text = groupMembers[indexPath.row + 1]
         return cell
     }
     

@@ -71,6 +71,9 @@ class DataManager: NSObject {
     var yesDeck = [[String]]() //an array of cards with YES swipes
     var individualGroupID = String()
     
+    // miscellaneous variables
+    var currentUsername = "" // a string storing a reference to the username of the current user
+    
     //Calls to server to get Foursquare data and returns the full file as myJson5
     func getJSONData()
     {
