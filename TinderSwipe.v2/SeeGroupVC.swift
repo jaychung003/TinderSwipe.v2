@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var navBarUserName: UINavigationItem!
     
@@ -106,6 +106,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 print(uid)
                 if let dictionary = DataSnapshot.value as? [String: AnyObject] {
                     self.navBarUserName.title = "My Groups"
+                    DataManager.sharedData.currentUsername = (dictionary["username"] as? String)!
                     //self.navBarUserName.title = (dictionary["name"] as? String)! + "'s groups"
                 }
             }, withCancel: nil)
