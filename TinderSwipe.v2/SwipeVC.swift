@@ -36,6 +36,14 @@ class SwipeVC: UIViewController {
     
     //button that brings to the next page
     @IBOutlet weak var nextPage: UIButton!
+    @IBOutlet weak var seeResults: UIButton!
+    @IBAction func seeResultsClicked(_ sender: UIButton) {
+        handleSeeResults()
+    }
+    
+    func handleSeeResults() {
+        performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
+    }
     
     //see menu button & hyperlink
     @IBOutlet weak var seeMenu: UIButton!
@@ -182,6 +190,7 @@ class SwipeVC: UIViewController {
         addressLabel.alpha = 0
         priceLabel.alpha = 0
         seeMenu.alpha = 0
+        seeResults.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -246,8 +255,19 @@ class SwipeVC: UIViewController {
             }
             print(DataManager.sharedData.swipes.count)
             nextPage.alpha = 1
-            performSegue(withIdentifier: "youreDone", sender: self)
-            performSegue(withIdentifier: "nextButton", sender: self)
+            seeResults.alpha = 1
+            self.card.alpha = 0
+            
+            ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                ResultsData.sharedResultsData.updateMasterSwipeArray()
+                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
+                ResultsData.sharedResultsData.sortMasterSwipeArray()
+                ResultsData.sharedResultsData.sortDeck()
+                print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
+            }
+            
             return
         }
     }

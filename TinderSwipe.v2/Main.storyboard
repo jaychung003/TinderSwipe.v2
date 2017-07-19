@@ -273,6 +273,19 @@
                                     <segue destination="Ve3-JB-ksU" kind="show" identifier="youreDone" id="BkC-QG-nOT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1j-Sm-Y1e">
+                                <rect key="frame" x="59" y="308" width="296" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.2731134892" green="0.69571095709999997" blue="0.66867619749999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Click to See Results">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="seeResultsClicked:" destination="3Cm-gd-cdL" eventType="touchUpInside" id="53m-vF-jj8"/>
+                                    <segue destination="Ve3-JB-ksU" kind="show" identifier="SeeResultsIdentifier" id="0eh-cc-OJg"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZL-LA-daF" customClass="UIViewX" customModule="TinderSwipe">
                                 <rect key="frame" x="18" y="106" width="378" height="516"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -426,6 +439,7 @@
                         <outlet property="priceLabel" destination="FUp-cu-OeK" id="6bg-VH-2Bh"/>
                         <outlet property="ratingLabel" destination="6Fq-8A-GMT" id="jJu-bO-u6u"/>
                         <outlet property="seeMenu" destination="CWC-1h-yG7" id="87q-xR-cIh"/>
+                        <outlet property="seeResults" destination="z1j-Sm-Y1e" id="oGJ-Qh-j0P"/>
                         <outlet property="thumbImageView" destination="rqQ-ts-N4d" id="jcp-Dc-yVp"/>
                         <outlet property="typeLabel" destination="2uY-u9-o9n" id="cHj-Iq-Zuf"/>
                     </connections>

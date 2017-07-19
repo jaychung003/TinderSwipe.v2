@@ -10,6 +10,7 @@ import UIKit
 
 class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
+    var sortedDeck = [[String]]()
     var wholeDeck = DataManager.sharedData.deck
     var swipeResult = DataManager.sharedData.swipes
     var yesDeck = DataManager.sharedData.yesDeck
@@ -45,29 +46,30 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         performSegue(withIdentifier: "MyGroupsIdentifier", sender: self)
     }
     
-    
     @IBOutlet weak var resultsTableView: UITableView!
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
-            ResultsData.sharedResultsData.updateMasterSwipeArray()
-                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
-                ResultsData.sharedResultsData.sortMasterSwipeArray()
-                ResultsData.sharedResultsData.sortDeck()
-        }
-        
-        
-        
+//        ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
+//        
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+//            ResultsData.sharedResultsData.updateMasterSwipeArray()
+//                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
+//                ResultsData.sharedResultsData.sortMasterSwipeArray()
+//                ResultsData.sharedResultsData.sortDeck()
+//        }
+        //update entire array
+        print("before fetching")
+        self.sortedDeck = ResultsData.sharedResultsData.sortedDeck
+        print("sorted deck in results data", ResultsData.sharedResultsData.sortedDeck)
+        print("sorted deck in this controller", self.sortedDeck)
     }
     
     
     override func viewDidLoad() {
-        testArray.append(wholeDeck)
+        testArray.append(ResultsData.sharedResultsData.sortedDeck) //wholeDeck
         testArray.append(yesDeck)
         print("test array", testArray)
         print(swipeResult)
