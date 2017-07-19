@@ -30,10 +30,11 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             ResultsData.sharedResultsData.updateMasterSwipeArray()
+            print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
+
         }
         
     }
-    
     
     override func viewDidLoad() {
         print(swipeResult)

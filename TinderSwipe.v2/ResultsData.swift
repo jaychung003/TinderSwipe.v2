@@ -94,52 +94,5 @@ class ResultsData: NSObject {
 
     }
     
-//    func uploadNewGroupWithMembers() {
-//        
-//        var databaseRef: DatabaseReference!
-//        databaseRef = Database.database().reference() // sets up reference to the Firebase database
-//        
-//        // Create a dictionary memberDict with usernames as the keys and default boolean 'true' as the values. This is for easier access of data in future (unordered list instead of an ordered list)
-//        
-//        var memberDict = [String: Bool]()
-//        
-//        var cardDict = [String: Bool]()
-//        
-//        for member in group1.listOfMembers {
-//            memberDict[member] = true
-//        }
-//        
-//        print("MEMBER DICT: ", memberDict)
-//        var groupInfo: [String: Any]
-//        groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
-//        var myGroupsReference = databaseRef.child("myGroups").childByAutoId()
-//        myGroupsReference.setValue(groupInfo)
-//        groupID = myGroupsReference.key
-//        //GroupInfo.sharedGroupInfo.currentUserGroupID = groupID
-//        print("printing groupID: ", groupID)
-//
-//        
-//    }
-
-
-    //    // getDeckSize obtains the size of the deck stored in Firebase under users/uid/groupsAssociatedWith/groupID
-    //    // REQUIRES A DELAY OF 1s after this function is called
-    //    func getDeckSize() {
-    //
-    //
-    //        var sizeOfDeck = 0
-    //
-    //        let uid = Auth.auth().currentUser?.uid
-    //        
-    //    }
-
-    
-    
-    
-    
-    
-    
-    
-    
     // END OF CLASS
 }

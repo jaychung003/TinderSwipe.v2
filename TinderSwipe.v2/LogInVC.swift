@@ -23,20 +23,22 @@ class LogInVC: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         logInSegmentedControl.selectedSegmentIndex = 0
         registerButton.isHidden = true
         nameField.isHidden = true
         usernameField.isHidden = true
         
+        // Dismisses keyboard when login screen is tapped
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(tap)
+        
     }
     
-    //Calls this function when the tap is recognized.
+    // dismissKeyboard dismisses the keyboard whenever the login screen is tapped
+    // Called when tap is recognized on the login screen
     override func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
