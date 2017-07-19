@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eHv-Qu-Oqe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eHv-Qu-Oqe">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -732,7 +732,6 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="registerButton:" destination="GSv-3T-Xp0" eventType="touchUpInside" id="0bF-hO-I9d"/>
-                                    <segue destination="eHv-Qu-Oqe" kind="show" identifier="RegisterIdentifier" id="4Ph-qx-BIR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rx7-Q4-Bfy">
@@ -741,7 +740,6 @@
                                 <state key="normal" title="Log In"/>
                                 <connections>
                                     <action selector="logInButton:" destination="GSv-3T-Xp0" eventType="touchUpInside" id="XXs-Ca-3C9"/>
-                                    <segue destination="eHv-Qu-Oqe" kind="show" identifier="LogInIdentifier" id="lEn-xV-nu4"/>
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FkO-hF-i0Y">
@@ -790,11 +788,12 @@
                         <outlet property="passwordField" destination="gaU-8k-be1" id="x3F-bX-peV"/>
                         <outlet property="registerButton" destination="LMP-Zt-Rvm" id="CQm-oU-2zT"/>
                         <outlet property="usernameField" destination="JSR-Hy-U9F" id="6qc-9g-HRi"/>
+                        <segue destination="eHv-Qu-Oqe" kind="show" identifier="LogInIdentifier" id="JEI-FC-a0i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Oq-4F-d8K" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="-618"/>
+            <point key="canvasLocation" x="-54" y="-618"/>
         </scene>
     </scenes>
     <resources>
@@ -804,7 +803,7 @@
         <image name="up" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e5u-QU-FD5"/>
+        <segue reference="JEI-FC-a0i"/>
         <segue reference="XPb-lH-J2Q"/>
         <segue reference="BkC-QG-nOT"/>
     </inferredMetricsTieBreakers>

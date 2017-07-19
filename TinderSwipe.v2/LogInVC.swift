@@ -79,8 +79,12 @@ class LogInVC: UIViewController {
 //            self.dismiss(animated: true, completion: nil)
             print("log in complete")
             print(Auth.auth().currentUser?.uid)
+            })
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             self.logIn()
-        })
+        }
+
         
     }
     func logIn() {
@@ -157,13 +161,18 @@ class LogInVC: UIViewController {
                 }
                 
 //                self.dismiss(animated: true, completion: nil) // dismiss the login page once the user has registered an account
-                self.register()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                    self.logIn()
+                    
+                    //self.register()
+                }
             })
         })
     }
-    func register() {
-        performSegue(withIdentifier: "RegisterIdentifier", sender: self)
-    }
+    
+//    func register() {
+//        performSegue(withIdentifier: "LogInIdentifier", sender: self)
+//    }
 
     
 }
