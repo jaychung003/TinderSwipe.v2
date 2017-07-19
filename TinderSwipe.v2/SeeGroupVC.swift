@@ -17,6 +17,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         // Don't do anything if the user isn't logged in yet,
         // instead, transition to the login screen
         if !checkIfUserLoggedIn() {
