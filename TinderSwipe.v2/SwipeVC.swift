@@ -95,6 +95,53 @@ class SwipeVC: UIViewController {
 
         
     }
+    
+    
+    
+    // uploadYesDeck stores the yesDeck to the database, under users/userID/groupsAssociatedWith/groupID/yesDeck
+    func uploadYesDeck() {
+        
+        
+        
+    }
+    
+    
+//    func updateMasterSwipeArray() {
+//        
+//        print("current masterSwipeArray before update: ", self.masterSwipeArray)
+//        
+//        for cardIndexInDeck in 0...(DataManager.sharedData.swipes.count - 1) {
+//            
+//            if DataManager.sharedData.swipes[cardIndexInDeck] == 0 {
+//                self.masterSwipeArray[cardIndexInDeck] += 0 // make sure masterSwipeArray is updated as the latest version, by calling getCurrentMasterSwipeArray()
+//            }
+//                
+//            else {
+//                self.masterSwipeArray[cardIndexInDeck] += 1 // make sure masterSwipeArray is updated as the latest version, by calling getCurrentMasterSwipeArray()
+//            }
+//        }
+//        
+//        print("updated masterSwipeArray: ", self.masterSwipeArray)
+//        
+//        // once masterSwipeArray is updated with swipe information from DataManager.sharedData.swipes, upload the updated masterSwipeArray to the database
+//        var refMyGroupsIndividualID: DatabaseReference!
+//        refMyGroupsIndividualID = Database.database().reference().child("myGroups/\(DataManager.sharedData.individualGroupID)/masterSwipeArray")
+//        
+//        var masterSwipeArrayUploadDict: [String: Any]
+//        
+//        masterSwipeArrayUploadDict = ["masterSwipeArray": self.masterSwipeArray]
+//        
+//        refMyGroupsIndividualID.setValue(self.masterSwipeArray)
+//        
+//    }
+
+    
+    
+    
+    
+    
+    
+    
 
     //right and left button action
     
@@ -315,7 +362,7 @@ class SwipeVC: UIViewController {
         print("ID should come up on this long one", DataManager.sharedData.individualGroupID)
         let eachUserRef = usersRef.child("\(currentUID)/groupsAssociatedWith/\(IDtoFix)")
         var updatedSwipeArray = [String: Any]()
-        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
+        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": DataManager.sharedData.yesDeck]
         eachUserRef.setValue(updatedSwipeArray)
         
     }

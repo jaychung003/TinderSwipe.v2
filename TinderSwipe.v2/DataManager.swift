@@ -74,7 +74,6 @@ class DataManager: NSObject {
     
     // miscellaneous variables
     var currentUsername = "" // a string storing a reference to the username of the current user
-//    var swipedBool: Bool
     
     //Calls to server to get Foursquare data and returns the full file as myJson5
     func getJSONData()
