@@ -19,23 +19,21 @@ class SwipeVC: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var picture: UIImageView!
     
-    
     //menu things that aren't being used right now
-    @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var menuButton: UIButton!
-    @IBOutlet weak var darkFillView: UIViewX!
     @IBOutlet weak var thumbImageView: UIImageView!
-    //@IBOutlet weak var checkMark: UIButtonX!
-    //@IBOutlet weak var xMark: UIButtonX!
     
     var point = CGPoint()
     var timer: Timer?
-
     var action1 = UIAlertAction()
     var alertView1 = UIAlertController()
+    var deck = DataManager.sharedData.deck
+    var divisor: CGFloat! //variable for angle tilt
+    var cardIndex: Int = 0
+    //var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     //button that brings to the next page
-    @IBOutlet weak var nextPage: UIButton!
     @IBOutlet weak var seeResults: UIButton!
     @IBAction func seeResultsClicked(_ sender: UIButton) {
         handleSeeResults()
@@ -61,10 +59,6 @@ class SwipeVC: UIViewController {
         }
     }
     
-    var deck = DataManager.sharedData.deck
-    var divisor: CGFloat! //variable for angle tilt
-    var cardIndex: Int = 0
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -72,6 +66,7 @@ class SwipeVC: UIViewController {
 
     //right and left button action
     
+    @IBOutlet weak var checkMark: UIButtonX!
     @IBAction func checkMarkClicked(_ sender: UIButton) {
         timer = nil
         while timer == nil {
@@ -104,7 +99,6 @@ class SwipeVC: UIViewController {
             point.x = 0
             timer?.invalidate()
             loadNew()
-//            DataManager.sharedData.swipes.append("YES")
             DataManager.sharedData.swipes.append(1)
 
             print(DataManager.sharedData.swipes)
@@ -112,6 +106,7 @@ class SwipeVC: UIViewController {
         }
     }
 
+    @IBOutlet weak var xMark: UIButtonX!
     @IBAction func xMarkClicked(_ sender: UIButton) {
         timer = nil
         while timer == nil {
@@ -124,7 +119,6 @@ class SwipeVC: UIViewController {
         point.x = point.x - 1
         
         let xFromCenter = self.card.center.x - self.view.center.x
-        //let xFromCenter = point.x - self.view.center.x
         
         self.card.center = CGPoint(x: self.view.center.x + point.x, y: self.view.center.y + point.y)
         
@@ -145,7 +139,6 @@ class SwipeVC: UIViewController {
             point.x = 0
             timer?.invalidate()
             loadNew()
-//            DataManager.sharedData.swipes.append("NO")
             DataManager.sharedData.swipes.append(0)
 
             print(DataManager.sharedData.swipes)
@@ -158,7 +151,6 @@ class SwipeVC: UIViewController {
             self.card.center = CGPoint(x: self.card.center.x + 200, y: self.card.center.y)
         })
         loadNew()
-//        DataManager.sharedData.swipes.append("YES")
         DataManager.sharedData.swipes.append(1)
 
         print(DataManager.sharedData.swipes)
@@ -169,7 +161,6 @@ class SwipeVC: UIViewController {
             self.card.center = CGPoint(x: self.card.center.x - 200, y: self.card.center.y)
         })
         loadNew()
-//        DataManager.sharedData.swipes.append("NO")
         DataManager.sharedData.swipes.append(0)
 
         print(DataManager.sharedData.swipes)
@@ -178,11 +169,8 @@ class SwipeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextPage.isHidden = true
         divisor = (view.frame.width / 2) / 0.61 //degree tilted
-       // hideButtons()
         //for a few second delay of showing card's info
-        nextPage.alpha = 0
         card.alpha = 0
         nameLabel.alpha = 0
         typeLabel.alpha = 0
@@ -191,6 +179,7 @@ class SwipeVC: UIViewController {
         priceLabel.alpha = 0
         seeMenu.alpha = 0
         seeResults.alpha = 0
+        activityIndicator.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -254,18 +243,27 @@ class SwipeVC: UIViewController {
             
             }
             print(DataManager.sharedData.swipes.count)
-            nextPage.alpha = 1
-            seeResults.alpha = 1
+            self.activityIndicator.alpha = 1
+            self.checkMark.alpha = 0
+            self.xMark.alpha = 0
             self.card.alpha = 0
+            activityIndicator.hidesWhenStopped = true
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
             
             ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                self.activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                //self.seeResults.alpha = 1
                 ResultsData.sharedResultsData.updateMasterSwipeArray()
                 print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
                 ResultsData.sharedResultsData.sortMasterSwipeArray()
                 ResultsData.sharedResultsData.sortDeck()
                 print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
+                self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
             }
             
             return
@@ -289,6 +287,8 @@ class SwipeVC: UIViewController {
         eachUserRef.setValue(updatedSwipeArray)
         
     }
+    
+    
     
     //swiping action
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
@@ -317,26 +317,11 @@ class SwipeVC: UIViewController {
         //for when finger is off the screen
         if sender.state == UIGestureRecognizerState.ended {
             if card.center.x < 75 {
-                //move off to the left side of screen
                 swipeLeft()
-                //                UIView.animate(withDuration: 0.3, animations: {
-                //                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
-                //                })
-                //                loadNew()
-                //                DataManager.sharedData.swipes.append("NO")
-                //                print(DataManager.sharedData.swipes)
-                //                return
-
             }
             else if card.center.x > (view.frame.width - 75) {
                 // move off to the right side of screen
                 swipeRight()
-                //                UIView.animate(withDuration: 0.3, animations: {
-                //                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
-                //                })
-                //                loadNew()
-                //                DataManager.sharedData.swipes.append("YES")
-                //                print(DataManager.sharedData.swipes)
                 return
             }
             //bring back to center if let go in the middle range

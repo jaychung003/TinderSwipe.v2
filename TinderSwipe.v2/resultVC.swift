@@ -10,33 +10,22 @@ import UIKit
 
 class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
-    var sortedDeck = [[String]]()
-    var wholeDeck = DataManager.sharedData.deck
     var swipeResult = DataManager.sharedData.swipes
     var yesDeck = DataManager.sharedData.yesDeck
     var myIndex = 0
     var venueName = ""
     var foursquarePageUrl = ""
     var venueID = ""
-    
     var p: Int!
-    
-    var testArray = [[[String]]]()
-    
-    var testTest = [["1 a","2 b","3 c","4 d","5 e"],["a 1","b 2","c 3","d 4"]]
+    var combinedSwipeResult = [[[String]]]()
+    var voteCount = ""
     
     @IBAction func switchTable(_ sender: UISegmentedControl) {
         p = sender.selectedSegmentIndex
         resultsTableView.reloadData()
-        
     }
-//    @IBAction func switchTable(_ sender: UISegmentedControl) {
-//        p = sender.selectedSegmentIndex
-//        resultsTableView.reloadData()
-//    }
-//    @IBAction func myGroupsClicked(_ sender: UIButton) {
-//        handleMyGroups()
-//    }
+    
+    @IBOutlet weak var resultsTableView: UITableView!
     
     @IBAction func myGroupsClicked(_ sender: UIButton) {
         handleMyGroups()
@@ -46,43 +35,28 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         performSegue(withIdentifier: "MyGroupsIdentifier", sender: self)
     }
     
-    @IBOutlet weak var resultsTableView: UITableView!
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
-//        
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
-//            ResultsData.sharedResultsData.updateMasterSwipeArray()
-//                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
-//                ResultsData.sharedResultsData.sortMasterSwipeArray()
-//                ResultsData.sharedResultsData.sortDeck()
-//        }
         //update entire array
-        print("before fetching")
-        self.sortedDeck = ResultsData.sharedResultsData.sortedDeck
         print("sorted deck in results data", ResultsData.sharedResultsData.sortedDeck)
-        print("sorted deck in this controller", self.sortedDeck)
     }
     
     
     override func viewDidLoad() {
-        testArray.append(ResultsData.sharedResultsData.sortedDeck) //wholeDeck
-        testArray.append(yesDeck)
-        print("test array", testArray)
+        combinedSwipeResult.append(ResultsData.sharedResultsData.sortedDeck) //wholeDeck
+        combinedSwipeResult.append(yesDeck)
+        print("combined group and individual swipe result", combinedSwipeResult)
         print(swipeResult)
         print(yesDeck)
+        print("Sorted by vote count???: ", ResultsData.sharedResultsData.sortedMasterSwipeArrayValue)
         p = 0
         
         let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         self.resultsTableView.addGestureRecognizer(longPressGesture)
-        
-        // SwipeResultToGroups.layer.cornerRadius = 7
-        
     }
     
     func handleLongPress(longPressGesture:UILongPressGestureRecognizer) {
@@ -106,27 +80,37 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testArray[p].count
+        return combinedSwipeResult[p].count
     }
-    
-    @IBOutlet weak var restaurantImage: UIImageView!
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellRestaurant", for: indexPath)
         
         //segmented control stuff
-        let restaurant = testArray[p][indexPath.row]
-        cell.textLabel?.text = restaurant[0]
-        cell.detailTextLabel?.text = restaurant[1] + "\n" + restaurant[2] + ", " + restaurant[3] + "\n" + restaurant[4] + "🔥" + "  " + restaurant[5] //detailed info
+        let restaurant = combinedSwipeResult[p][indexPath.row]
+        let name = restaurant[0]
+        let cuisine = restaurant[1]
+        let address = restaurant[2] + ", " + restaurant[3]
+        let rating = restaurant[4] + "🔥"
+        let price = restaurant[5]
+        
+        
+        if p == 0 {
+            voteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[indexPath.row])
+        }
+        let denominator = DataManager.sharedData.groupResultDenominator
+        
+        let voteResult = voteCount + "/" + denominator
+        
+        cell.textLabel?.text = name
+        cell.detailTextLabel?.text = "Group Result: " + voteResult + "  " + "\n" + cuisine + "  "  + rating + "  " + price + "\n" + address //detailed info
+        
         
         //pull image from url and set it as the image in each cell
-        let url = NSURL(string:testArray[p][indexPath.row][6])
+        let url = NSURL(string:combinedSwipeResult[p][indexPath.row][6])
         let data = NSData(contentsOf:url! as URL)
         let restImage = UIImage(data: data! as Data)
         cell.imageView!.image = restImage
-        //cell.imageView!.image.layer.borderColor = UIColor.white
-        //cell.imageView!.image.layer.borderWidth = 2
-        
         
         return cell
     }
@@ -140,6 +124,5 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         print(foursquarePageUrl)
         UIApplication.shared.openURL(URL(string: foursquarePageUrl)!)
     }
-    
     
 }

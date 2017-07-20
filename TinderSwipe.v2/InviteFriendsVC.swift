@@ -40,7 +40,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var allUsernames = [String]()
     
     // a dummy array, supposed to be swipeArray
-    var swipeArray = [String]()
+    var swipeArray = [Int]()
     
     // appendCurrentUsername appends the current username to Group.groupInstance.listOfMembers once the full group is created
     func appendCurrentUsername() {
@@ -50,7 +50,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func populateInitialArray() {
         
         for i in 0...DataManager.sharedData.sizeCount-1 {
-            self.swipeArray.append("x")
+            self.swipeArray.append(999999999)
         }
         print("SWIPEARRAY COUNT: ", self.swipeArray.count)
         print("SWIPEARRAY: ", self.swipeArray)
@@ -167,6 +167,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.present(alertView, animated: true, completion: nil)
             return
         }
+        
         //pop up an error message if username is not registered
         if allUsernames.contains(userNameField.text!) == false {
             alertView = UIAlertController(title: "Invalid Username", message: "Please put in a valid username", preferredStyle: .alert)
