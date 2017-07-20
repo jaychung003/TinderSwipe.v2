@@ -61,7 +61,39 @@ class SwipeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //spinning wheel initializer
+        self.activityIndicator.alpha = 1
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        
+        //check if user swiped
+        if GroupInfo.sharedGroupInfo.checkSwipeArray() == true {
+            
+            ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                self.activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
+                ResultsData.sharedResultsData.sortMasterSwipeArray()
+                ResultsData.sharedResultsData.sortDeck()
+                print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
+                self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
+            }
+            
+        }
+        
+        
+        //spinning wheel ends
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+        self.activityIndicator.alpha = 0
 
+        
     }
 
     //right and left button action

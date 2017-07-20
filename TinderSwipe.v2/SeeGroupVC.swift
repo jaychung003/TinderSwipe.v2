@@ -148,12 +148,34 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         DataManager.sharedData.deck = GroupInfo.sharedGroupInfo.allDecks[indexPath.row]
         DataManager.sharedData.individualGroupID = GroupInfo.sharedGroupInfo.groupIDs[indexPath.row]
         DataManager.sharedData.groupResultDenominator = String(GroupInfo.sharedGroupInfo.groupMembers[indexPath.row].count)
-        print("denominator::", DataManager.sharedData.groupResultDenominator)
         
-        print("individual group ID:::", DataManager.sharedData.individualGroupID)
-        print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
+        //spinning wheel begins
+        self.activityIndicator.alpha = 1
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
-        performSegue(withIdentifier: "SeeGroupToSwipeIdentifier", sender: self)
+        GroupInfo.sharedGroupInfo.getSwipeArray()
+        print("before 1 second delay in see group")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+            print("spinning wheel")
+            //spinning wheel ends
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            
+            print("denominator::", DataManager.sharedData.groupResultDenominator)
+            print("individual group ID:::", DataManager.sharedData.individualGroupID)
+            print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
+            
+            self.performSegue(withIdentifier: "SeeGroupToSwipeIdentifier", sender: self)
+            
+            
+        }
+
+
+        
+       
     }
     
 }

@@ -164,7 +164,7 @@ class GroupInfo: NSObject {
         }, withCancel: nil)
     }
     
-    func checkSwipeArray() -> Bool {
+    func checkSwipeArray() -> Bool { //true when swiped
         
         var dummySwipeArray = [Int]() // dummySwipeArray is the default swipe array, containing all "x", depending on the size of the deck
         
@@ -174,7 +174,7 @@ class GroupInfo: NSObject {
             
         }
 
-        if self.fetchedSwipeArray == dummySwipeArray {
+        if self.fetchedSwipeArray == dummySwipeArray { //if all 999999999
             return false
         }
         
