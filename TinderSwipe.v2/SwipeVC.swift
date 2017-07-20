@@ -29,6 +29,7 @@ class SwipeVC: UIViewController {
     var deck = DataManager.sharedData.deck
     var divisor: CGFloat! //variable for angle tilt
     var cardIndex: Int = 0
+    
     //var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -69,9 +70,11 @@ class SwipeVC: UIViewController {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        
-        //check if user swiped
+        print("fetched swipe array should be 9999:", GroupInfo.sharedGroupInfo.fetchedSwipeArray)
+        print("has user swiped??  ", GroupInfo.sharedGroupInfo.checkSwipeArray())
+        //if user swiped go straight to results
         if GroupInfo.sharedGroupInfo.checkSwipeArray() == true {
+            
             
             ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
             
@@ -86,12 +89,6 @@ class SwipeVC: UIViewController {
             }
             
         }
-        
-        
-        //spinning wheel ends
-        self.activityIndicator.stopAnimating()
-        UIApplication.shared.endIgnoringInteractionEvents()
-        self.activityIndicator.alpha = 0
 
         
     }
@@ -212,6 +209,8 @@ class SwipeVC: UIViewController {
         seeMenu.alpha = 0
         seeResults.alpha = 0
         activityIndicator.alpha = 0
+        xMark.alpha = 0
+        checkMark.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -222,9 +221,14 @@ class SwipeVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: 0.5, animations: {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
+            //spinning wheel ends
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.activityIndicator.alpha = 0
             self.card.alpha = 1 //have to refer self if using outside of the brackets
-        }) { (true) in
+            self.xMark.alpha = 1
+            self.checkMark.alpha = 1
             self.showInfo()
         }
     }
