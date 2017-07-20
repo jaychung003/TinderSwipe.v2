@@ -14,10 +14,16 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var navBarUserName: UINavigationItem!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
         // Don't do anything if the user isn't logged in yet,
         // instead, transition to the login screen
         if !checkIfUserLoggedIn() {
@@ -44,7 +50,9 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
                 print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
                 self.tableView.reloadData()
-                
+                self.activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                self.activityIndicator.alpha = 0
             }
         
     }
@@ -121,11 +129,11 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
         cell.textLabel?.text = GroupInfo.sharedGroupInfo.groupNames[indexPath.row]
         
-        var stringArray =  GroupInfo.sharedGroupInfo.groupMembers[indexPath.row]
-        var string = stringArray.joined(separator: " ")
-        print("stringArray", stringArray)
-        print("string  ", string)
-        cell.detailTextLabel?.text = string
+        var membersInGroupArray =  GroupInfo.sharedGroupInfo.groupMembers[indexPath.row]
+        var membersInGroup = membersInGroupArray.joined(separator: " ")
+        print("membersInGroupArray", membersInGroupArray)
+        print("membersInGroup  ", membersInGroup)
+        cell.detailTextLabel?.text = membersInGroup
         return cell
     }
    
@@ -139,6 +147,9 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataManager.sharedData.deck = GroupInfo.sharedGroupInfo.allDecks[indexPath.row]
         DataManager.sharedData.individualGroupID = GroupInfo.sharedGroupInfo.groupIDs[indexPath.row]
+        DataManager.sharedData.groupResultDenominator = String(GroupInfo.sharedGroupInfo.groupMembers[indexPath.row].count)
+        print("denominator::", DataManager.sharedData.groupResultDenominator)
+        
         print("individual group ID:::", DataManager.sharedData.individualGroupID)
         print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
         

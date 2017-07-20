@@ -124,7 +124,7 @@ class ResultsData: NSObject {
             
         }
         
-        print(sortedDeck)
+        print("sorted deck in results data  ", sortedDeck)
         
     
     }

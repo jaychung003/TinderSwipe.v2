@@ -70,6 +70,7 @@ class DataManager: NSObject {
     var swipes = [Int]() //an array of YES or NO swipes
     var yesDeck = [[String]]() //an array of cards with YES swipes
     var individualGroupID = String()
+    var groupResultDenominator = String()
     
     // miscellaneous variables
     var currentUsername = "" // a string storing a reference to the username of the current user
