@@ -54,7 +54,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         print("SWIPEARRAY COUNT: ", self.swipeArray.count)
         print("SWIPEARRAY: ", self.swipeArray)
-
+        GroupInfo.sharedGroupInfo.fetchedSwipeArray = self.swipeArray
     }
     
     
