@@ -28,6 +28,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     @IBOutlet weak var resultsTableView: UITableView!
     
     @IBAction func myGroupsClicked(_ sender: UIButton) {
+        ResultsData.sharedResultsData.sortedDeck = [[String]]() ///clear the deck
         handleMyGroups()
     }
     
@@ -48,8 +49,6 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         combinedSwipeResult.append(ResultsData.sharedResultsData.sortedDeck) //wholeDeck
         combinedSwipeResult.append(yesDeck)
         print("combined group and individual swipe result", combinedSwipeResult)
-        print(swipeResult)
-        print(yesDeck)
         print("Sorted by vote count???: ", ResultsData.sharedResultsData.sortedMasterSwipeArrayValue)
         p = 0
         
@@ -94,16 +93,18 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         let rating = restaurant[4] + "🔥"
         let price = restaurant[5]
         
+        let denominator = DataManager.sharedData.groupResultDenominator
+        var voteResult = String()
+
         
         if p == 0 {
             voteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[indexPath.row])
+            voteResult = "Group Result: " + voteCount + "/" + denominator + "  " + "\n"
         }
-        let denominator = DataManager.sharedData.groupResultDenominator
-        
-        let voteResult = voteCount + "/" + denominator
+
         
         cell.textLabel?.text = name
-        cell.detailTextLabel?.text = "Group Result: " + voteResult + "  " + "\n" + cuisine + "  "  + rating + "  " + price + "\n" + address //detailed info
+        cell.detailTextLabel?.text = voteResult + cuisine + "  "  + rating + "  " + price + "\n" + address //detailed info
         
         
         //pull image from url and set it as the image in each cell
