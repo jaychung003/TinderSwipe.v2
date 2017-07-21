@@ -27,6 +27,16 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
         // update the groupsAssociatedWith for each member of the group that has just been created
         
+        // Error message that prevents user from creating a group that only includes himself
+//        // First check if user has added at least one friend to the group
+//        if Group.groupInstance.listOfMembers == [] {
+//            alertView = UIAlertController(title: "No one's added yet!", message: "Please invite your friends to the group", preferredStyle: .alert)
+//            action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in })
+//            alertView.addAction(action)
+//            self.present(alertView, animated: true, completion: nil)
+//            return
+//        }
+        
         appendCurrentUsername() // appends current username to the current list of members
         print("listOfMembers finally apended with current user: ", Group.groupInstance.listOfMembers)
         handleDoneInviting()
@@ -85,7 +95,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //for members of the group, make a new branch groupsAssociatedWith
                     let eachUserRef = usersRef.child("\(uid!)/groupsAssociatedWith")
                     var groupInfoForUserWithSwipes: [String: Any]
-                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": ["default yes deck"]]
+                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": ["default yes deck"], "yes deck size": 0]
                     var referenceForID =  eachUserRef.child("\(self.groupID!)")
                     referenceForID.setValue(groupInfoForUserWithSwipes)
                     DataManager.sharedData.individualGroupID = self.groupID

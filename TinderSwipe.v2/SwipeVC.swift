@@ -75,7 +75,7 @@ class SwipeVC: UIViewController {
         //if user swiped go straight to results
         if GroupInfo.sharedGroupInfo.checkSwipeArray() == true {
             
-            
+            self.getYesDeck()
             ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
@@ -93,44 +93,52 @@ class SwipeVC: UIViewController {
         
     }
     
+    // getYesDeck obtains the yesDeck from the database, under users/userID/groupsAssociatedWith/groupID/yesDeck
+    func getYesDeck() {
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        var sizeOfCurrentYesDeck = 0
+        
+        let uid = Auth.auth().currentUser?.uid
+        
+        ref.child("users/\(uid!)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+            print("CURRENT UID getYesDeck: ", uid)
+            
+            let dictionary = DataSnapshot.value as? [String: Any]
+            print("DATASNAP DICTIONARY getYesDeck: ", dictionary)
+            
+            sizeOfCurrentYesDeck = dictionary?["yes deck size"] as! Int
+            
+        }, withCancel: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
+            print("SIZE OF THE CURRENT YES DECK: ", sizeOfCurrentYesDeck)
+            
+            ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/yes deck").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                
+                let yesDeckInNSArrayForm = DataSnapshot.value as! NSArray
+                
+                var yesDeckCardInfo: NSArray = []
+                var yesDeckInfo = [[String]]()
+                
+                print("yes deck size count:::: ", sizeOfCurrentYesDeck)
+                
+                for cardIndexInYesDeck in 0...(sizeOfCurrentYesDeck - 1) {
+                    yesDeckCardInfo = yesDeckInNSArrayForm[cardIndexInYesDeck] as! NSArray
+                    print("INFO FOR ONE CARD IN YES DECK: ", yesDeckCardInfo)
+                    yesDeckInfo.append(yesDeckCardInfo as! Array)
+                }
+                
+                DataManager.sharedData.yesDeck = yesDeckInfo
+                print("YES DECK OBTAINED: ", yesDeckInfo)
+                print("YES DECK OBTAINED: ", DataManager.sharedData.yesDeck)
+                
+            }, withCancel: nil)
+        }
     
-    
-    // uploadYesDeck stores the yesDeck to the database, under users/userID/groupsAssociatedWith/groupID/yesDeck
-    func uploadYesDeck() {
-        
-        
-        
     }
-    
-    
-//    func updateMasterSwipeArray() {
-//        
-//        print("current masterSwipeArray before update: ", self.masterSwipeArray)
-//        
-//        for cardIndexInDeck in 0...(DataManager.sharedData.swipes.count - 1) {
-//            
-//            if DataManager.sharedData.swipes[cardIndexInDeck] == 0 {
-//                self.masterSwipeArray[cardIndexInDeck] += 0 // make sure masterSwipeArray is updated as the latest version, by calling getCurrentMasterSwipeArray()
-//            }
-//                
-//            else {
-//                self.masterSwipeArray[cardIndexInDeck] += 1 // make sure masterSwipeArray is updated as the latest version, by calling getCurrentMasterSwipeArray()
-//            }
-//        }
-//        
-//        print("updated masterSwipeArray: ", self.masterSwipeArray)
-//        
-//        // once masterSwipeArray is updated with swipe information from DataManager.sharedData.swipes, upload the updated masterSwipeArray to the database
-//        var refMyGroupsIndividualID: DatabaseReference!
-//        refMyGroupsIndividualID = Database.database().reference().child("myGroups/\(DataManager.sharedData.individualGroupID)/masterSwipeArray")
-//        
-//        var masterSwipeArrayUploadDict: [String: Any]
-//        
-//        masterSwipeArrayUploadDict = ["masterSwipeArray": self.masterSwipeArray]
-//        
-//        refMyGroupsIndividualID.setValue(self.masterSwipeArray)
-//        
-//    }
 
     
     
@@ -366,7 +374,7 @@ class SwipeVC: UIViewController {
         print("ID should come up on this long one", DataManager.sharedData.individualGroupID)
         let eachUserRef = usersRef.child("\(currentUID)/groupsAssociatedWith/\(IDtoFix)")
         var updatedSwipeArray = [String: Any]()
-        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": DataManager.sharedData.yesDeck]
+        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": DataManager.sharedData.yesDeck, "yes deck size": DataManager.sharedData.yesDeck.count]
         eachUserRef.setValue(updatedSwipeArray)
         
     }
