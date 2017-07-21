@@ -38,6 +38,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //        }
         
         appendCurrentUsername() // appends current username to the current list of members
+        DataManager.sharedData.groupResultDenominator = String(Group.groupInstance.listOfMembers.count)
         print("listOfMembers finally apended with current user: ", Group.groupInstance.listOfMembers)
         handleDoneInviting()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
