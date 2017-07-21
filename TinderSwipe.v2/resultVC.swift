@@ -16,12 +16,12 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     var venueName = ""
     var foursquarePageUrl = ""
     var venueID = ""
-    var p: Int!
+    var page: Int!
     var combinedSwipeResult = [[[String]]]()
     var voteCount = ""
     
     @IBAction func switchTable(_ sender: UISegmentedControl) {
-        p = sender.selectedSegmentIndex
+        page = sender.selectedSegmentIndex
         resultsTableView.reloadData()
     }
     
@@ -50,7 +50,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         combinedSwipeResult.append(yesDeck)
         print("combined group and individual swipe result", combinedSwipeResult)
         print("Sorted by vote count???: ", ResultsData.sharedResultsData.sortedMasterSwipeArrayValue)
-        p = 0
+        page = 0
         
         let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPressGesture.minimumPressDuration = 0.5
@@ -66,7 +66,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         }
         else if (longPressGesture.state == UIGestureRecognizerState.began) {
             print("Long press on row, at \(indexPath!.row)")
-            var restaurant2 = yesDeck[(indexPath?.row)!]
+            var restaurant2 = combinedSwipeResult[page][(indexPath?.row)!]
             let busPhone = restaurant2[9]
             if let urlTest = URL(string: "tel://\(busPhone)"), UIApplication.shared.canOpenURL(urlTest) {
                 UIApplication.shared.open(urlTest)
@@ -79,14 +79,14 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return combinedSwipeResult[p].count
+        return combinedSwipeResult[page].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellRestaurant", for: indexPath)
         
         //segmented control stuff
-        let restaurant = combinedSwipeResult[p][indexPath.row]
+        let restaurant = combinedSwipeResult[page][indexPath.row]
         let name = restaurant[0]
         let cuisine = restaurant[1]
         let address = restaurant[2] + ", " + restaurant[3]
@@ -97,7 +97,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         var voteResult = String()
 
         
-        if p == 0 {
+        if page == 0 {
             voteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[indexPath.row])
             voteResult = "Group Result: " + voteCount + "/" + denominator + "  " + "\n"
         }
@@ -108,7 +108,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         
         //pull image from url and set it as the image in each cell
-        let url = NSURL(string:combinedSwipeResult[p][indexPath.row][6])
+        let url = NSURL(string:combinedSwipeResult[page][indexPath.row][6])
         let data = NSData(contentsOf:url! as URL)
         let restImage = UIImage(data: data! as Data)
         cell.imageView!.image = restImage
@@ -117,7 +117,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var restaurant2 = yesDeck[indexPath.row]
+        var restaurant2 = combinedSwipeResult[page][indexPath.row]
         myIndex = indexPath.row
         venueName = restaurant2[0].replacingOccurrences(of: " ", with: "-", options: .literal, range: nil)
         venueName = venueName.lowercased()

@@ -159,7 +159,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         GroupInfo.sharedGroupInfo.getSwipeArray()
         print("before 1 second delay in see group")
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
-            print("spinning wheel")
+            
             //spinning wheel ends
             self.activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()

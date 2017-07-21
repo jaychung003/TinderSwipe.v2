@@ -18,6 +18,7 @@ class SwipeVC: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var picture: UIImageView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     //menu things that aren't being used right now
     @IBOutlet weak var thumbImageView: UIImageView!
@@ -72,6 +73,8 @@ class SwipeVC: UIViewController {
         
         print("fetched swipe array should be 9999:", GroupInfo.sharedGroupInfo.fetchedSwipeArray)
         print("has user swiped??  ", GroupInfo.sharedGroupInfo.checkSwipeArray())
+        
+        
         //if user swiped go straight to results
         if GroupInfo.sharedGroupInfo.checkSwipeArray() == true {
             
@@ -258,6 +261,7 @@ class SwipeVC: UIViewController {
         activityIndicator.alpha = 0
         xMark.alpha = 0
         checkMark.alpha = 0
+        navBar.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -273,7 +277,8 @@ class SwipeVC: UIViewController {
             self.activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
             self.activityIndicator.alpha = 0
-            self.card.alpha = 1 //have to refer self if using outside of the brackets
+            self.navBar.alpha = 1
+            self.card.alpha = 1
             self.xMark.alpha = 1
             self.checkMark.alpha = 1
             self.showInfo()

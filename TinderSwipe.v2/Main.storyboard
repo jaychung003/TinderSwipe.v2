@@ -421,6 +421,7 @@
                         <outlet property="card" destination="GZL-LA-daF" id="9it-0Y-Van"/>
                         <outlet property="checkMark" destination="K6j-SC-Oh2" id="3aH-JW-vp7"/>
                         <outlet property="nameLabel" destination="gZx-vf-VpG" id="LmL-8h-uWY"/>
+                        <outlet property="navBar" destination="pDe-w8-Djl" id="wrk-k6-Wrg"/>
                         <outlet property="picture" destination="U29-l4-cp1" id="FSm-aX-D8Y"/>
                         <outlet property="priceLabel" destination="FUp-cu-OeK" id="6bg-VH-2Bh"/>
                         <outlet property="ratingLabel" destination="6Fq-8A-GMT" id="jJu-bO-u6u"/>
@@ -826,7 +827,7 @@
         <image name="up" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="atD-iM-ABX"/>
+        <segue reference="e5u-QU-FD5"/>
         <segue reference="lKa-GA-Nxb"/>
     </inferredMetricsTieBreakers>
 </document>
