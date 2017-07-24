@@ -31,7 +31,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //        // First check if user has added at least one friend to the group
         //        if Group.groupInstance.listOfMembers == [] {
         //            alertView = UIAlertController(title: "No one's added yet!", message: "Please invite your friends to the group", preferredStyle: .alert)
-        //            action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in })
+        //            action = UIAlertAction(t999999999itle: "OK", style: .default, handler: { (alert) in })
         //            alertView.addAction(action)
         //            self.present(alertView, animated: true, completion: nil)
         //            return
@@ -61,7 +61,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func populateInitialArray() {
         
         for i in 0...DataManager.sharedData.sizeCount-1 {
-            self.swipeArray.append("x")
+            self.swipeArray.append(999999999)
         }
         print("SWIPEARRAY COUNT: ", self.swipeArray.count)
         print("SWIPEARRAY: ", self.swipeArray)

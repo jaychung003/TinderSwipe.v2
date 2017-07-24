@@ -20,21 +20,18 @@ class SwipeVC: UIViewController {
     @IBOutlet weak var picture: UIImageView!
     @IBOutlet weak var navBar: UINavigationBar!
     
-    
-    
     //thumbs up or down image
     @IBOutlet weak var thumbImageView: UIImageView!
 
     
     var point = CGPoint()
     var timer: Timer?
-
     var action1 = UIAlertAction()
     var alertView1 = UIAlertController()
-    
-    //button that brings to the next page
-    @IBOutlet weak var nextPage: UIButton!
-    
+    var deck = DataManager.sharedData.deck
+    var divisor: CGFloat! //variable for angle tilt
+    var cardIndex: Int = 0
+        
     //see menu button & hyperlink
     @IBOutlet weak var seeMenu: UIButton!
     @IBAction func menuLink(_ sender: AnyObject) {
@@ -50,11 +47,7 @@ class SwipeVC: UIViewController {
             UIApplication.shared.openURL(url as URL)
         }
     }
-    
-    var deck = DataManager.sharedData.deck
-    var divisor: CGFloat! //variable for angle tilt
-    var cardIndex: Int = 0
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
