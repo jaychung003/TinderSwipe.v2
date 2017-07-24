@@ -61,7 +61,7 @@ class DataManager: NSObject {
     
     var JSONPhoneNumberString: String!
     var arraySize = 0
-    var sizeCount = 0
+    var sizeCount = 0 // will be the number of cards in FULL JSON FILE that match the users selected $ values
     var cardTierValue = 0
     
     // variables for data structures, card and deck
@@ -128,12 +128,14 @@ class DataManager: NSObject {
     
     //creates Deck
     func createDeck() -> [[String]]
-    {   findSize()
+    {
+        findSize()
         var count = 0
         while count < sizeCount
         {
             getResultJson(indexRestaurant: indexRestaurant)
             getPrice()
+            print("get price in create deck")
             if priceArray.contains(cardTierValue)
             {
                 getJSONVenueID()
@@ -160,7 +162,8 @@ class DataManager: NSObject {
     }
     
     func findSize()
-    {   while indexRestaurant < (arraySize - 1)
+    {   sizeCount = 0 //set size to 0
+        while indexRestaurant < (arraySize - 1)
     {   getResultJson(indexRestaurant: indexRestaurant)
         getPrice()
         if priceArray.contains(cardTierValue)
@@ -328,6 +331,11 @@ class DataManager: NSObject {
                 cardTierValue = JSONTier
                 print("JSONTIER is: ", JSONTier)
             }
+            else {
+                JSONTier = 1
+                print("JSONTIER is: ", JSONTier)
+                cardTierValue = 1
+            }
         }
         if JSONPrice == nil || JSONTier == nil
         {
@@ -335,6 +343,7 @@ class DataManager: NSObject {
             //Let's say that any venue without a tier is a 1
             JSONTier = 1
         }
+        PriceAndTier = ""
         for numbers in 1...cardTierValue
         {
             PriceAndTier = PriceAndTier + "$"
@@ -347,6 +356,7 @@ class DataManager: NSObject {
     {
         PriceAndTier = ""
         JSONTier = 1
+        print("set price")
         card.append(getPrice())
         //print(card)
         //print(card[5])

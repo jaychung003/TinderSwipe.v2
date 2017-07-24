@@ -73,6 +73,7 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //when create event button clicked
     @IBAction func createEvent(_ sender: Any) {
         print("event button clicked")
+        DataManager.sharedData.deck = [] //clear old deck before creating new one
         handleCreateEvent()
     }
     func handleCreateEvent() {

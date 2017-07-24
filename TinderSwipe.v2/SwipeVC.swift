@@ -70,26 +70,26 @@ class SwipeVC: UIViewController {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        print("fetched swipe array should be 9999:", GroupInfo.sharedGroupInfo.fetchedSwipeArray)
-        print("has user swiped??  ", GroupInfo.sharedGroupInfo.checkSwipeArray())
-        //if user swiped go straight to results
-        if GroupInfo.sharedGroupInfo.checkSwipeArray() == true {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0) {
+            print("fetched swipe array should be 9999:", GroupInfo.sharedGroupInfo.fetchedSwipeArray)
+            print("has user swiped??  ", GroupInfo.sharedGroupInfo.checkSwipeArray())
+            //if user swiped go straight to results
+            if GroupInfo.sharedGroupInfo.checkSwipeArray() == true {
             
-            self.getYesDeck()
-            ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
+                self.getYesDeck()
+                ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
             
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
-                self.activityIndicator.stopAnimating()
-                UIApplication.shared.endIgnoringInteractionEvents()
-                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
-                ResultsData.sharedResultsData.sortMasterSwipeArray()
-                ResultsData.sharedResultsData.sortDeck()
-                print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
-                self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
+                    ResultsData.sharedResultsData.sortMasterSwipeArray()
+                    ResultsData.sharedResultsData.sortDeck()
+                    print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
+                    self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
             }
-            
+            }
         }
-
         
     }
     
@@ -114,6 +114,10 @@ class SwipeVC: UIViewController {
         }, withCancel: nil)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
+            
+            if sizeOfCurrentYesDeck != 0 {
+                
+            
             print("SIZE OF THE CURRENT YES DECK: ", sizeOfCurrentYesDeck)
             
             ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/yes deck").observeSingleEvent(of: .value, with: { (DataSnapshot) in
@@ -123,7 +127,6 @@ class SwipeVC: UIViewController {
                 var yesDeckCardInfo: NSArray = []
                 var yesDeckInfo = [[String]]()
                 
-                print("yes deck size count:::: ", sizeOfCurrentYesDeck)
                 
                 for cardIndexInYesDeck in 0...(sizeOfCurrentYesDeck - 1) {
                     yesDeckCardInfo = yesDeckInNSArrayForm[cardIndexInYesDeck] as! NSArray
@@ -136,6 +139,7 @@ class SwipeVC: UIViewController {
                 print("YES DECK OBTAINED: ", DataManager.sharedData.yesDeck)
                 
             }, withCancel: nil)
+            }
         }
     
     }
