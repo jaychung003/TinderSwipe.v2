@@ -18,15 +18,13 @@ class SwipeVC: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var picture: UIImageView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     
-    //menu things that aren't being used right now
-    @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var menuButton: UIButton!
-    @IBOutlet weak var darkFillView: UIViewX!
+    
+    //thumbs up or down image
     @IBOutlet weak var thumbImageView: UIImageView!
-    //@IBOutlet weak var checkMark: UIButtonX!
-    //@IBOutlet weak var xMark: UIButtonX!
+
     
     var point = CGPoint()
     var timer: Timer?

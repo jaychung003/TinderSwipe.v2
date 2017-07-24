@@ -70,6 +70,10 @@ class DataManager: NSObject {
     var swipes = [Int]() //an array of YES or NO swipes
     var yesDeck = [[String]]() //an array of cards with YES swipes
     var individualGroupID = String()
+    var groupResultDenominator = String()
+
+    // miscellaneous variables
+    var currentUsername = "" // a string storing a reference to the username of the current user
     
     //Calls to server to get Foursquare data and returns the full file as myJson5
     func getJSONData()
@@ -344,8 +348,6 @@ class DataManager: NSObject {
         PriceAndTier = ""
         JSONTier = 1
         card.append(getPrice())
-        //print(card)
-        //print(card[5])
     }
     
 
@@ -375,8 +377,6 @@ class DataManager: NSObject {
     func setImageURL()
     {
         card.append(getImageURL())
-        //print(card)
-        //print(card[6])
     }
     
     func resetImageURL()
@@ -401,8 +401,6 @@ class DataManager: NSObject {
     func setMenuID()
     {
         card.append(getMenuID())
-        //print(card)
-        //print(card[7])
     }
     
     

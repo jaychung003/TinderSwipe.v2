@@ -340,20 +340,6 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
         print(DataManager.sharedData.myCurrentLocation)
     }
     
-    //IBAction that sets location based on urlHERE, gets the JSONData file, and createsDeck from it
-    
-//    @IBAction func setLocation(_ sender: UIButton) {
-//        let url = DataManager.sharedData.urlHERE
-//        print(url)
-//        DataManager.sharedData.request = NSMutableURLRequest(url: URL(string: url)!)
-//        DataManager.sharedData.getJSONData()
-//        while DataManager.sharedData.fullJson == nil {
-//        }
-//        DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
-//        DataManager.sharedData.createDeck()
-//    }
-
-    
     //ViewDidLoad func requests user location privileges, hides scroll pickers, creates a "tap" zone for scrollers
     @IBAction func backToGroupAction(_ sender: UIButton) {
     }

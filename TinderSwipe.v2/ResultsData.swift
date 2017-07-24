@@ -16,7 +16,9 @@ class ResultsData: NSObject {
     
     // Declare class variables
     var masterSwipeArray = [Int]() // the master swipe array that compiles the number of yes swipes for each card in the deck in an array, for a specific group
-    
+    var sortedMasterSwipeArrayValue = [Int]() // the sorted master swipe array, in decreasing order, elements representing the yes counts for each card
+    var sortedMasterSwipeArrayIndices = [Int]() // the sorted master swipe array, in decreasing order, elements representing the indices for each card from the original deck
+    var sortedDeck = [[String]]() // the sorted deck, in the order determined by the variable sortedMasterSwipeArrayIndices
     
     
     // FUNCTIONS that handle the swipe results
@@ -94,50 +96,38 @@ class ResultsData: NSObject {
 
     }
     
-//    func uploadNewGroupWithMembers() {
-//        
-//        var databaseRef: DatabaseReference!
-//        databaseRef = Database.database().reference() // sets up reference to the Firebase database
-//        
-//        // Create a dictionary memberDict with usernames as the keys and default boolean 'true' as the values. This is for easier access of data in future (unordered list instead of an ordered list)
-//        
-//        var memberDict = [String: Bool]()
-//        
-//        var cardDict = [String: Bool]()
-//        
-//        for member in group1.listOfMembers {
-//            memberDict[member] = true
-//        }
-//        
-//        print("MEMBER DICT: ", memberDict)
-//        var groupInfo: [String: Any]
-//        groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
-//        var myGroupsReference = databaseRef.child("myGroups").childByAutoId()
-//        myGroupsReference.setValue(groupInfo)
-//        groupID = myGroupsReference.key
-//        //GroupInfo.sharedGroupInfo.currentUserGroupID = groupID
-//        print("printing groupID: ", groupID)
-//
-//        
-//    }
-
-
-    //    // getDeckSize obtains the size of the deck stored in Firebase under users/uid/groupsAssociatedWith/groupID
-    //    // REQUIRES A DELAY OF 1s after this function is called
-    //    func getDeckSize() {
-    //
-    //
-    //        var sizeOfDeck = 0
-    //
-    //        let uid = Auth.auth().currentUser?.uid
-    //        
-    //    }
-
+    
+    // sortMasterSwipeArray sorts the masterSwipeArray in decreasing order of the number of yes counts for each card in the deck
+    // updates the variables sortedMasterSwipeArrayValue and sortedMasterSwipeArrayIndices
+    func sortMasterSwipeArray() {
+        
+        let sortedMasterSwipeArray = self.masterSwipeArray.enumerated().sorted(by: {$0.element > $1.element})
+        self.sortedMasterSwipeArrayIndices = sortedMasterSwipeArray.map{$0.offset}
+        self.sortedMasterSwipeArrayValue = sortedMasterSwipeArray.map{$0.element}
+        
+        print("Sorted by vote count: ", self.sortedMasterSwipeArrayValue)
+        print("Sorted by original indices: ", self.sortedMasterSwipeArrayIndices)
+        
+    }
     
     
-    
-    
-    
+    // sortDeck sorts the original deck of cards in decreasing order of vote counts, based on the variable sortedMasterSwipeArrayIndices
+    // NOTE: Make sure sortMasterSwipeArray is called before this function, so that sortedMasterSwipeArrayIndices is updated to the latest version after user has swiped
+    // updates the variable sortedDeck
+    func sortDeck() {
+        
+        for i in 0...(DataManager.sharedData.deck.count - 1) {
+            
+            let indexToRefFromDeck = sortedMasterSwipeArrayIndices[i]
+            
+            sortedDeck.append(DataManager.sharedData.deck[indexToRefFromDeck])
+            
+        }
+        
+        print("sorted deck in results data  ", sortedDeck)
+        
+        
+    }
     
     
     

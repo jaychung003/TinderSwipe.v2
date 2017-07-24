@@ -19,6 +19,9 @@ class GroupInfo: NSObject {
     var groupMembers = [[String]]()
     var allDecks = [[[String]]]()
     
+    // variables to handle segue from SeeGroupsVC to swipeVC/resultVC
+    var fetchedSwipeArray = [Int]()
+    
     func loadGroupIDs() { // Put IDs into group IDs array.
         var ref: DatabaseReference!
         ref = Database.database().reference()
@@ -32,9 +35,6 @@ class GroupInfo: NSObject {
         }) {(error) in
             print(error.localizedDescription)
         }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
-            //self.loadGroupName()
-        }
     }
     
     func loadGroupNames() {
@@ -46,7 +46,6 @@ class GroupInfo: NSObject {
                     let eventName = (dictionary["event name"] as? String)!
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                         self.groupNames.append(eventName)
-                        //self.tableView.reloadData()
                     }
                 }
             }, withCancel: nil)
@@ -127,7 +126,58 @@ class GroupInfo: NSObject {
 
 
     
-// FUNCTIONS REQUIRED TO COMPILE AND UPLOAD SWIPE RESULTS ONTO FIREBASE
+    // FUNCTIONS REQUIRED TO COMPILE AND UPLOAD SWIPE RESULTS ONTO FIREBASE
+    
+    
+    func getSwipeArray() {
+        
+        var ref: DatabaseReference
+        ref = Database.database().reference()
+        var tempFetchedSwipeArray = [Int]()
+        
+        print("fetch swipe array userID", Auth.auth().currentUser!.uid)
+        print("fetch swipe array groupID", DataManager.sharedData.individualGroupID)
+        
+        ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/swipeArray").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+            
+            let fetchedSwipeArrayInNSArrayForm = DataSnapshot.value as! NSArray
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                
+                var currentSwipeValue: Int
+                
+                for swipeIndex in 0...(fetchedSwipeArrayInNSArrayForm.count - 1) {
+                    
+                    currentSwipeValue = fetchedSwipeArrayInNSArrayForm[swipeIndex] as! Int
+                    tempFetchedSwipeArray.append(currentSwipeValue)
+                }
+                print("FETCHED SWIPE ARRAY: ", tempFetchedSwipeArray)
+                
+                self.fetchedSwipeArray = tempFetchedSwipeArray
+            }
+            
+        }, withCancel: nil)
+    }
+    
+    func checkSwipeArray() -> Bool { //true when swiped
+        
+        var dummySwipeArray = [Int]() // dummySwipeArray is the default swipe array, containing all "x", depending on the size of the deck
+        
+        for i in 0...(DataManager.sharedData.deck.count - 1) {
+            
+            dummySwipeArray.append(999999999)
+            
+        }
+        
+        if self.fetchedSwipeArray == dummySwipeArray { //if all 999999999
+            return false
+        }
+            
+        else {
+            return true
+        }
+    }
     
     
     

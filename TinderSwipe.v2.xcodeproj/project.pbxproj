@@ -241,7 +241,7 @@
 				TargetAttributes = {
 					CBE652EE1F0D4EE200201E47 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = UETU7CUUHY;
+						DevelopmentTeam = J9ZQ7GC82X;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -464,14 +464,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UETU7CUUHY;
+				DEVELOPMENT_TEAM = J9ZQ7GC82X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = TinderSwipe.v2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSdddd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSdd;
 				PRODUCT_NAME = YumNum;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -487,14 +487,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UETU7CUUHY;
+				DEVELOPMENT_TEAM = J9ZQ7GC82X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = TinderSwipe.v2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSdddd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cssummer.TinderSdd;
 				PRODUCT_NAME = YumNum;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
