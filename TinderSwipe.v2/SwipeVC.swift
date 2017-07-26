@@ -18,24 +18,32 @@ class SwipeVC: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var picture: UIImageView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
-    
-    //menu things that aren't being used right now
-    @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var menuButton: UIButton!
-    @IBOutlet weak var darkFillView: UIViewX!
+    //thumbs up or down image
     @IBOutlet weak var thumbImageView: UIImageView!
-    //@IBOutlet weak var checkMark: UIButtonX!
-    //@IBOutlet weak var xMark: UIButtonX!
     
     var point = CGPoint()
     var timer: Timer?
-
     var action1 = UIAlertAction()
     var alertView1 = UIAlertController()
+    var deck = DataManager.sharedData.deck
+    var divisor: CGFloat! //variable for angle tilt
+    var cardIndex: Int = 0
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     //button that brings to the next page
-    @IBOutlet weak var nextPage: UIButton!
+    @IBOutlet weak var seeResults: UIButton!
+    @IBAction func seeResultsClicked(_ sender: UIButton) {
+        handleSeeResults()
+    }
+    
+    
+    func handleSeeResults() {
+        performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
+    }
     
     //see menu button & hyperlink
     @IBOutlet weak var seeMenu: UIButton!
@@ -43,9 +51,9 @@ class SwipeVC: UIViewController {
         if (self.deck[self.cardIndex][8] == "Menu is not available")
         {
             alertView1 = UIAlertController(title: "Whoops!", message: "It appears there is no menu available for this venue.", preferredStyle: .alert)
-                action1 = UIAlertAction(title: "Return to swiping", style: .default, handler: { (alert) in })
-                alertView1.addAction(action1)
-                self.present(alertView1, animated: true, completion: nil)
+            action1 = UIAlertAction(title: "Return to swiping", style: .default, handler: { (alert) in })
+            alertView1.addAction(action1)
+            self.present(alertView1, animated: true, completion: nil)
         }
         print(self.deck[self.cardIndex][8])
         if let url = NSURL(string: self.deck[self.cardIndex][8]) {
@@ -53,17 +61,97 @@ class SwipeVC: UIViewController {
         }
     }
     
-    var deck = DataManager.sharedData.deck
-    var divisor: CGFloat! //variable for angle tilt
-    var cardIndex: Int = 0
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        //spinning wheel initializer
+        self.activityIndicator.alpha = 1
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        DataManager.sharedData.swipes = []
+        GroupInfo.sharedGroupInfo.getSwipeArray()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+        print("fetched swipe array should be 9999:", GroupInfo.sharedGroupInfo.fetchedSwipeArray)
+        print("has user swiped??  ", GroupInfo.sharedGroupInfo.checkSwipeArray())
+        
+        
+        //if user swiped go straight to results
+        if GroupInfo.sharedGroupInfo.checkSwipeArray() == true { // doesn't contain 999999999
+            
+            self.getYesDeck()
+            ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                self.activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
+                ResultsData.sharedResultsData.sortMasterSwipeArray()
+                ResultsData.sharedResultsData.sortDeck()
+                print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
+                self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
+            }
+            
+        }
+        
+        }
+        
+        
+    }
+    
+    // getYesDeck obtains the yesDeck from the database, under users/userID/groupsAssociatedWith/groupID/yesDeck
+    func getYesDeck() {
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        var sizeOfCurrentYesDeck = 0
+        
+        let uid = Auth.auth().currentUser?.uid
+        
+        ref.child("users/\(uid!)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+            print("CURRENT UID getYesDeck: ", uid)
+            
+            let dictionary = DataSnapshot.value as? [String: Any]
+            print("DATASNAP DICTIONARY getYesDeck: ", dictionary)
+            
+            sizeOfCurrentYesDeck = dictionary?["yes deck size"] as! Int
+            
+        }, withCancel: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
+            print("SIZE OF THE CURRENT YES DECK: ", sizeOfCurrentYesDeck)
+            
+            ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/yes deck").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                
+                let yesDeckInNSArrayForm = DataSnapshot.value as! NSArray
+                
+                var yesDeckCardInfo: NSArray = []
+                var yesDeckInfo = [[String]]()
+                
+                print("yes deck size count:::: ", sizeOfCurrentYesDeck)
+                
+                for cardIndexInYesDeck in 0...(sizeOfCurrentYesDeck - 1) {
+                    yesDeckCardInfo = yesDeckInNSArrayForm[cardIndexInYesDeck] as! NSArray
+                    print("INFO FOR ONE CARD IN YES DECK: ", yesDeckCardInfo)
+                    yesDeckInfo.append(yesDeckCardInfo as! Array)
+                }
+                
+                DataManager.sharedData.yesDeck = yesDeckInfo
+                print("YES DECK OBTAINED: ", yesDeckInfo)
+                print("YES DECK OBTAINED: ", DataManager.sharedData.yesDeck)
+                
+            }, withCancel: nil)
+        }
+        
     }
 
     //right and left button action
     
+    @IBOutlet weak var checkMark: UIButtonX!
     @IBAction func checkMarkClicked(_ sender: UIButton) {
         timer = nil
         while timer == nil {
@@ -96,7 +184,6 @@ class SwipeVC: UIViewController {
             point.x = 0
             timer?.invalidate()
             loadNew()
-//            DataManager.sharedData.swipes.append("YES")
             DataManager.sharedData.swipes.append(1)
 
             print(DataManager.sharedData.swipes)
@@ -104,6 +191,7 @@ class SwipeVC: UIViewController {
         }
     }
 
+    @IBOutlet weak var xMark: UIButtonX!
     @IBAction func xMarkClicked(_ sender: UIButton) {
         timer = nil
         while timer == nil {
@@ -116,7 +204,6 @@ class SwipeVC: UIViewController {
         point.x = point.x - 1
         
         let xFromCenter = self.card.center.x - self.view.center.x
-        //let xFromCenter = point.x - self.view.center.x
         
         self.card.center = CGPoint(x: self.view.center.x + point.x, y: self.view.center.y + point.y)
         
@@ -149,9 +236,8 @@ class SwipeVC: UIViewController {
             self.card.center = CGPoint(x: self.card.center.x + 200, y: self.card.center.y)
         })
         loadNew()
-//        DataManager.sharedData.swipes.append("YES")
         DataManager.sharedData.swipes.append(1)
-
+        
         print(DataManager.sharedData.swipes)
     }
     
@@ -160,20 +246,16 @@ class SwipeVC: UIViewController {
             self.card.center = CGPoint(x: self.card.center.x - 200, y: self.card.center.y)
         })
         loadNew()
-//        DataManager.sharedData.swipes.append("NO")
         DataManager.sharedData.swipes.append(0)
-
+        
         print(DataManager.sharedData.swipes)
         return
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextPage.isHidden = true
         divisor = (view.frame.width / 2) / 0.61 //degree tilted
-       // hideButtons()
         //for a few second delay of showing card's info
-        nextPage.alpha = 0
         card.alpha = 0
         nameLabel.alpha = 0
         typeLabel.alpha = 0
@@ -181,6 +263,11 @@ class SwipeVC: UIViewController {
         addressLabel.alpha = 0
         priceLabel.alpha = 0
         seeMenu.alpha = 0
+        seeResults.alpha = 0
+        activityIndicator.alpha = 0
+        xMark.alpha = 0
+        checkMark.alpha = 0
+        navBar.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -191,9 +278,15 @@ class SwipeVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: 0.5, animations: {
-            self.card.alpha = 1 //have to refer self if using outside of the brackets
-        }) { (true) in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0){
+            //spinning wheel ends
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.activityIndicator.alpha = 0
+            self.navBar.alpha = 1
+            self.card.alpha = 1
+            self.xMark.alpha = 1
+            self.checkMark.alpha = 1
             self.showInfo()
         }
     }
@@ -203,27 +296,27 @@ class SwipeVC: UIViewController {
         deck = DataManager.sharedData.deck
         print("did deck transfer:", deck)
         UIView.animate(withDuration: 0.1, animations: {
-        self.nameLabel.text = self.deck[self.cardIndex][0]
-        self.typeLabel.text = self.deck[self.cardIndex][1]
-        self.ratingLabel.text = self.deck[self.cardIndex][4] + "🔥"
-        self.addressLabel.text = self.deck[self.cardIndex][2] + ", " + self.deck[self.cardIndex][3]
-        self.priceLabel.text = self.deck[self.cardIndex][5]
-        self.nameLabel.alpha = 1
-        self.typeLabel.alpha = 1
-        self.ratingLabel.alpha = 1
-        self.addressLabel.alpha = 1
-        self.priceLabel.alpha = 1
-        self.seeMenu.alpha = 1
-
-        //picture
-        let url = NSURL(string:self.deck[self.cardIndex][6])
-        let data = NSData(contentsOf:url! as URL)
-        self.picture.image = UIImage(data: data! as Data)
-        self.picture.alpha = 1
-    })
+            self.nameLabel.text = self.deck[self.cardIndex][0]
+            self.typeLabel.text = self.deck[self.cardIndex][1]
+            self.ratingLabel.text = self.deck[self.cardIndex][4] + "🔥"
+            self.addressLabel.text = self.deck[self.cardIndex][2] + ", " + self.deck[self.cardIndex][3]
+            self.priceLabel.text = self.deck[self.cardIndex][5]
+            self.nameLabel.alpha = 1
+            self.typeLabel.alpha = 1
+            self.ratingLabel.alpha = 1
+            self.addressLabel.alpha = 1
+            self.priceLabel.alpha = 1
+            self.seeMenu.alpha = 1
+            
+            //picture
+            let url = NSURL(string:self.deck[self.cardIndex][6])
+            let data = NSData(contentsOf:url! as URL)
+            self.picture.image = UIImage(data: data! as Data)
+            self.picture.alpha = 1
+        })
     }
     
-
+    
     func loadNew() {
         if self.cardIndex < (deck.count-1) {
             resetCard()
@@ -240,13 +333,33 @@ class SwipeVC: UIViewController {
             
             // function that updates swipe Array once swiping is done
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
-            self.updateSwipeArray()
-            
+                self.updateSwipeArray()
+                
             }
             print(DataManager.sharedData.swipes.count)
-            nextPage.alpha = 1
-            performSegue(withIdentifier: "youreDone", sender: self)
-            performSegue(withIdentifier: "nextButton", sender: self)
+            self.activityIndicator.alpha = 1
+            self.checkMark.alpha = 0
+            self.xMark.alpha = 0
+            self.card.alpha = 0
+            activityIndicator.hidesWhenStopped = true
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            
+            ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                self.activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                //self.seeResults.alpha = 1
+                ResultsData.sharedResultsData.updateMasterSwipeArray()
+                print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
+                ResultsData.sharedResultsData.sortMasterSwipeArray()
+                ResultsData.sharedResultsData.sortDeck()
+                print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
+                self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
+            }
+            
             return
         }
     }
@@ -264,7 +377,7 @@ class SwipeVC: UIViewController {
         print("ID should come up on this long one", DataManager.sharedData.individualGroupID)
         let eachUserRef = usersRef.child("\(currentUID)/groupsAssociatedWith/\(IDtoFix)")
         var updatedSwipeArray = [String: Any]()
-        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
+        updatedSwipeArray = ["swipeArray": DataManager.sharedData.swipes, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": DataManager.sharedData.yesDeck, "yes deck size": DataManager.sharedData.yesDeck.count]
         eachUserRef.setValue(updatedSwipeArray)
         
     }
@@ -296,26 +409,11 @@ class SwipeVC: UIViewController {
         //for when finger is off the screen
         if sender.state == UIGestureRecognizerState.ended {
             if card.center.x < 75 {
-                //move off to the left side of screen
                 swipeLeft()
-                //                UIView.animate(withDuration: 0.3, animations: {
-                //                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
-                //                })
-                //                loadNew()
-                //                DataManager.sharedData.swipes.append("NO")
-                //                print(DataManager.sharedData.swipes)
-                //                return
-
             }
             else if card.center.x > (view.frame.width - 75) {
                 // move off to the right side of screen
                 swipeRight()
-                //                UIView.animate(withDuration: 0.3, animations: {
-                //                card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
-                //                })
-                //                loadNew()
-                //                DataManager.sharedData.swipes.append("YES")
-                //                print(DataManager.sharedData.swipes)
                 return
             }
             //bring back to center if let go in the middle range

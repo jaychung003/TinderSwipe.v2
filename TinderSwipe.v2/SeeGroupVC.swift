@@ -14,9 +14,16 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var navBarUserName: UINavigationItem!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //activityIndicator.hidesWhenStopped = true
+        //view.addSubview(activityIndicator)
+        //activityIndicator.startAnimating()
+        //UIApplication.shared.beginIgnoringInteractionEvents()
+        
         // Don't do anything if the user isn't logged in yet,
         // instead, transition to the login screen
         if !checkIfUserLoggedIn() {
@@ -25,26 +32,28 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         clearAllGroupInfo()
         while GroupInfo.sharedGroupInfo.groupIDs == nil {
             print("Group IDs is NIL")
-
+            
             GroupInfo.sharedGroupInfo.loadGroupIDs()
         }
-            GroupInfo.sharedGroupInfo.loadGroupIDs()
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0) {
-                print("PRINT GROUPIDS: ", GroupInfo.sharedGroupInfo.groupIDs)
-
-                GroupInfo.sharedGroupInfo.loadGroupNames()
-                GroupInfo.sharedGroupInfo.loadGroupMembers()
-                GroupInfo.sharedGroupInfo.loadDecks()
-                self.tableView.reloadData()
-            }
+        GroupInfo.sharedGroupInfo.loadGroupIDs()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0) {
+            print("PRINT GROUPIDS: ", GroupInfo.sharedGroupInfo.groupIDs)
             
-            // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
-            // RELOAD DATA AFTER 5 SECONDS TO GENERATE ALL DECKS IN ALL GROUPS, ONLY FOR DEBUGGING PURPOSES
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
-                print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
-                self.tableView.reloadData()
-                
-            }
+            GroupInfo.sharedGroupInfo.loadGroupNames()
+            GroupInfo.sharedGroupInfo.loadGroupMembers()
+            GroupInfo.sharedGroupInfo.loadDecks()
+            self.tableView.reloadData()
+        }
+        
+        // NEED A 5 SECOND DELAY TO GENERATE THE 3-LEVEL ARRAY THAT INCLUDES ALL DECKS IN ALL GROUPS
+        // RELOAD DATA AFTER 5 SECONDS TO GENERATE ALL DECKS IN ALL GROUPS, ONLY FOR DEBUGGING PURPOSES
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
+            print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
+            self.tableView.reloadData()
+            //self.activityIndicator.stopAnimating()
+            //UIApplication.shared.endIgnoringInteractionEvents()
+            //self.activityIndicator.alpha = 0
+        }
         
     }
     
@@ -67,6 +76,8 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         handleCreateEvent()
     }
     func handleCreateEvent() {
+        DataManager.sharedData.deck = []
+        ResultsData.sharedResultsData.masterSwipeArray = []
         performSegue(withIdentifier: "CreateEventIdentifier", sender: self)
     }
     
@@ -105,28 +116,29 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 print(uid)
                 if let dictionary = DataSnapshot.value as? [String: AnyObject] {
                     self.navBarUserName.title = "My Groups"
+                    DataManager.sharedData.currentUsername = (dictionary["username"] as? String)! // this is called to store the current usermame of the logged in user as the currentUsername variable in DataManager
                     //self.navBarUserName.title = (dictionary["name"] as? String)! + "'s groups"
                 }
             }, withCancel: nil)
-        return true
+            return true
         }
     }
-   
     
-// UITable functions
+    
+    // UITable functions
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("group name:", GroupInfo.sharedGroupInfo.groupNames)
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
         cell.textLabel?.text = GroupInfo.sharedGroupInfo.groupNames[indexPath.row]
-        
-        var stringArray =  GroupInfo.sharedGroupInfo.groupMembers[indexPath.row]
-        var string = stringArray.joined(separator: " ")
-        print("stringArray", stringArray)
-        print("string  ", string)
-        cell.detailTextLabel?.text = string
+        print("GROUPMEMBERS ARRAY: ", GroupInfo.sharedGroupInfo.groupMembers)
+        var membersInGroupArray =  GroupInfo.sharedGroupInfo.groupMembers[indexPath.row]
+        var membersInGroup = membersInGroupArray.joined(separator: " ")
+        print("membersInGroupArray", membersInGroupArray)
+        print("membersInGroup  ", membersInGroup)
+        cell.detailTextLabel?.text = membersInGroup
         return cell
     }
-   
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("groupNames count:::", GroupInfo.sharedGroupInfo.groupNames.count)
@@ -137,10 +149,35 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataManager.sharedData.deck = GroupInfo.sharedGroupInfo.allDecks[indexPath.row]
         DataManager.sharedData.individualGroupID = GroupInfo.sharedGroupInfo.groupIDs[indexPath.row]
-        print("individual group ID:::", DataManager.sharedData.individualGroupID)
-        print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
+        DataManager.sharedData.groupResultDenominator = String(GroupInfo.sharedGroupInfo.groupMembers[indexPath.row].count)
         
-        performSegue(withIdentifier: "SeeGroupToSwipeIdentifier", sender: self)
+        //spinning wheel begins
+        //self.activityIndicator.alpha = 1
+        //activityIndicator.hidesWhenStopped = true
+        //view.addSubview(activityIndicator)
+        //activityIndicator.startAnimating()
+        //UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        GroupInfo.sharedGroupInfo.getSwipeArray()
+        print("before 1 second delay in see group")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0) {
+            
+            //spinning wheel ends
+            //self.activityIndicator.stopAnimating()
+            //UIApplication.shared.endIgnoringInteractionEvents()
+            
+            print("denominator::", DataManager.sharedData.groupResultDenominator)
+            print("individual group ID:::", DataManager.sharedData.individualGroupID)
+            print("DECK FOR THE GROUP CLICKED: ", DataManager.sharedData.deck)
+            
+            self.performSegue(withIdentifier: "SeeGroupToSwipeIdentifier", sender: self)
+            
+            
+        }
+        
+        
+        
+        
     }
     
 }

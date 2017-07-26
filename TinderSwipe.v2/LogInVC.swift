@@ -23,20 +23,22 @@ class LogInVC: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         logInSegmentedControl.selectedSegmentIndex = 0
         registerButton.isHidden = true
         nameField.isHidden = true
         usernameField.isHidden = true
         
+        // Dismisses keyboard when login screen is tapped
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(tap)
+        
     }
     
-    //Calls this function when the tap is recognized.
+    // dismissKeyboard dismisses the keyboard whenever the login screen is tapped
+    // Called when tap is recognized on the login screen
     override func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -72,18 +74,22 @@ class LogInVC: UIViewController {
                 print(error)
                 return
             }
-
+            
             //successfully logged in our user
-//            self.dismiss(animated: true, completion: nil)
+            //            self.dismiss(animated: true, completion: nil)
             print("log in complete")
             print(Auth.auth().currentUser?.uid)
-            self.logIn()
         })
         
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            self.logIn()
+        }
     }
+    
     func logIn() {
         performSegue(withIdentifier: "LogInIdentifier", sender: self)
     }
+    
     func isValid(name: String) -> Bool {
         // check the name is between 4 and 16 characters
         if !(4...16 ~= name.characters.count) {
@@ -154,15 +160,20 @@ class LogInVC: UIViewController {
                     return
                 }
                 
-//                self.dismiss(animated: true, completion: nil) // dismiss the login page once the user has registered an account
-                self.register()
+                //                self.dismiss(animated: true, completion: nil) // dismiss the login page once the user has registered an account
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                    self.logIn()
+                    
+                    //self.register()
+                }
             })
         })
     }
-    func register() {
-        performSegue(withIdentifier: "RegisterIdentifier", sender: self)
-    }
-
+    
+    //    func register() {
+    //        performSegue(withIdentifier: "LogInIdentifier", sender: self)
+    //    }
+    
     
 }
 

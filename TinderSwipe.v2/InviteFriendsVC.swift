@@ -26,10 +26,14 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBAction func doneButtonClicked(_ sender: UIButton) {
     
         // update the groupsAssociatedWith for each member of the group that has just been created
-
+        
+        
+        appendCurrentUsername() // appends current username to the current list of members
+        DataManager.sharedData.groupResultDenominator = String(Group.groupInstance.listOfMembers.count)
+        print("listOfMembers finally apended with current user: ", Group.groupInstance.listOfMembers)
         handleDoneInviting()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
-        self.handleGroupFormation()
+            self.handleGroupFormation()
         }
     }
     
@@ -38,13 +42,21 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var allUsernames = [String]()
     
     // a dummy array, supposed to be swipeArray
-    var swipeArray = [String]()
+    var swipeArray = [Int]()
+    
+    // appendCurrentUsername appends the current username to Group.groupInstance.listOfMembers once the full group is created
+    func appendCurrentUsername() {
+        Group.groupInstance.listOfMembers.append(DataManager.sharedData.currentUsername)
+    }
     
     func populateInitialArray() {
         
         for i in 0...DataManager.sharedData.sizeCount-1 {
-            self.swipeArray.append("x")
+            self.swipeArray.append(999999999)
         }
+        
+        GroupInfo.sharedGroupInfo.fetchedSwipeArray = self.swipeArray
+        
         print("SWIPEARRAY COUNT: ", self.swipeArray.count)
         print("SWIPEARRAY: ", self.swipeArray)
 
@@ -55,9 +67,9 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //iterate through each member in group
         let ref = Database.database().reference()
         var uid: String!
-        print("LISTOFMEMBERS: ", group1.listOfMembers)
-        for member in group1.listOfMembers {
-
+        print("LISTOFMEMBERS: ", Group.groupInstance.listOfMembers)
+        for member in Group.groupInstance.listOfMembers {
+            
             //find the matching uid for each username
             let usersRef = ref.child("users")
             
@@ -70,15 +82,15 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let userDict = userSnap.value as! [String:AnyObject]
                     print("uid:", uid)
                     
-//                    var groupDict = [String: Bool]()
-//                    print(uid)
-//                    print("groupID:", self.groupID)
-//                    ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
+                    //                    var groupDict = [String: Bool]()
+                    //                    print(uid)
+                    //                    print("groupID:", self.groupID)
+                    //                    ref.child("users/\(uid!)/groupsAssociatedWith/\(self.groupID!)").setValue(true)
                     
                     //for members of the group, make a new branch groupsAssociatedWith
                     let eachUserRef = usersRef.child("\(uid!)/groupsAssociatedWith")
                     var groupInfoForUserWithSwipes: [String: Any]
-                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count]
+                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": ["default yes deck"], "yes deck size": 0]
                     var referenceForID =  eachUserRef.child("\(self.groupID!)")
                     referenceForID.setValue(groupInfoForUserWithSwipes)
                     DataManager.sharedData.individualGroupID = self.groupID
@@ -123,7 +135,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         var cardDict = [String: Bool]()
         
-        for member in group1.listOfMembers {
+        for member in Group.groupInstance.listOfMembers {
             memberDict[member] = true
         }
         
@@ -143,7 +155,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func handleAddButton() {
-//        print("groupMembers: ", groupMembers)
+        //        print("groupMembers: ", groupMembers)
         //pop up an error message if nothing is typed in
         if userNameField.text == "" {
             alertView = UIAlertController(title: "Invalid Username", message: "Please put in a valid username", preferredStyle: .alert)
@@ -153,13 +165,14 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             return
         }
         //pop up an error message if username is already a group member
-        if groupMembers.contains(userNameField.text!) == true {
+        if Group.groupInstance.listOfMembers.contains(userNameField.text!) == true {
             alertView = UIAlertController(title: "Invalid Username", message: "The user is already in your group!", preferredStyle: .alert)
             action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in })
             alertView.addAction(action)
             self.present(alertView, animated: true, completion: nil)
             return
         }
+        
         //pop up an error message if username is not registered
         if allUsernames.contains(userNameField.text!) == false {
             alertView = UIAlertController(title: "Invalid Username", message: "Please put in a valid username", preferredStyle: .alert)
@@ -168,39 +181,50 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.present(alertView, animated: true, completion: nil)
             return
         }
+        
+        // pop up an error message if username is the same
+        if userNameField.text == DataManager.sharedData.currentUsername {
+            alertView = UIAlertController(title: "You're already in the group!", message: "Please put in your friend's username", preferredStyle: .alert)
+            action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in })
+            alertView.addAction(action)
+            self.present(alertView, animated: true, completion: nil)
+            return
+        }
             
-        //append entered username to the list if the textfield is not empty
+            //append entered username to the list if the textfield is not empty
         else {
-            groupMembers.append(userNameField.text!)
-            print(groupMembers)
-            self.tableView.reloadData()
+            
+            //changes
+            
+            Group.groupInstance.listOfMembers.append(userNameField.text!)
+            print("updated listOfMembers: ", Group.groupInstance.listOfMembers)
             userNameField.text = ""
-            group1.listOfMembers = groupMembers
-            print("group1.listOfMembers: ", group1.listOfMembers)
+            self.tableView.reloadData()
             
         }
     }
-        func fetchUsernames() -> [String] {
-            Database.database().reference().child("users").observe(.childAdded, with: { (DataSnapshot) in
     
-                if let dictionary = DataSnapshot.value as? [String: AnyObject] {
-                    print("Datasnapshot:  ", DataSnapshot)
-                    print("dictionary: ", dictionary)
-                    self.allUsernames.append(dictionary["username"] as! String)
-                }
+    func fetchUsernames() -> [String] {
+        Database.database().reference().child("users").observe(.childAdded, with: { (DataSnapshot) in
+            
+            if let dictionary = DataSnapshot.value as? [String: AnyObject] {
+                print("Datasnapshot:  ", DataSnapshot)
+                print("dictionary: ", dictionary)
+                self.allUsernames.append(dictionary["username"] as! String)
             }
-                , withCancel: nil)
-            return allUsernames
         }
+            , withCancel: nil)
+        return allUsernames
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "usernameCell", for: indexPath)
-        cell.textLabel?.text = groupMembers[indexPath.row]
+        cell.textLabel?.text = Group.groupInstance.listOfMembers[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupMembers.count
+        return Group.groupInstance.listOfMembers.count
     }
     
     override func viewDidLoad() {

@@ -10,56 +10,51 @@ import UIKit
 
 class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
-    var wholeDeck = DataManager.sharedData.deck
     var swipeResult = DataManager.sharedData.swipes
     var yesDeck = DataManager.sharedData.yesDeck
     var myIndex = 0
     var venueName = ""
     var foursquarePageUrl = ""
     var venueID = ""
-    
-    var p: Int!
-    
-    var testArray = [[[String]]]()
-    
-    var testTest = [["1 a","2 b","3 c","4 d","5 e"],["a 1","b 2","c 3","d 4"]]
+    var page: Int!
+    var combinedSwipeResult = [[[String]]]()
+    var voteCount = ""
     
     @IBAction func switchTable(_ sender: UISegmentedControl) {
-        p = sender.selectedSegmentIndex
+        page = sender.selectedSegmentIndex
         resultsTableView.reloadData()
     }
     
     @IBOutlet weak var resultsTableView: UITableView!
     
-    //@IBOutlet weak var SwipeResultToGroups: UIButton!
+    @IBAction func myGroupsClicked(_ sender: UIButton) {
+        ResultsData.sharedResultsData.sortedDeck = [[String]]() ///clear the deck
+        handleMyGroups()
+    }
+    
+    func handleMyGroups() {
+        performSegue(withIdentifier: "MyGroupsIdentifier", sender: self)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
-            ResultsData.sharedResultsData.updateMasterSwipeArray()
-        }
-        
+        //update entire array
+        print("sorted deck in results data", ResultsData.sharedResultsData.sortedDeck)
     }
     
     
     override func viewDidLoad() {
-        testArray.append(wholeDeck)
-        testArray.append(yesDeck)
-        print("test array", testArray)
-        print(swipeResult)
-        print(yesDeck)
-        p = 0
-    
+        combinedSwipeResult.append(ResultsData.sharedResultsData.sortedDeck) //wholeDeck
+        combinedSwipeResult.append(yesDeck)
+        print("combined group and individual swipe result", combinedSwipeResult)
+        print("Sorted by vote count???: ", ResultsData.sharedResultsData.sortedMasterSwipeArrayValue)
+        page = 0
+        
         let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         self.resultsTableView.addGestureRecognizer(longPressGesture)
-       
-        // SwipeResultToGroups.layer.cornerRadius = 7
-        
     }
     
     func handleLongPress(longPressGesture:UILongPressGestureRecognizer) {
@@ -70,7 +65,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         }
         else if (longPressGesture.state == UIGestureRecognizerState.began) {
             print("Long press on row, at \(indexPath!.row)")
-            var restaurant2 = yesDeck[(indexPath?.row)!]
+            var restaurant2 = combinedSwipeResult[page][(indexPath?.row)!]
             let busPhone = restaurant2[9]
             if let urlTest = URL(string: "tel://\(busPhone)"), UIApplication.shared.canOpenURL(urlTest) {
                 UIApplication.shared.open(urlTest)
@@ -83,33 +78,45 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testArray[p].count
+        return combinedSwipeResult[page].count
     }
-    
-    @IBOutlet weak var restaurantImage: UIImageView!
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellRestaurant", for: indexPath)
         
         //segmented control stuff
-        let restaurant = testArray[p][indexPath.row]
-        cell.textLabel?.text = restaurant[0]
-        cell.detailTextLabel?.text = restaurant[1] + "\n" + restaurant[2] + ", " + restaurant[3] + "\n" + restaurant[4] + "🔥" + "  " + restaurant[5] //detailed info
+        let restaurant = combinedSwipeResult[page][indexPath.row]
+        let name = restaurant[0]
+        let cuisine = restaurant[1]
+        let address = restaurant[2] + ", " + restaurant[3]
+        let rating = restaurant[4] + "🔥"
+        let price = restaurant[5]
+        
+        let denominator = DataManager.sharedData.groupResultDenominator
+        var voteResult = String()
+        
+        
+        if page == 0 {
+            voteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[indexPath.row])
+            voteResult = "Group Result: " + voteCount + "/" + denominator + "  " + "\n"
+        }
+        
+        
+        cell.textLabel?.text = name
+        cell.detailTextLabel?.text = voteResult + cuisine + "  "  + rating + "  " + price + "\n" + address //detailed info
+        
         
         //pull image from url and set it as the image in each cell
-        let url = NSURL(string:testArray[p][indexPath.row][6])
+        let url = NSURL(string:combinedSwipeResult[page][indexPath.row][6])
         let data = NSData(contentsOf:url! as URL)
         let restImage = UIImage(data: data! as Data)
         cell.imageView!.image = restImage
-        //cell.imageView!.image.layer.borderColor = UIColor.white
-        //cell.imageView!.image.layer.borderWidth = 2
-        
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var restaurant2 = yesDeck[indexPath.row]
+        var restaurant2 = combinedSwipeResult[page][indexPath.row]
         myIndex = indexPath.row
         venueName = restaurant2[0].replacingOccurrences(of: " ", with: "-", options: .literal, range: nil)
         venueName = venueName.lowercased()
@@ -117,6 +124,5 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         print(foursquarePageUrl)
         UIApplication.shared.openURL(URL(string: foursquarePageUrl)!)
     }
-    
     
 }
