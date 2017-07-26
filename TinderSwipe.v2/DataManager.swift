@@ -75,6 +75,9 @@ class DataManager: NSObject {
     // miscellaneous variables
     var currentUsername = "" // a string storing a reference to the username of the current user
     
+    // variables in InviteFriends VC
+    var allUsernames = [String]()
+    
     //Calls to server to get Foursquare data and returns the full file as myJson5
     func getJSONData()
     {
@@ -155,6 +158,55 @@ class DataManager: NSObject {
             }
             indexRestaurant = indexRestaurant + 1
         }
+        
+        // print user input information
+        print("eventCity: ", eventCity)
+        print("eventState: ", eventState)
+        print("venueType: ", venueType)
+        print("urlHERE: ", urlHERE)
+        
+        
+        
+//        var venueType = ""
+//        var eventDate = ""
+//        var eventTime = ""
+//        var eventDateAndTime = ""
+//        var eventName = ""
+//        var eventCity = ""
+//        var eventState = ""
+//        var URLtoPass = String()
+//        var URLtoPassNoSpace = ""
+//        var urlHERE = ""
+//        var myCurrentLocation = CLLocationCoordinate2D()
+//        var eventType = ["Food","Breakfast","Brunch","Lunch","Coffee","Dinner","Dessert","Drinks"]
+        
+        
+        
+        //print the JSON information
+        print("JSONname: ", JSONname)
+        print("JSONLocationType: ", JSONLocationType)
+        print("JSONLocationAddress: ", JSONLocationAddress)
+        print("JSONLocationCity: ", JSONLocationCity)
+        print("JSONRating: ", JSONRating)
+        print("JSONPrice: ", JSONPrice)
+        print("storeImageURLString: ", storeImageURLString)
+        print("JSONMenuID: ", JSONMenuID)
+        print("JSONHasMenu: ", JSONHasMenu)
+        print("JSONMenuURL: ", JSONMenuURL)
+        print("JSONTier: ", JSONTier)
+        
+//        var JSONname: String!
+//        var JSONLocationType: String!
+//        var JSONLocationAddress: String!
+//        var JSONLocationCity: String!
+//        var JSONRating: String!
+//        var JSONPrice: String!
+//        var storeImageURLString = "" // variable to store image url prefix, dimensions, suffix, combined
+//        var JSONMenuID: String!
+//        var JSONHasMenu = ""
+//        var JSONMenuURL = ""
+//        var JSONTier: Int!
+        
         priceArray = []
         print("This is the deck from data manager:", deck)
         return deck
@@ -278,7 +330,7 @@ class DataManager: NSObject {
             {
                 print(JSONLocation)
                 JSONLocationCity = JSONLocation["city"] as? String
-                print(JSONLocationCity)
+                print("City of current search:", JSONLocationCity)
             }
             if JSONLocationCity == nil
             {
@@ -336,6 +388,7 @@ class DataManager: NSObject {
             //Let's say that any venue without a tier is a 1
             JSONTier = 1
         }
+        print("cardTierValue:", cardTierValue)
         for numbers in 1...cardTierValue
         {
             PriceAndTier = PriceAndTier + "$"

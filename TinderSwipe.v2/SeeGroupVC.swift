@@ -17,18 +17,22 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //activityIndicator.hidesWhenStopped = true
-        //view.addSubview(activityIndicator)
-        //activityIndicator.startAnimating()
-        //UIApplication.shared.beginIgnoringInteractionEvents()
         
         // Don't do anything if the user isn't logged in yet,
         // instead, transition to the login screen
         if !checkIfUserLoggedIn() {
             return
         }
+
+        
+        // activate the spinning wheel during loading
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        super.viewWillAppear(animated)
+        
         clearAllGroupInfo()
         while GroupInfo.sharedGroupInfo.groupIDs == nil {
             print("Group IDs is NIL")
@@ -50,9 +54,11 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0){
             print("ALL DECKS IN ALL GROUPS: ", GroupInfo.sharedGroupInfo.allDecks)
             self.tableView.reloadData()
-            //self.activityIndicator.stopAnimating()
-            //UIApplication.shared.endIgnoringInteractionEvents()
-            //self.activityIndicator.alpha = 0
+            
+            // deactivate the spinning wheel after info has finished loading
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.activityIndicator.alpha = 0
         }
         
     }
@@ -76,8 +82,22 @@ class SeeGroupVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         handleCreateEvent()
     }
     func handleCreateEvent() {
+        print("WHAT IS THE DECK NOW:", DataManager.sharedData.deck)
         DataManager.sharedData.deck = []
+        print("DECK SHOULD HAVE RESET:", DataManager.sharedData.deck)
+        print("WHAT IS THE MASTERSWIPEARRAY NOW:", ResultsData.sharedResultsData.masterSwipeArray)
         ResultsData.sharedResultsData.masterSwipeArray = []
+        print("MASTERSWIPEARRAY SHOULD HAVE RESET:", ResultsData.sharedResultsData.masterSwipeArray)
+        print("WHAT IS THE PRICEARRAY NOW:", DataManager.sharedData.priceArray)
+        DataManager.sharedData.priceArray = []
+        print("PRICEARRAY SHOULD HAVE RESET:", DataManager.sharedData.priceArray)
+        print("WHAT IS THE ALLUSERNAMES ARRAY NOW:", DataManager.sharedData.allUsernames)
+        DataManager.sharedData.allUsernames = []
+        print("ALLUSERNAMES SHOULD HAVE RESET:", DataManager.sharedData.allUsernames)
+        
+        // Include code here to reset all local variables
+        
+        
         performSegue(withIdentifier: "CreateEventIdentifier", sender: self)
     }
     

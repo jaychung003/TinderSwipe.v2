@@ -39,7 +39,6 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     var action = UIAlertAction()
     var alertView = UIAlertController()
-    var allUsernames = [String]()
     
     // a dummy array, supposed to be swipeArray
     var swipeArray = [Int]()
@@ -117,11 +116,10 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         DataManager.sharedData.request = NSMutableURLRequest(url: URL(string: url)!)
         DataManager.sharedData.getJSONData()
         
-        // while statement allows for time for fullJson to populate
-        
-        while DataManager.sharedData.fullJson == nil {
+        // delay to make sure we get the most updated fullJson file
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
         }
-        DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
     }
     
     func uploadNewGroupWithMembers() {
@@ -144,7 +142,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         print("MEMBER DICT: ", memberDict)
         var groupInfo: [String: Any]
-        groupInfo = ["members": memberDict, "event name": DataManager.sharedData.eventName, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "masterSwipeArray": ResultsData.sharedResultsData.masterSwipeArray]
+        groupInfo = ["event name": DataManager.sharedData.eventName, "event city": DataManager.sharedData.eventCity, "event state": DataManager.sharedData.eventState, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "members": memberDict, "masterSwipeArray": ResultsData.sharedResultsData.masterSwipeArray]
         var myGroupsReference = databaseRef.child("myGroups").childByAutoId()
         myGroupsReference.setValue(groupInfo)
         groupID = myGroupsReference.key
@@ -153,6 +151,11 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         print("printing individualGroupID: ", DataManager.sharedData.individualGroupID)
         
     }
+    
+    // event name
+    // event city
+    // event state
+    
     
     func handleAddButton() {
         //        print("groupMembers: ", groupMembers)
@@ -174,7 +177,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         //pop up an error message if username is not registered
-        if allUsernames.contains(userNameField.text!) == false {
+        if DataManager.sharedData.allUsernames.contains(userNameField.text!) == false {
             alertView = UIAlertController(title: "Invalid Username", message: "Please put in a valid username", preferredStyle: .alert)
             action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in })
             alertView.addAction(action)
@@ -210,11 +213,11 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let dictionary = DataSnapshot.value as? [String: AnyObject] {
                 print("Datasnapshot:  ", DataSnapshot)
                 print("dictionary: ", dictionary)
-                self.allUsernames.append(dictionary["username"] as! String)
+                DataManager.sharedData.allUsernames.append(dictionary["username"] as! String)
             }
         }
             , withCancel: nil)
-        return allUsernames
+        return DataManager.sharedData.allUsernames
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -231,7 +234,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         fetchUsernames()
         populateInitialArray()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-            print("all users: ", self.allUsernames)
+            print("all users: ", DataManager.sharedData.allUsernames)
         }
     }
     

@@ -73,6 +73,7 @@ class SwipeVC: UIViewController {
         
         DataManager.sharedData.swipes = []
         GroupInfo.sharedGroupInfo.getSwipeArray()
+        DataManager.sharedData.yesDeck = []
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
         print("fetched swipe array should be 9999:", GroupInfo.sharedGroupInfo.fetchedSwipeArray)
@@ -82,12 +83,13 @@ class SwipeVC: UIViewController {
         //if user swiped go straight to results
         if GroupInfo.sharedGroupInfo.checkSwipeArray() == true { // doesn't contain 999999999
             
-            self.getYesDeck()
+            ResultsData.sharedResultsData.getYesDeck()
             ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
             
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
                 self.activityIndicator.stopAnimating()
                 UIApplication.shared.endIgnoringInteractionEvents()
+                print("WHAT THE CURRENT YES DECK NOW IS: ", DataManager.sharedData.yesDeck)
                 print("Compiled MasterSwipeArray: ", ResultsData.sharedResultsData.masterSwipeArray)
                 ResultsData.sharedResultsData.sortMasterSwipeArray()
                 ResultsData.sharedResultsData.sortDeck()
@@ -101,53 +103,7 @@ class SwipeVC: UIViewController {
         
         
     }
-    
-    // getYesDeck obtains the yesDeck from the database, under users/userID/groupsAssociatedWith/groupID/yesDeck
-    func getYesDeck() {
-        
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        
-        var sizeOfCurrentYesDeck = 0
-        
-        let uid = Auth.auth().currentUser?.uid
-        
-        ref.child("users/\(uid!)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            print("CURRENT UID getYesDeck: ", uid)
-            
-            let dictionary = DataSnapshot.value as? [String: Any]
-            print("DATASNAP DICTIONARY getYesDeck: ", dictionary)
-            
-            sizeOfCurrentYesDeck = dictionary?["yes deck size"] as! Int
-            
-        }, withCancel: nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
-            print("SIZE OF THE CURRENT YES DECK: ", sizeOfCurrentYesDeck)
-            
-            ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/yes deck").observeSingleEvent(of: .value, with: { (DataSnapshot) in
-                
-                let yesDeckInNSArrayForm = DataSnapshot.value as! NSArray
-                
-                var yesDeckCardInfo: NSArray = []
-                var yesDeckInfo = [[String]]()
-                
-                print("yes deck size count:::: ", sizeOfCurrentYesDeck)
-                
-                for cardIndexInYesDeck in 0...(sizeOfCurrentYesDeck - 1) {
-                    yesDeckCardInfo = yesDeckInNSArrayForm[cardIndexInYesDeck] as! NSArray
-                    print("INFO FOR ONE CARD IN YES DECK: ", yesDeckCardInfo)
-                    yesDeckInfo.append(yesDeckCardInfo as! Array)
-                }
-                
-                DataManager.sharedData.yesDeck = yesDeckInfo
-                print("YES DECK OBTAINED: ", yesDeckInfo)
-                print("YES DECK OBTAINED: ", DataManager.sharedData.yesDeck)
-                
-            }, withCancel: nil)
-        }
-        
-    }
+
 
     //right and left button action
     

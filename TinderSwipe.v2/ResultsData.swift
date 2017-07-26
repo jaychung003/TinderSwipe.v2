@@ -129,7 +129,53 @@ class ResultsData: NSObject {
         
     }
     
-    
+    // getYesDeck obtains the yesDeck from the database, under users/userID/groupsAssociatedWith/groupID/yesDeck
+    func getYesDeck() {
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        var sizeOfCurrentYesDeck = 0
+        
+        let uid = Auth.auth().currentUser?.uid
+        
+        ref.child("users/\(uid!)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+            print("CURRENT UID getYesDeck: ", uid)
+            
+            let dictionary = DataSnapshot.value as? [String: Any]
+            print("DATASNAP DICTIONARY getYesDeck: ", dictionary)
+            
+            sizeOfCurrentYesDeck = dictionary?["yes deck size"] as! Int
+            
+        }, withCancel: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0){
+            print("SIZE OF THE CURRENT YES DECK: ", sizeOfCurrentYesDeck)
+            
+            ref.child("users/\(Auth.auth().currentUser!.uid)/groupsAssociatedWith/\(DataManager.sharedData.individualGroupID)/yes deck").observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                
+                let yesDeckInNSArrayForm = DataSnapshot.value as! NSArray
+                
+                var yesDeckCardInfo: NSArray = []
+                var yesDeckInfo = [[String]]()
+                
+                print("yes deck size count:::: ", sizeOfCurrentYesDeck)
+                
+                for cardIndexInYesDeck in 0...(sizeOfCurrentYesDeck - 1) {
+                    yesDeckCardInfo = yesDeckInNSArrayForm[cardIndexInYesDeck] as! NSArray
+                    print("INFO FOR ONE CARD IN YES DECK: ", yesDeckCardInfo)
+                    yesDeckInfo.append(yesDeckCardInfo as! Array)
+                }
+                
+                DataManager.sharedData.yesDeck = yesDeckInfo
+                print("YES DECK OBTAINED: ", yesDeckInfo)
+                print("YES DECK OBTAINED: ", DataManager.sharedData.yesDeck)
+                
+            }, withCancel: nil)
+        }
+        
+    }
+
     
     // END OF CLASS
 }

@@ -611,43 +611,46 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
                 DataManager.sharedData.request = NSMutableURLRequest(url: URL(string: url)!)
                 DataManager.sharedData.getJSONData()
                 
-                // while statement allows for time for fullJson to populate
-                
-                while DataManager.sharedData.fullJson == nil {
-                    print("JSON IS LLL")
+                // delay to make sure we get the most updated fullJson file
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+                    
+                    print(self.currentLocation)
+                    DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
+                    print("Hello World")
+                    DataManager.sharedData.createDeck()
+                    print("We created a deck", DataManager.sharedData.deck)
+                    
+                    //This is the transition to the next VC
+                    
+                    var storyBoard1 : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    var nextViewController1 = storyBoard1.instantiateViewController(withIdentifier: "InviteFriendsVCID")
+                    self.present(nextViewController1, animated:true, completion:nil)
                 }
-                print("We left the while loop")
-                print(self.currentLocation)
-                DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
-                print("Hello World")
-                DataManager.sharedData.createDeck()
-                print("We created a deck", DataManager.sharedData.deck)
-                //This is the transition to the next VC
-                
-                 var storyBoard1 : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                 var nextViewController1 = storyBoard1.instantiateViewController(withIdentifier: "InviteFriendsVCID")
-                self.present(nextViewController1, animated:true, completion:nil)
             }}
             
         else {
             okButton.isHidden = false
             DataManager.sharedData.makeInputLocationURL()
             let url = DataManager.sharedData.urlHERE
+            print("WHAT THE URLLLLL IS NOW: ", url)
             DataManager.sharedData.request = NSMutableURLRequest(url: URL(string: url)!)
             DataManager.sharedData.getJSONData()
             
-            // while statement allows for time for fullJson to populate
-            
-            while DataManager.sharedData.fullJson == nil {
+            // delay to make sure we get the most updated fullJson file
+            print("WHAT THE FULLJSON IS BEFORE: ", DataManager.sharedData.fullJson)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+                
+                print("WHAT THE FULLJSON IS NOW AFTER: ", DataManager.sharedData.fullJson)
+
+                DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
+                DataManager.sharedData.createDeck()
+                
+                //This is the transition to the next VC
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVCID")
+                self.present(nextViewController, animated:true, completion:nil)
             }
-            DataManager.sharedData.getResultJson(indexRestaurant: DataManager.sharedData.indexRestaurant)
-            DataManager.sharedData.createDeck()
-            
-            //This is the transition to the next VC
-            
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InviteFriendsVCID")
-            self.present(nextViewController, animated:true, completion:nil)
         }
     }
     
