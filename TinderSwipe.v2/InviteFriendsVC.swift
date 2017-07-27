@@ -89,7 +89,7 @@ class InviteFriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //for members of the group, make a new branch groupsAssociatedWith
                     let eachUserRef = usersRef.child("\(uid!)/groupsAssociatedWith")
                     var groupInfoForUserWithSwipes: [String: Any]
-                    groupInfoForUserWithSwipes = ["swipeArray": self.swipeArray, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": ["default yes deck"], "yes deck size": 0]
+                    groupInfoForUserWithSwipes = ["swipeArray": GroupInfo.sharedGroupInfo.fetchedSwipeArray, "deck": DataManager.sharedData.deck, "deck size": DataManager.sharedData.deck.count, "yes deck": ["default yes deck"], "yes deck size": 0]
                     var referenceForID =  eachUserRef.child("\(self.groupID!)")
                     referenceForID.setValue(groupInfoForUserWithSwipes)
                     DataManager.sharedData.individualGroupID = self.groupID

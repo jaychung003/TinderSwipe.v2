@@ -72,6 +72,9 @@ class SwipeVC: UIViewController {
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         DataManager.sharedData.swipes = []
+        
+        // need this delay while we wait for swipe array to be uploaded to the database in inviteFriendsVC, when done button is clicked
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
         GroupInfo.sharedGroupInfo.getSwipeArray()
         DataManager.sharedData.yesDeck = []
         
@@ -101,6 +104,8 @@ class SwipeVC: UIViewController {
         
         }
         
+        }
+    
         
     }
 
