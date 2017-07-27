@@ -307,6 +307,8 @@ class SwipeVC: UIViewController {
             activityIndicator.startAnimating()
             UIApplication.shared.beginIgnoringInteractionEvents()
             
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
@@ -320,7 +322,7 @@ class SwipeVC: UIViewController {
                 print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
                 self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
             }
-            
+            }
             return
         }
     }
