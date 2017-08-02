@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -459,9 +460,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2zN-vM-eBL">
-                                <rect key="frame" x="0.0" y="106" width="414" height="630"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2zN-vM-eBL">
+                                <rect key="frame" x="0.0" y="97" width="414" height="639"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellRestaurant" textLabel="gWX-cD-rAv" detailTextLabel="pgO-Aw-LPg" imageView="Ab0-ay-QgP" rowHeight="86" style="IBUITableViewCellStyleSubtitle" id="bvr-Xs-isC">
@@ -498,9 +498,8 @@
                                     <outlet property="delegate" destination="BWY-yN-YyD" id="vit-0k-YR4"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzN-BS-mc6">
-                                <rect key="frame" x="20" y="20" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzN-BS-mc6">
+                                <rect key="frame" x="28" y="23" width="50" height="30"/>
                                 <color key="backgroundColor" red="0.27311348915100098" green="0.69571095705032349" blue="0.66867619752883911" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Groups">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -510,9 +509,8 @@
                                     <segue destination="eHv-Qu-Oqe" kind="show" identifier="MyGroupsIdentifier" id="IdO-N4-Roa"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Di-1h-KPN">
-                                <rect key="frame" x="52" y="58" width="310" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Di-1h-KPN">
+                                <rect key="frame" x="52" y="61" width="310" height="29"/>
                                 <segments>
                                     <segment title="Our Yums"/>
                                     <segment title="My Yums"/>
@@ -524,6 +522,28 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.27311348915100098" green="0.69571095705032349" blue="0.66867619752883911" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3Di-1h-KPN" firstAttribute="leading" secondItem="XVB-6o-5Lh" secondAttribute="leadingMargin" constant="32" id="33w-FK-3PU"/>
+                            <constraint firstItem="2zN-vM-eBL" firstAttribute="top" secondItem="3Di-1h-KPN" secondAttribute="bottom" constant="20" id="4SZ-wn-zc9"/>
+                            <constraint firstItem="3Di-1h-KPN" firstAttribute="top" secondItem="GzN-BS-mc6" secondAttribute="bottom" constant="8" id="7Gw-39-jZl"/>
+                            <constraint firstItem="GzN-BS-mc6" firstAttribute="top" secondItem="4NJ-gt-Reg" secondAttribute="bottom" constant="3" id="7k7-x9-Nv2"/>
+                            <constraint firstItem="2zN-vM-eBL" firstAttribute="top" secondItem="3Di-1h-KPN" secondAttribute="bottom" constant="8" id="8tY-3B-SVJ"/>
+                            <constraint firstAttribute="trailing" secondItem="2zN-vM-eBL" secondAttribute="trailing" id="CTJ-Cg-Uie"/>
+                            <constraint firstItem="GzN-BS-mc6" firstAttribute="leading" secondItem="XVB-6o-5Lh" secondAttribute="leadingMargin" constant="5" id="H1c-6v-cL8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Di-1h-KPN" secondAttribute="trailing" constant="32" id="HKM-Yj-vsR"/>
+                            <constraint firstItem="3Di-1h-KPN" firstAttribute="top" secondItem="GzN-BS-mc6" secondAttribute="bottom" constant="5" id="Iuw-vw-Ikz"/>
+                            <constraint firstItem="2zN-vM-eBL" firstAttribute="leading" secondItem="XVB-6o-5Lh" secondAttribute="leading" id="KjX-wl-0Vg"/>
+                            <constraint firstAttribute="bottom" secondItem="2zN-vM-eBL" secondAttribute="bottom" id="PFJ-qW-lFL"/>
+                            <constraint firstItem="GzN-BS-mc6" firstAttribute="top" secondItem="4NJ-gt-Reg" secondAttribute="bottom" constant="3" id="WTU-EU-ZsP"/>
+                            <constraint firstItem="3Di-1h-KPN" firstAttribute="top" secondItem="GzN-BS-mc6" secondAttribute="bottom" constant="8" id="YWW-9Y-80R"/>
+                            <constraint firstItem="GzN-BS-mc6" firstAttribute="top" secondItem="4NJ-gt-Reg" secondAttribute="bottom" constant="8" id="Z3o-yv-vxR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Di-1h-KPN" secondAttribute="trailing" constant="32" id="aNM-C5-9aL"/>
+                            <constraint firstItem="GzN-BS-mc6" firstAttribute="leading" secondItem="XVB-6o-5Lh" secondAttribute="leadingMargin" constant="3" id="c9v-DT-GCq"/>
+                            <constraint firstItem="GzN-BS-mc6" firstAttribute="leading" secondItem="XVB-6o-5Lh" secondAttribute="leadingMargin" constant="8" id="eJL-7S-RxW"/>
+                            <constraint firstItem="3Di-1h-KPN" firstAttribute="leading" secondItem="XVB-6o-5Lh" secondAttribute="leadingMargin" constant="32" id="gXt-rK-KVV"/>
+                            <constraint firstItem="3Di-1h-KPN" firstAttribute="top" secondItem="GzN-BS-mc6" secondAttribute="bottom" constant="8" id="qFo-WR-nM5"/>
+                            <constraint firstItem="GzN-BS-mc6" firstAttribute="top" secondItem="4NJ-gt-Reg" secondAttribute="bottom" constant="3" id="vce-FY-dMd"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="resultsTableView" destination="2zN-vM-eBL" id="G26-AD-Vot"/>
@@ -692,7 +712,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="39"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IZX-fr-LyB" id="zI9-zB-k0D">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -839,6 +859,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lKa-GA-Nxb"/>
-        <segue reference="PKK-2s-C6s"/>
+        <segue reference="IdO-N4-Roa"/>
     </inferredMetricsTieBreakers>
 </document>
