@@ -19,6 +19,8 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     var page: Int!
     var combinedSwipeResult = [[[String]]]()
     var voteCount = ""
+    var bestVoteCount = ""
+    var bestVoteCountRows = [Int]()
     
     @IBAction func switchTable(_ sender: UISegmentedControl) {
         page = sender.selectedSegmentIndex
@@ -95,16 +97,20 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         let denominator = DataManager.sharedData.groupResultDenominator
         var voteResult = String()
         
+
         
+        //for showing group result
         if page == 0 {
             voteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[indexPath.row])
             voteResult = "\n" + voteCount + "/" + denominator + " YUMS"
+            bestVoteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[0])
+            if voteCount == bestVoteCount {
+                voteResult = voteResult + " ✅"
+            }
         }
-        
         
         cell.textLabel?.text = name + voteResult
         cell.detailTextLabel?.text = cuisine + "\n"  + rating + "  " + price + "\n" + address //detailed info
-        
         
         //pull image from url and set it as the image in each cell
         let url = NSURL(string:combinedSwipeResult[page][indexPath.row][6])
@@ -114,6 +120,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var restaurant2 = combinedSwipeResult[page][indexPath.row]
