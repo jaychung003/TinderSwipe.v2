@@ -88,6 +88,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             cityField.isHidden = false
             stateField.isHidden = false
             orLabel.isHidden = false
+            //myLocationIconButton.tintColor = UIColor.white
             myLocationIconButton.isHidden = false
             dateLabel.isHidden = true
             diningLabel.isHidden = true

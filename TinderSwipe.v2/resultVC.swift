@@ -98,12 +98,12 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         if page == 0 {
             voteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[indexPath.row])
-            voteResult = "Group Result: " + voteCount + "/" + denominator + "  " + "\n"
+            voteResult = "\n" + "Group Result: " + voteCount + "/" + denominator
         }
         
         
-        cell.textLabel?.text = name
-        cell.detailTextLabel?.text = voteResult + cuisine + "  "  + rating + "  " + price + "\n" + address //detailed info
+        cell.textLabel?.text = name + voteResult
+        cell.detailTextLabel?.text = cuisine + "\n"  + rating + "  " + price + "\n" + address //detailed info
         
         
         //pull image from url and set it as the image in each cell
