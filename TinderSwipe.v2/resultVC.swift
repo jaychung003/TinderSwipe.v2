@@ -98,7 +98,7 @@ class resultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         if page == 0 {
             voteCount = String(ResultsData.sharedResultsData.sortedMasterSwipeArrayValue[indexPath.row])
-            voteResult = "\n" + "Group Result: " + voteCount + "/" + denominator
+            voteResult = "\n" + voteCount + "/" + denominator + " YUMS"
         }
         
         

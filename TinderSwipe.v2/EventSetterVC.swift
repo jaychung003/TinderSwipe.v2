@@ -52,9 +52,6 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     var action = UIAlertAction()
     var alertView = UIAlertController()
     
-    //location icon setup
-    var locationArrow = UIImage(named: "#imageLiteral(resourceName: "519580-076_LocationArrow-512")")
-    
     @IBAction func backButton(_ sender: UIButton) {
     
         stepValue = stepValue - 1
@@ -90,7 +87,6 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             cityField.isHidden = false
             stateField.isHidden = false
             orLabel.isHidden = false
-            myLocationIconButton.imageView?.tintColor = UIColor.white
             myLocationIconButton.isHidden = false
             dateLabel.isHidden = true
             diningLabel.isHidden = true
