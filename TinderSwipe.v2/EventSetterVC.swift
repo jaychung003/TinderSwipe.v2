@@ -52,6 +52,8 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
     var action = UIAlertAction()
     var alertView = UIAlertController()
     
+    //location icon setup
+    var locationArrow = UIImage(named: "#imageLiteral(resourceName: "519580-076_LocationArrow-512")")
     
     @IBAction func backButton(_ sender: UIButton) {
     
@@ -88,7 +90,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
             cityField.isHidden = false
             stateField.isHidden = false
             orLabel.isHidden = false
-            //myLocationIconButton.tintColor = UIColor.white
+            myLocationIconButton.imageView?.tintColor = UIColor.white
             myLocationIconButton.isHidden = false
             dateLabel.isHidden = true
             diningLabel.isHidden = true
@@ -401,7 +403,7 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
         eventNameField.textColor = UIColor.black
         diningLabel.isUserInteractionEnabled = true
         dateLabel.isUserInteractionEnabled = true
-        datePicker.backgroundColor = hexStringToUIColor(hex: "#46B1AA")
+        datePicker.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         dateLabel.layer.cornerRadius = 5
         backToGroup.layer.cornerRadius = 7
         backButton.layer.cornerRadius = 7
@@ -415,62 +417,62 @@ class EventSetterVC: UIViewController, UIPickerViewDelegate, UITextFieldDelegate
         
         SearchOne.layer.cornerRadius = 5
         SearchOne.clipsToBounds = true
-        SearchOne.backgroundColor = .white
+        SearchOne.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         SearchTwo.layer.cornerRadius = 5
         SearchTwo.clipsToBounds = true
-        SearchTwo.backgroundColor = .white
+        SearchTwo.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         SearchThree.layer.cornerRadius = 5
         SearchThree.clipsToBounds = true
-        SearchThree.backgroundColor = .white
+        SearchThree.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         SearchFour.layer.cornerRadius = 5
         SearchFour.clipsToBounds = true
-        SearchFour.backgroundColor = .white
+        SearchFour.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         
         
     }
     
     @IBAction func amendSearchOne(_ sender: UIButton) {
         DataManager.sharedData.addRemoveValue(dollarSignValue: 1)
-        if SearchOne.backgroundColor == .gray{
-            SearchOne.backgroundColor = .white
+        if SearchOne.backgroundColor == hexStringToUIColor(hex: "#984C49"){
+            SearchOne.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         }
         else
         {
-            SearchOne.backgroundColor = .gray
+            SearchOne.backgroundColor = hexStringToUIColor(hex: "#984C49")
         }
         
     }
     @IBAction func amendSearchTwo(_ sender: UIButton) {
     
         DataManager.sharedData.addRemoveValue(dollarSignValue: 2)
-        if SearchTwo.backgroundColor == .gray{
-            SearchTwo.backgroundColor = .white
+        if SearchTwo.backgroundColor == hexStringToUIColor(hex: "#984C49"){
+            SearchTwo.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         }
         else
         {
-            SearchTwo.backgroundColor = .gray
+            SearchTwo.backgroundColor = hexStringToUIColor(hex: "#984C49")
         }
     }
     
     @IBAction func amendSearchThree(_ sender: UIButton) {
            DataManager.sharedData.addRemoveValue(dollarSignValue: 3)
-        if SearchThree.backgroundColor == .gray{
-            SearchThree.backgroundColor = .white
+        if SearchThree.backgroundColor == hexStringToUIColor(hex: "#984C49"){
+            SearchThree.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         }
         else
         {
-            SearchThree.backgroundColor = .gray
+            SearchThree.backgroundColor = hexStringToUIColor(hex: "#984C49")
         }
     }
     
     @IBAction func amendSearchFour(_ sender: UIButton) {
         DataManager.sharedData.addRemoveValue(dollarSignValue: 4)
-        if SearchFour.backgroundColor == .gray{
-            SearchFour.backgroundColor = .white
+        if SearchFour.backgroundColor == hexStringToUIColor(hex: "#984C49"){
+            SearchFour.backgroundColor = hexStringToUIColor(hex: "#FF7E79")
         }
         else
         {
-            SearchFour.backgroundColor = .gray
+            SearchFour.backgroundColor = hexStringToUIColor(hex: "#984C49")
         }
     }
     

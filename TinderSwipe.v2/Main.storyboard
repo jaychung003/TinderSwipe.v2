@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -85,24 +84,12 @@
                                     <outlet property="delegate" destination="e0O-QO-PQr" id="T76-Ub-9Cl"/>
                                 </connections>
                             </pickerView>
-                            <datePicker hidden="YES" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ntg-yy-gld">
-                                <rect key="frame" x="0.0" y="420" width="414" height="212"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.49491375679999999" blue="0.47541630270000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="1" green="0.49491375679999999" blue="0.47541630270000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <date key="date" timeIntervalSinceReferenceDate="519672498.39345598">
-                                    <!--2017-06-20 17:28:18 +0000-->
-                                </date>
-                                <connections>
-                                    <action selector="pickerValueChanged:" destination="e0O-QO-PQr" eventType="valueChanged" id="mLT-hW-U3a"/>
-                                </connections>
-                            </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tyr-OK-eAn" userLabel="Search Two">
                                 <rect key="frame" x="100" y="235" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.49491375684738159" blue="0.47541630268096924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.49411764705882355" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="$$" backgroundImage="lighter app color">
+                                <state key="normal" title="$$">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.83448477030000001" green="0.83448477030000001" blue="0.83448477030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -113,8 +100,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Meq-BS-hcG" userLabel="Search Three">
                                 <rect key="frame" x="197" y="235" width="75" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.49411764705882355" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="$$$" backgroundImage="lighter app color">
+                                <state key="normal" title="$$$">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="0.83448477030000001" green="0.83448477030000001" blue="0.83448477030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -179,8 +167,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7O-of-xJo" userLabel="Search Four">
                                 <rect key="frame" x="296" y="235" width="97" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.49411764705882355" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="$$$$" backgroundImage="lighter app color">
+                                <state key="normal" title="$$$$">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="0.83448477030000001" green="0.83448477030000001" blue="0.83448477030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -193,7 +182,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.49491375684738159" blue="0.47541630268096924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="$" backgroundImage="lighter app color">
+                                <state key="normal" title="$">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.83448477030000001" green="0.83448477030000001" blue="0.83448477030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -230,6 +219,18 @@
                                     <action selector="getManualURL:" destination="e0O-QO-PQr" eventType="touchUpInside" id="VXc-S9-PFO"/>
                                 </connections>
                             </button>
+                            <datePicker hidden="YES" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ntg-yy-gld">
+                                <rect key="frame" x="0.0" y="431" width="414" height="212"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.49491375679999999" blue="0.47541630270000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="1" green="0.49491375679999999" blue="0.47541630270000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <date key="date" timeIntervalSinceReferenceDate="519672498.39345598">
+                                    <!--2017-06-20 17:28:18 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="pickerValueChanged:" destination="e0O-QO-PQr" eventType="valueChanged" id="mLT-hW-U3a"/>
+                                </connections>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" red="0.94995909929275513" green="0.44848555326461792" blue="0.38132292032241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.47843137254901957" green="0.36470588235294116" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -698,7 +699,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="39"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IZX-fr-LyB" id="zI9-zB-k0D">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -841,7 +842,6 @@
         <image name="519580-076_LocationArrow-512" width="512" height="512"/>
         <image name="app color" width="47" height="43"/>
         <image name="burger" width="194" height="121"/>
-        <image name="lighter app color" width="73" height="32"/>
         <image name="up" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
