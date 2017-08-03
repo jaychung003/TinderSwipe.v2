@@ -81,7 +81,7 @@ class LogInVC: UIViewController {
             print(Auth.auth().currentUser?.uid)
         })
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
             self.logIn()
         }
     }
@@ -161,7 +161,7 @@ class LogInVC: UIViewController {
                 }
                 
                 //                self.dismiss(animated: true, completion: nil) // dismiss the login page once the user has registered an account
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
                     self.logIn()
                     
                     //self.register()

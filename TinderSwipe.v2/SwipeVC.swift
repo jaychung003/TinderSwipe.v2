@@ -74,11 +74,11 @@ class SwipeVC: UIViewController {
         DataManager.sharedData.swipes = []
         
         // need this delay while we wait for swipe array to be uploaded to the database in inviteFriendsVC, when done button is clicked
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { // changed from 1.0 to 0.5
         GroupInfo.sharedGroupInfo.getSwipeArray()
         DataManager.sharedData.yesDeck = []
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { // changed from 1.0 to 0.5
         print("fetched swipe array should be 9999:", GroupInfo.sharedGroupInfo.fetchedSwipeArray)
         print("has user swiped??  ", GroupInfo.sharedGroupInfo.checkSwipeArray())
         
@@ -307,6 +307,8 @@ class SwipeVC: UIViewController {
             activityIndicator.startAnimating()
             UIApplication.shared.beginIgnoringInteractionEvents()
             
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             ResultsData.sharedResultsData.getCurrentMasterSwipeArray()
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
@@ -320,7 +322,7 @@ class SwipeVC: UIViewController {
                 print("sorted deck in swipe vc   ", ResultsData.sharedResultsData.sortedDeck)
                 self.performSegue(withIdentifier: "SeeResultsIdentifier", sender: self)
             }
-            
+            }
             return
         }
     }
