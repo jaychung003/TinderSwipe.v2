@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 
+// import the Facebook login toolkit
+import FacebookLogin
+
 class LogInVC: UIViewController {
     
     @IBOutlet weak var logInSegmentedControl: UISegmentedControl!

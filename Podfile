@@ -10,4 +10,9 @@ pod ‘Firebase/Database’
 pod ‘Firebase/Auth’
 pod ‘Firebase/Storage’
 
+use_frameworks!
+
+pod 'FacebookCore'
+pod 'FacebookLogin'
+
 end

@@ -10,6 +10,7 @@
 		A94C473C1F16D0FC0013AFB8 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */; };
 		A94C473D1F16D0FC0013AFB8 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */; };
 		A94C473E1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */; };
+		B2672C41F6781F68B66DBE1A /* Pods_TinderSwipe_v2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FC59ADE75F64B21D778D1A /* Pods_TinderSwipe_v2.framework */; };
 		CBAE5EFC1F27E21F008EFC7D /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBAE5EFB1F27E21F008EFC7D /* iAd.framework */; };
 		CBB88C711F17E90800CD0132 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB88C701F17E90800CD0132 /* Group.swift */; };
 		CBB88C731F17E94300CD0132 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB88C721F17E94300CD0132 /* AppUser.swift */; };
@@ -59,6 +60,7 @@
 		A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/TinderSwipe.v2-ezlylvmzcvskeufpfgoygbdjivgq/Build/Products/Debug-iphonesimulator/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "../../../Library/Developer/Xcode/DerivedData/TinderSwipe.v2-ezlylvmzcvskeufpfgoygbdjivgq/Build/Products/Debug-iphonesimulator/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<group>"; };
 		A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_TinderSwipe_v2.framework; path = "Pods/../build/Debug-iphoneos/Pods_TinderSwipe_v2.framework"; sourceTree = "<group>"; };
+		C8FC59ADE75F64B21D778D1A /* Pods_TinderSwipe_v2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinderSwipe_v2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBAE5EFB1F27E21F008EFC7D /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		CBB88C701F17E90800CD0132 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		CBB88C721F17E94300CD0132 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				A94C473C1F16D0FC0013AFB8 /* GoogleToolboxForMac.framework in Frameworks */,
 				A94C473D1F16D0FC0013AFB8 /* GTMSessionFetcher.framework in Frameworks */,
 				A94C473E1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework in Frameworks */,
+				B2672C41F6781F68B66DBE1A /* Pods_TinderSwipe_v2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +124,7 @@
 				A94C47391F16D0FC0013AFB8 /* GoogleToolboxForMac.framework */,
 				A94C473A1F16D0FC0013AFB8 /* GTMSessionFetcher.framework */,
 				A94C473B1F16D0FC0013AFB8 /* Pods_TinderSwipe_v2.framework */,
+				C8FC59ADE75F64B21D778D1A /* Pods_TinderSwipe_v2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -327,7 +331,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
