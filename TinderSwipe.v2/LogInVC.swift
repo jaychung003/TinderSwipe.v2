@@ -38,6 +38,11 @@ class LogInVC: UIViewController {
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
+//        // Facebook login implementation
+//        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+//        loginButton.center = view.center
+//        view.addSubview(loginButton)
+        
     }
     
     // dismissKeyboard dismisses the keyboard whenever the login screen is tapped
